@@ -1,0 +1,60 @@
+{
+    "employees": [
+        {
+            "id": "1",
+            "key": "1",
+            "name": "Alice Johnson",
+            "role": "Frontend Developer",
+            "team": "Product A",
+            "status": "Active"
+        },
+        {
+            "id": "2",
+            "key": "2",
+            "name": "Bob Smith",
+            "role": "Product Designer",
+            "team": "Design System",
+            "status": "On Leave"
+        },
+        {
+            "id": "3",
+            "key": "3",
+            "name": "Charlie Brown",
+            "role": "Backend Engineer",
+            "team": "Platform",
+            "status": "Active"
+        },
+        {
+            "id": "4",
+            "key": "4",
+            "name": "Diana Prince",
+            "role": "Product Manager",
+            "team": "Product A",
+            "status": "Active"
+        },
+        {
+            "id": "5",
+            "key": "5",
+            "name": "Evan Wright",
+            "role": "DevOps Engineer",
+            "team": "Infra",
+            "status": "Inactive"
+        },
+        {
+            "id": "6",
+            "key": "6",
+            "name": "Fiona Green",
+            "role": "HR Specialist",
+            "team": "People",
+            "status": "Active"
+        },
+        {
+            "id": "7",
+            "key": "7",
+            "name": "George Black",
+            "role": "QA Engineer",
+            "team": "Product B",
+            "status": "Active"
+        }
+    ]
+}

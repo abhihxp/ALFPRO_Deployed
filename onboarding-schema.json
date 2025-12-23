@@ -1,0 +1,170 @@
+{
+    "type": "container",
+    "id": "root",
+    "props": {
+        "className": "p-0 h-full flex flex-col"
+    },
+    "children": [
+        {
+            "type": "page-header",
+            "id": "header",
+            "props": {
+                "title": "Onboard New Employee",
+                "breadcrumbs": [
+                    {
+                        "title": "Dashboard"
+                    },
+                    {
+                        "title": "Employees"
+                    },
+                    {
+                        "title": "New"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "wizard",
+            "id": "onboarding-wizard",
+            "props": {
+                "title": "Employee Registration",
+                "submitUrl": "http://localhost:3001/employees",
+                "steps": [
+                    {
+                        "title": "Personal Info",
+                        "content": {
+                            "type": "container",
+                            "id": "step1-content",
+                            "props": {
+                                "className": "grid grid-cols-1 md:grid-cols-2 gap-6"
+                            },
+                            "children": [
+                                {
+                                    "type": "input",
+                                    "id": "name",
+                                    "props": {
+                                        "name": "name",
+                                        "label": "Full Name",
+                                        "placeholder": "John Doe",
+                                        "rules": {
+                                            "required": "Name is required"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "input",
+                                    "id": "email",
+                                    "props": {
+                                        "name": "email",
+                                        "label": "Email Address",
+                                        "placeholder": "john@alftek.com",
+                                        "rules": {
+                                            "required": "Email is required"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "input",
+                                    "id": "phone",
+                                    "props": {
+                                        "name": "phone",
+                                        "label": "Phone Number",
+                                        "placeholder": "+1 234 567 890"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "Job Details",
+                        "content": {
+                            "type": "container",
+                            "id": "step2-content",
+                            "props": {
+                                "className": "grid grid-cols-1 md:grid-cols-2 gap-6"
+                            },
+                            "children": [
+                                {
+                                    "type": "select",
+                                    "id": "role",
+                                    "props": {
+                                        "name": "role",
+                                        "label": "Job Role",
+                                        "options": [
+                                            "Frontend Developer",
+                                            "Backend Engineer",
+                                            "Product Designer",
+                                            "Product Manager"
+                                        ],
+                                        "rules": {
+                                            "required": "Role is required"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "select",
+                                    "id": "team",
+                                    "props": {
+                                        "name": "team",
+                                        "label": "Team",
+                                        "options": [
+                                            "Product A",
+                                            "product B",
+                                            "Platform",
+                                            "Design System"
+                                        ],
+                                        "rules": {
+                                            "required": "Team is required"
+                                        }
+                                    }
+                                },
+                                {
+                                    "type": "select",
+                                    "id": "status",
+                                    "props": {
+                                        "name": "status",
+                                        "label": "Initial Status",
+                                        "options": [
+                                            "Active",
+                                            "Probation"
+                                        ],
+                                        "rules": {
+                                            "required": "Status is required"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "Review",
+                        "content": {
+                            "type": "container",
+                            "id": "step3-content",
+                            "props": {
+                                "className": "bg-gray-50 p-6 rounded-md text-center"
+                            },
+                            "children": [
+                                {
+                                    "type": "text",
+                                    "id": "review-title",
+                                    "props": {
+                                        "content": "Ready to Submit?",
+                                        "level": 3
+                                    }
+                                },
+                                {
+                                    "type": "text",
+                                    "id": "review-desc",
+                                    "props": {
+                                        "content": "Please review the information in previous steps. Click 'Done' to create the employee record."
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

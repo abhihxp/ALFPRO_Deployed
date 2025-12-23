@@ -1,0 +1,103 @@
+{
+    "type": "container",
+    "id": "root",
+    "props": {
+        "className": "p-0 h-full flex flex-col"
+    },
+    "children": [
+        {
+            "type": "page-header",
+            "id": "header",
+            "props": {
+                "title": "Employees",
+                "breadcrumbs": [
+                    {
+                        "title": "Dashboard"
+                    },
+                    {
+                        "title": "Employees"
+                    }
+                ],
+                "primaryAction": {
+                    "label": "Add Employee",
+                    "icon": "plus"
+                },
+                "secondaryAction": {
+                    "label": "Export",
+                    "icon": "download"
+                }
+            }
+        },
+        {
+            "type": "container",
+            "id": "content-wrapper",
+            "props": {
+                "className": "p-6 flex-1 flex flex-col gap-4"
+            },
+            "children": [
+                {
+                    "type": "filter-bar",
+                    "id": "filters",
+                    "props": {
+                        "searchPlaceholder": "Search by name, role, or ID...",
+                        "filters": [
+                            {
+                                "key": "role",
+                                "label": "Role",
+                                "options": [
+                                    "Developer",
+                                    "Designer",
+                                    "Manager"
+                                ]
+                            },
+                            {
+                                "key": "status",
+                                "label": "Status",
+                                "options": [
+                                    "Active",
+                                    "On Leave"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "smart-table",
+                    "id": "employee-table",
+                    "props": {
+                        "apiUrl": "http://localhost:3001/employees",
+                        "columns": [
+                            {
+                                "title": "Employee",
+                                "dataIndex": "name",
+                                "key": "name",
+                                "renderType": "user-avatar"
+                            },
+                            {
+                                "title": "Role",
+                                "dataIndex": "role",
+                                "key": "role"
+                            },
+                            {
+                                "title": "Team",
+                                "dataIndex": "team",
+                                "key": "team"
+                            },
+                            {
+                                "title": "Status",
+                                "dataIndex": "status",
+                                "key": "status",
+                                "renderType": "status-badge"
+                            },
+                            {
+                                "title": "Action",
+                                "key": "action",
+                                "renderType": "action-menu"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
