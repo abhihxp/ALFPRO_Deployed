@@ -10,7 +10,6 @@ You can copy and paste this markdown directly into Confluence (most modern versi
 | :--- | :--- |
 | **Project** | Alftek ALFPRO HRMS (SaaS) |
 | **Version** | 1.0 (Phase 1) |
-| **Status** | 🟢 Approved |
 | **Tech Stack** | Next.js 15, Ant Design 5, Redux Toolkit |
 | **Last Updated** | December 23, 2025 |
 
