@@ -65,7 +65,7 @@
                     "type": "smart-table",
                     "id": "employee-table",
                     "props": {
-                        "apiUrl": "http://localhost:3001/employees",
+                        "apiUrl": "http://localhost:3002/employees",
                         "columns": [
                             {
                                 "title": "Employee",

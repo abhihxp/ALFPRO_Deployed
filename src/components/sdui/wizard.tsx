@@ -50,7 +50,7 @@ export default function Wizard({ steps, submitUrl, title }: any) {
     const items = steps.map((item: any) => ({ key: item.title, title: item.title }));
 
     return (
-        <div className="max-w-4xl mx-auto p-6">
+        <div className="w-full">
             <Card title={title} className="shadow-md">
                 <Steps current={current} items={items} className="mb-8" />
 

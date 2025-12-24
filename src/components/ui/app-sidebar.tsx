@@ -51,9 +51,10 @@ export default function AppSidebar() {
             trigger={null}
             collapsible
             collapsed={collapsed}
-            className="border-r border-gray-200 h-screen sticky top-0 left-0"
+            className="border-r border-gray-200 h-screen sticky top-0 left-0 overflow-y-auto"
             theme="light"
             width={240}
+            style={{ position: 'fixed', height: '100vh', left: 0, top: 0 }}
         >
             <div className="flex items-center justify-between p-4 border-b border-gray-100 h-16">
                 {!collapsed && (

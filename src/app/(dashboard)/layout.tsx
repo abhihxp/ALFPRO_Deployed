@@ -17,7 +17,7 @@ export default function DashboardLayout({
         <ConfigProvider theme={themeConfig}>
             <Layout className="min-h-screen">
                 <AppSidebar />
-                <Layout>
+                <Layout style={{ marginLeft: '240px' }}>
                     <AppHeader />
                     <Content className="m-6 bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden min-h-[280px]">
                         {children}

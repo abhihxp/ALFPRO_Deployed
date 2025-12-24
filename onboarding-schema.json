@@ -28,7 +28,7 @@
             "id": "onboarding-wizard",
             "props": {
                 "title": "Employee Registration",
-                "submitUrl": "http://localhost:3001/employees",
+                "submitUrl": "http://localhost:3002/employees",
                 "steps": [
                     {
                         "title": "Personal Info",
