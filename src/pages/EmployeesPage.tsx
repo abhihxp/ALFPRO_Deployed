@@ -1,6 +1,9 @@
-import { Search, Download, Plus, List, Grid, MoreVertical } from 'lucide-react';
-import { Button, Table, Avatar, Tag, Dropdown } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import { useState, useMemo } from 'react';
+import { Search, Download, Plus, List, Grid, MoreVertical, X } from 'lucide-react';
+import { Button, Table, Avatar, Tag, Dropdown, DatePicker } from 'antd';
+import type { ColumnsType, TableProps } from 'antd/es/table';
+import type { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 
 // --- Types ---
@@ -582,13 +585,184 @@ const getStatusStats = (data: Employee[]) => {
     ];
 };
 
+// --- Filter Column Mapping ---
+const filterColumnMap: Record<string, string> = {
+    'location': 'Location',
+    'department': 'Department',
+    'designation': 'Designation',
+    'status': 'Status',
+    'visaType': 'Visa Status',
+    'joiningDate': 'Joining Date'
+};
+
+// --- Get Filter Display Label ---
+const getFilterLabel = (columnKey: string, value: string): string => {
+    // For status, use the display label
+    if (columnKey === 'status') {
+        const statusMap: Record<string, string> = {
+            'active': 'Active',
+            'on_leave': 'On Leave',
+            'probation': 'Probation'
+        };
+        return statusMap[value] || value;
+    }
+    // Capitalize other values
+    return value.charAt(0).toUpperCase() + value.slice(1);
+};
+
+// --- StatCard Component ---
+const StatCard = ({ title, data, showTotal = false, totalEmployees = 0 }: { 
+    title: string, 
+    data: { name: string, value: number, color: string }[], 
+    showTotal?: boolean,
+    totalEmployees?: number 
+}) => (
+    <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 h-full flex flex-col">
+        <h3 className="font-semibold text-gray-800 border-l-4 border-primary pl-2 mb-4">{title}</h3>
+        <div className="flex items-center gap-4 flex-1">
+            <div className="w-32 h-32 relative flex-shrink-0">
+                <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                        <Pie
+                            data={data}
+                            innerRadius={40}
+                            outerRadius={60}
+                            paddingAngle={2}
+                            dataKey="value"
+                        >
+                            {data.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={entry.color} strokeWidth={0} />
+                            ))}
+                        </Pie>
+                        <Tooltip />
+                    </PieChart>
+                </ResponsiveContainer>
+                {showTotal && (
+                    <div className="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
+                        <span className="text-xs text-gray-400">Total</span>
+                        <span className="text-xl font-bold text-gray-800">{totalEmployees}</span>
+                    </div>
+                )}
+            </div>
+            {/* Legend Section */}
+            <div className="flex-1 overflow-auto max-h-32 custom-scrollbar flex flex-col justify-center">
+                {data.map((item) => (
+                    <div key={item.name} className="flex items-center justify-between text-xs mb-1 last:mb-0">
+                        <div className="flex items-center gap-2 flex-1 min-w-0">
+                            <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }}></span>
+                            <span className="text-gray-500 truncate" title={item.name}>{item.name}</span>
+                        </div>
+                        <span className="font-semibold text-gray-700 ml-2">{item.value}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+);
+
+// --- ActiveFilters Component ---
+interface ActiveFiltersProps {
+    activeFilters: Record<string, (string | number)[]>;
+    onClearFilter: (columnKey: string, value?: string | number) => void;
+    onClearAll: () => void;
+}
+
+const ActiveFilters = ({ activeFilters, onClearFilter, onClearAll }: ActiveFiltersProps) => {
+    const filterEntries = Object.entries(activeFilters);
+    if (filterEntries.length === 0) return null;
+
+    return (
+        <div className="px-6 py-4 border-b border-gray-100">
+            <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-sm text-gray-500 font-medium mr-1">Active Filters:</span>
+                {filterEntries.map(([columnKey, values]) => (
+                    <div
+                        key={columnKey}
+                        className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700"
+                    >
+                        <span className="font-medium text-gray-500 whitespace-nowrap">{filterColumnMap[columnKey]}:</span>
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                            {values.map((value) => (
+                                <div
+                                    key={`${columnKey}-${value}`}
+                                    className="flex items-center gap-1 px-2 py-0.5 bg-white border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
+                                >
+                                    <span>{getFilterLabel(columnKey, String(value))}</span>
+                                    <button
+                                        onClick={() => onClearFilter(columnKey, value)}
+                                        className="ml-0.5 p-0.5 hover:bg-gray-200 rounded transition-colors flex-shrink-0"
+                                        aria-label={`Remove ${filterColumnMap[columnKey]} filter: ${value}`}
+                                    >
+                                        <X size={12} className="text-gray-500" />
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                ))}
+                <button
+                    onClick={onClearAll}
+                    className="ml-auto px-3 py-1.5 text-sm text-white ant-btn-primary ant-btn-color-primary ant-btn-variant-solid bg-primary hover:bg-purple-700 h-9 rounded-lg"
+                >
+                    Clear All
+                </button>
+            </div>
+        </div>
+    );
+};
+
 
 const EmployeesPage = () => {
-    // --- Stats Data ---
-    const designationData = getDesignationStats(employeesData);
-    const departmentData = getDepartmentStats(employeesData);
-    const statusData = getStatusStats(employeesData);
-    const totalEmployees = employeesData.length;
+    // --- Filter State ---
+    const [tableFilters, setTableFilters] = useState<Record<string, (string | number)[] | null>>({});
+    const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
+    const [searchQuery, setSearchQuery] = useState<string>('');
+
+    // --- Filter Employees by Date Range and Search ---
+    const filteredEmployees = useMemo(() => {
+        let filtered = employeesData;
+
+        // Filter by search query
+        if (searchQuery.trim()) {
+            const query = searchQuery.toLowerCase();
+            filtered = filtered.filter(emp => 
+                emp.fullNameEn.toLowerCase().includes(query) ||
+                emp.fullNameAr.includes(query) ||
+                emp.employeeCode.toLowerCase().includes(query) ||
+                emp.email.toLowerCase().includes(query)
+            );
+        }
+
+        // Filter by date range
+        if (dateRange && dateRange[0] && dateRange[1]) {
+            filtered = filtered.filter(emp => {
+                const joiningDate = dayjs(emp.joiningDate).startOf('day');
+                const startDate = dateRange[0]!.startOf('day');
+                const endDate = dateRange[1]!.startOf('day');
+                return (joiningDate.isSame(startDate) || joiningDate.isAfter(startDate)) && 
+                       (joiningDate.isSame(endDate) || joiningDate.isBefore(endDate));
+            });
+        }
+
+        // Apply table filters
+        Object.keys(tableFilters).forEach(key => {
+            const filterValue = tableFilters[key];
+            if (filterValue && Array.isArray(filterValue) && filterValue.length > 0) {
+                filtered = filtered.filter(emp => {
+                    const empValue = String(emp[key as keyof Employee]);
+                    return filterValue.includes(empValue);
+                });
+            }
+        });
+
+        return filtered;
+    }, [searchQuery, dateRange, tableFilters]);
+
+    // --- Stats Data (based on filtered employees) ---
+    const designationData = getDesignationStats(filteredEmployees);
+    const departmentData = getDepartmentStats(filteredEmployees);
+    const statusData = getStatusStats(filteredEmployees);
+    const totalEmployees = filteredEmployees.length;
 
     // --- Filter Helpers ---
     const getFilters = (key: keyof Employee) => {
@@ -596,8 +770,93 @@ const EmployeesPage = () => {
         return uniqueValues.map(v => ({ text: String(v), value: String(v) }));
     };
 
-    // --- Table Configuration ---
-    const columns: ColumnsType<Employee> = [
+    // --- Active Filters (derived from tableFilters only, excluding date range) ---
+    const activeFilters = useMemo(() => {
+        const filters: Record<string, (string | number)[]> = {};
+        Object.keys(tableFilters).forEach(key => {
+            const filterValue = tableFilters[key];
+            if (filterValue && Array.isArray(filterValue) && filterValue.length > 0) {
+                filters[key] = filterValue as (string | number)[];
+            }
+        });
+        return filters;
+    }, [tableFilters]);
+
+    // --- Handle Filter Change ---
+    const handleTableChange: TableProps<Employee>['onChange'] = (_pagination, filters) => {
+        const convertedFilters: Record<string, (string | number)[] | null> = {};
+        Object.keys(filters).forEach(key => {
+            const filterValue = filters[key];
+            if (filterValue && Array.isArray(filterValue) && filterValue.length > 0) {
+                convertedFilters[key] = filterValue as (string | number)[];
+            } else {
+                convertedFilters[key] = null;
+            }
+        });
+        setTableFilters(convertedFilters);
+    };
+
+    // --- Clear Single Filter ---
+    const clearFilter = (columnKey: string, value?: string | number) => {
+        const currentFilter = tableFilters[columnKey];
+        
+        if (value && Array.isArray(currentFilter) && currentFilter.length > 1) {
+            // Remove specific value from array
+            const newValues = currentFilter.filter(v => v !== value);
+            setTableFilters({
+                ...tableFilters,
+                [columnKey]: newValues.length > 0 ? newValues : null
+            });
+        } else {
+            // Clear entire filter
+            setTableFilters({
+                ...tableFilters,
+                [columnKey]: null
+            });
+        }
+    };
+
+    // --- Handle Date Range Change (preserve other date when one is changed) ---
+    const handleDateRangeChange = (dates: [Dayjs | null, Dayjs | null] | null) => {
+        if (!dates) {
+            setDateRange(null);
+            return;
+        }
+
+        const [newStart, newEnd] = dates;
+        const [currentStart, currentEnd] = dateRange || [null, null];
+
+        // If both dates are provided, use them directly
+        if (newStart && newEnd) {
+            setDateRange([newStart, newEnd]);
+            return;
+        }
+
+        // If only start date is provided and we have a current end date, preserve it
+        if (newStart && !newEnd && currentEnd) {
+            setDateRange([newStart, currentEnd]);
+            return;
+        }
+
+        // If only end date is provided and we have a current start date, preserve it
+        if (!newStart && newEnd && currentStart) {
+            setDateRange([currentStart, newEnd]);
+            return;
+        }
+
+        // Otherwise, set the partial selection (for initial selection)
+        setDateRange([newStart, newEnd]);
+    };
+
+    // --- Clear All Filters ---
+    const clearAllFilters = () => {
+        setTableFilters({});
+        setDateRange(null);
+        setSearchQuery('');
+    };
+
+    // --- Table Configuration (with controlled filters) ---
+    const columns: ColumnsType<Employee> = useMemo(() => [
         {
             title: 'Employee',
             dataIndex: 'fullNameEn',
@@ -621,6 +880,7 @@ const EmployeesPage = () => {
             width: 120,
             className: 'text-gray-600',
             filters: getFilters('location'),
+            filteredValue: (tableFilters.location ?? null) as (string | number)[] | null,
             onFilter: (value, record) => record.location === value
         },
         { title: 'Joining Date', dataIndex: 'joiningDate', key: 'joiningDate', width: 120, className: 'text-gray-600' },
@@ -632,6 +892,7 @@ const EmployeesPage = () => {
             render: (text) => <span className="capitalize">{text}</span>,
             className: 'text-gray-600',
             filters: getFilters('department'),
+            filteredValue: (tableFilters.department ?? null) as (string | number)[] | null,
             onFilter: (value, record) => record.department === value
         },
         {
@@ -641,6 +902,7 @@ const EmployeesPage = () => {
             width: 180,
             className: 'text-gray-600',
             filters: getFilters('designation'),
+            filteredValue: (tableFilters.designation ?? null) as (string | number)[] | null,
             onFilter: (value, record) => record.designation === value
         },
         {
@@ -653,6 +915,7 @@ const EmployeesPage = () => {
                 { text: 'On Leave', value: 'on_leave' },
                 { text: 'Probation', value: 'probation' }
             ],
+            filteredValue: (tableFilters.status ?? null) as (string | number)[] | null,
             onFilter: (value, record) => record.status === value,
             render: (status) => {
                 let color = 'green';
@@ -673,6 +936,7 @@ const EmployeesPage = () => {
             width: 120,
             render: (text) => <span className="capitalize text-gray-600">{text}</span>,
             filters: getFilters('visaType'),
+            filteredValue: (tableFilters.visaType ?? null) as (string | number)[] | null,
             onFilter: (value, record) => record.visaType === value
         },
         {
@@ -692,51 +956,8 @@ const EmployeesPage = () => {
                 </Dropdown>
             ),
         }
-    ];
+    ], [tableFilters]);
 
-    const StatCard = ({ title, data, showTotal = false }: { title: string, data: { name: string, value: number, color: string }[], showTotal?: boolean }) => (
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 h-full flex flex-col">
-            <h3 className="font-semibold text-gray-800 border-l-4 border-primary pl-2 mb-4">{title}</h3>
-            <div className="flex items-center gap-4 flex-1">
-                <div className="w-32 h-32 relative flex-shrink-0">
-                    <ResponsiveContainer width="100%" height="100%">
-                        <PieChart>
-                            <Pie
-                                data={data}
-                                innerRadius={40}
-                                outerRadius={60}
-                                paddingAngle={2}
-                                dataKey="value"
-                            >
-                                {data.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={entry.color} strokeWidth={0} />
-                                ))}
-                            </Pie>
-                            <Tooltip />
-                        </PieChart>
-                    </ResponsiveContainer>
-                    {showTotal && (
-                        <div className="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
-                            <span className="text-xs text-gray-400">Total</span>
-                            <span className="text-xl font-bold text-gray-800">{totalEmployees}</span>
-                        </div>
-                    )}
-                </div>
-                {/* Legend Section */}
-                <div className="flex-1 overflow-auto max-h-32 custom-scrollbar flex flex-col justify-center">
-                    {data.map((item) => (
-                        <div key={item.name} className="flex items-center justify-between text-xs mb-1 last:mb-0">
-                            <div className="flex items-center gap-2 flex-1 min-w-0">
-                                <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }}></span>
-                                <span className="text-gray-500 truncate" title={item.name}>{item.name}</span>
-                            </div>
-                            <span className="font-semibold text-gray-700 ml-2">{item.value}</span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
-    );
 
     return (
         <div className="space-y-6">
@@ -748,10 +969,21 @@ const EmployeesPage = () => {
                         <input
                             type="text"
                             placeholder="Search employee..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
                             className="bg-transparent border-none text-sm ml-2 w-full focus:outline-none text-gray-600 placeholder:text-gray-400"
                         />
                         <span className="text-xs text-gray-400">⌘/</span>
                     </div>
+                    <DatePicker.RangePicker
+                        value={dateRange}
+                        onChange={handleDateRangeChange}
+                        placeholder={['Start Date', 'End Date']}
+                        format="YYYY-MM-DD"
+                        className="h-9"
+                        allowClear
+                        style={{ borderRadius: '0.5rem' }}
+                    />
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -766,9 +998,9 @@ const EmployeesPage = () => {
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <StatCard title="Designation" data={designationData} />
-                <StatCard title="Department" data={departmentData} />
-                <StatCard title="Status Overview" data={statusData} showTotal />
+                <StatCard title="Designation" data={designationData} totalEmployees={totalEmployees} />
+                <StatCard title="Department" data={departmentData} totalEmployees={totalEmployees} />
+                <StatCard title="Status Overview" data={statusData} showTotal totalEmployees={totalEmployees} />
             </div>
 
             {/* Table Section - Ensure max-w-full to prevent horizontal scroll on body */}
@@ -780,15 +1012,24 @@ const EmployeesPage = () => {
                         <Button icon={<Grid size={16} />} className="text-gray-500" />
                     </div>
                 </div>
+                
+                {/* Active Filters */}
+                <ActiveFilters 
+                    activeFilters={activeFilters} 
+                    onClearFilter={clearFilter}
+                    onClearAll={clearAllFilters}
+                />
+                
                 <div className="h-[600px] w-[calc(100vw-12rem)]"> {/* Fixed height for sticky header effectiveness */}
                     <Table
                         columns={columns}
-                        dataSource={employeesData}
+                        dataSource={filteredEmployees}
                         rowKey="id"
                         pagination={{ pageSize: 15 }}
                         size="middle"
                         scroll={{ x: 1300, y: 500 }} // Increased x width slightly to ensure scrolling happens inside
                         sticky
+                        onChange={handleTableChange}
                     />
                 </div>
             </div>
