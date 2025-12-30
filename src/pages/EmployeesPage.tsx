@@ -1,13 +1,12 @@
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Search, Download, Plus, List, Grid, MoreVertical, X } from 'lucide-react';
 import { Button, Table, Avatar, Tag, Dropdown, DatePicker } from 'antd';
-import type { ColumnsType, TableProps } from 'antd/es/table';
-import type { Dayjs } from 'dayjs';
-import dayjs from 'dayjs';
+import type { ColumnsType } from 'antd/es/table';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+import { useEmployeeFilters } from '../hooks/useEmployeeFilters';
 
 // --- Types ---
-interface Employee {
+export interface Employee {
     id: string;
     fullNameEn: string;
     fullNameAr: string;
@@ -678,7 +677,7 @@ const ActiveFilters = ({ activeFilters, onClearFilter, onClearAll }: ActiveFilte
                 {filterEntries.map(([columnKey, values]) => (
                     <div
                         key={columnKey}
-                        className="flex items-center gap-2 px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700"
+                        className="flex items-center justify-between px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700"
                     >
                         <span className="font-medium text-gray-500 whitespace-nowrap">{filterColumnMap[columnKey]}:</span>
                         <div className="flex items-center gap-1.5 flex-wrap">
@@ -698,6 +697,15 @@ const ActiveFilters = ({ activeFilters, onClearFilter, onClearAll }: ActiveFilte
                                 </div>
                             ))}
                         </div>
+                        {values.length > 1 && (
+                            <button
+                                onClick={() => onClearFilter(columnKey)}
+                                className="p-0.5 hover:bg-gray-200 rounded transition-colors flex-shrink-0"
+                                aria-label={`Clear all ${filterColumnMap[columnKey]} filters`}
+                            >
+                                <X size={12} className="text-gray-500" />
+                            </button>
+                        )}
                     </div>
                 ))}
                 <button
@@ -713,147 +721,25 @@ const ActiveFilters = ({ activeFilters, onClearFilter, onClearAll }: ActiveFilte
 
 
 const EmployeesPage = () => {
-    // --- Filter State ---
-    const [tableFilters, setTableFilters] = useState<Record<string, (string | number)[] | null>>({});
-    const [dateRange, setDateRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
-    const [searchQuery, setSearchQuery] = useState<string>('');
+    const {
+        tableFilters,
+        dateRange,
+        searchQuery,
+        setSearchQuery,
+        filteredEmployees,
+        activeFilters,
+        getFilters,
+        handleTableChange,
+        clearFilter,
+        handleDateRangeChange,
+        clearAllFilters,
+    } = useEmployeeFilters(employeesData);
 
-    // --- Filter Employees by Date Range and Search ---
-    const filteredEmployees = useMemo(() => {
-        let filtered = employeesData;
-
-        // Filter by search query
-        if (searchQuery.trim()) {
-            const query = searchQuery.toLowerCase();
-            filtered = filtered.filter(emp => 
-                emp.fullNameEn.toLowerCase().includes(query) ||
-                emp.fullNameAr.includes(query) ||
-                emp.employeeCode.toLowerCase().includes(query) ||
-                emp.email.toLowerCase().includes(query)
-            );
-        }
-
-        // Filter by date range
-        if (dateRange && dateRange[0] && dateRange[1]) {
-            filtered = filtered.filter(emp => {
-                const joiningDate = dayjs(emp.joiningDate).startOf('day');
-                const startDate = dateRange[0]!.startOf('day');
-                const endDate = dateRange[1]!.startOf('day');
-                return (joiningDate.isSame(startDate) || joiningDate.isAfter(startDate)) && 
-                       (joiningDate.isSame(endDate) || joiningDate.isBefore(endDate));
-            });
-        }
-
-        // Apply table filters
-        Object.keys(tableFilters).forEach(key => {
-            const filterValue = tableFilters[key];
-            if (filterValue && Array.isArray(filterValue) && filterValue.length > 0) {
-                filtered = filtered.filter(emp => {
-                    const empValue = String(emp[key as keyof Employee]);
-                    return filterValue.includes(empValue);
-                });
-            }
-        });
-
-        return filtered;
-    }, [searchQuery, dateRange, tableFilters]);
-
-    // --- Stats Data (based on filtered employees) ---
-    const designationData = getDesignationStats(filteredEmployees);
-    const departmentData = getDepartmentStats(filteredEmployees);
-    const statusData = getStatusStats(filteredEmployees);
+    // --- Stats Data (based on all employees, static) ---
+    const designationData = getDesignationStats(employeesData);
+    const departmentData = getDepartmentStats(employeesData);
+    const statusData = getStatusStats(employeesData);
     const totalEmployees = filteredEmployees.length;
-
-    // --- Filter Helpers ---
-    const getFilters = (key: keyof Employee) => {
-        const uniqueValues = Array.from(new Set(employeesData.map(e => e[key])));
-        return uniqueValues.map(v => ({ text: String(v), value: String(v) }));
-    };
-
-    // --- Active Filters (derived from tableFilters only, excluding date range) ---
-    const activeFilters = useMemo(() => {
-        const filters: Record<string, (string | number)[]> = {};
-        Object.keys(tableFilters).forEach(key => {
-            const filterValue = tableFilters[key];
-            if (filterValue && Array.isArray(filterValue) && filterValue.length > 0) {
-                filters[key] = filterValue as (string | number)[];
-            }
-        });
-        return filters;
-    }, [tableFilters]);
-
-    // --- Handle Filter Change ---
-    const handleTableChange: TableProps<Employee>['onChange'] = (_pagination, filters) => {
-        const convertedFilters: Record<string, (string | number)[] | null> = {};
-        Object.keys(filters).forEach(key => {
-            const filterValue = filters[key];
-            if (filterValue && Array.isArray(filterValue) && filterValue.length > 0) {
-                convertedFilters[key] = filterValue as (string | number)[];
-            } else {
-                convertedFilters[key] = null;
-            }
-        });
-        setTableFilters(convertedFilters);
-    };
-
-    // --- Clear Single Filter ---
-    const clearFilter = (columnKey: string, value?: string | number) => {
-        const currentFilter = tableFilters[columnKey];
-        
-        if (value && Array.isArray(currentFilter) && currentFilter.length > 1) {
-            // Remove specific value from array
-            const newValues = currentFilter.filter(v => v !== value);
-            setTableFilters({
-                ...tableFilters,
-                [columnKey]: newValues.length > 0 ? newValues : null
-            });
-        } else {
-            // Clear entire filter
-            setTableFilters({
-                ...tableFilters,
-                [columnKey]: null
-            });
-        }
-    };
-
-    // --- Handle Date Range Change (preserve other date when one is changed) ---
-    const handleDateRangeChange = (dates: [Dayjs | null, Dayjs | null] | null) => {
-        if (!dates) {
-            setDateRange(null);
-            return;
-        }
-
-        const [newStart, newEnd] = dates;
-        const [currentStart, currentEnd] = dateRange || [null, null];
-
-        // If both dates are provided, use them directly
-        if (newStart && newEnd) {
-            setDateRange([newStart, newEnd]);
-            return;
-        }
-
-        // If only start date is provided and we have a current end date, preserve it
-        if (newStart && !newEnd && currentEnd) {
-            setDateRange([newStart, currentEnd]);
-            return;
-        }
-
-        // If only end date is provided and we have a current start date, preserve it
-        if (!newStart && newEnd && currentStart) {
-            setDateRange([currentStart, newEnd]);
-            return;
-        }
-
-        // Otherwise, set the partial selection (for initial selection)
-        setDateRange([newStart, newEnd]);
-    };
-
-    // --- Clear All Filters ---
-    const clearAllFilters = () => {
-        setTableFilters({});
-        setDateRange(null);
-        setSearchQuery('');
-    };
 
     // --- Table Configuration (with controlled filters) ---
     const columns: ColumnsType<Employee> = useMemo(() => [
@@ -956,46 +842,11 @@ const EmployeesPage = () => {
                 </Dropdown>
             ),
         }
-    ], [tableFilters]);
+    ], [tableFilters, getFilters]);
 
 
     return (
         <div className="space-y-6">
-            {/* Top Controls */}
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div className="flex items-center gap-4 w-full md:w-auto">
-                    <div className="bg-white flex items-center px-3 py-2 rounded-lg border border-gray-100 flex-1 md:w-64">
-                        <Search className="w-4 h-4 text-gray-400" />
-                        <input
-                            type="text"
-                            placeholder="Search employee..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="bg-transparent border-none text-sm ml-2 w-full focus:outline-none text-gray-600 placeholder:text-gray-400"
-                        />
-                        <span className="text-xs text-gray-400">⌘/</span>
-                    </div>
-                    <DatePicker.RangePicker
-                        value={dateRange}
-                        onChange={handleDateRangeChange}
-                        placeholder={['Start Date', 'End Date']}
-                        format="YYYY-MM-DD"
-                        className="h-9"
-                        allowClear
-                        style={{ borderRadius: '0.5rem' }}
-                    />
-                </div>
-
-                <div className="flex items-center gap-3">
-                    <Button icon={<Download size={14} />} className="flex items-center text-gray-600">
-                        Export
-                    </Button>
-                    <Button type="primary" icon={<Plus size={16} />} className="bg-primary hover:bg-purple-700 h-9">
-                        Add Employee
-                    </Button>
-                </div>
-            </div>
-
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <StatCard title="Designation" data={designationData} totalEmployees={totalEmployees} />
@@ -1012,14 +863,51 @@ const EmployeesPage = () => {
                         <Button icon={<Grid size={16} />} className="text-gray-500" />
                     </div>
                 </div>
-                
+
+                {/* Top Controls */}
+                <div className="px-6 py-4 border-b border-gray-100">
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                        <div className="flex items-center gap-4 w-full md:w-auto">
+                            <div className="bg-white flex items-center px-3 py-2 rounded-lg border border-gray-100 flex-1 md:w-64">
+                                <Search className="w-4 h-4 text-gray-400" />
+                                <input
+                                    type="text"
+                                    placeholder="Search employee..."
+                                    value={searchQuery}
+                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                    className="bg-transparent border-none text-sm ml-2 w-full focus:outline-none text-gray-600 placeholder:text-gray-400"
+                                />
+                                <span className="text-xs text-gray-400">⌘/</span>
+                            </div>
+                            <DatePicker.RangePicker
+                                value={dateRange}
+                                onChange={handleDateRangeChange}
+                                placeholder={['Start Date', 'End Date']}
+                                format="YYYY-MM-DD"
+                                className="h-9"
+                                allowClear
+                                style={{ borderRadius: '0.5rem' }}
+                            />
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                            <Button icon={<Download size={14} />} className="flex items-center text-gray-600">
+                                Export
+                            </Button>
+                            <Button type="primary" icon={<Plus size={16} />} className="bg-primary hover:bg-purple-700 h-9">
+                                Add Employee
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Active Filters */}
-                <ActiveFilters 
-                    activeFilters={activeFilters} 
+                <ActiveFilters
+                    activeFilters={activeFilters}
                     onClearFilter={clearFilter}
                     onClearAll={clearAllFilters}
                 />
-                
+
                 <div className="h-[600px] w-[calc(100vw-12rem)]"> {/* Fixed height for sticky header effectiveness */}
                     <Table
                         columns={columns}

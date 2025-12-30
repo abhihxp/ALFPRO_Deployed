@@ -1,0 +1,89 @@
+{
+    "menu": {
+        "dashboard": "Dashboard",
+        "jobs": "Jobs",
+        "message": "Message",
+        "employee": "Employee",
+        "employees": "Employees",
+        "payroll": "Payroll",
+        "attendance": "Attendance",
+        "leaves": "Leaves",
+        "statistics": "Statistics",
+        "schedule": "Schedule",
+        "profile": "Profile",
+        "helpCenter": "Help Center",
+        "settings": "Settings",
+        "logOut": "Log Out"
+    },
+    "header": {
+        "leaves": "Leaves",
+        "subtitle": "Track staff activities, stats, and updates."
+    },
+    "employeesPage": {
+        "searchPlaceholder": "Search employee...",
+        "export": "Export",
+        "addEmployee": "Add Employee",
+        "allEmployees": "All Employees",
+        "subtitle": "Track employee activities, stats, and updates.",
+        "stats": {
+            "designation": "Designation",
+            "department": "Department",
+            "statusOverview": "Status Overview",
+            "total": "Total",
+            "active": "Active",
+            "onLeave": "On Leave",
+            "probation": "Probation"
+        },
+        "table": {
+            "employee": "Employee",
+            "location": "Location",
+            "joiningDate": "Joining Date",
+            "department": "Department",
+            "designation": "Designation",
+            "status": "Status",
+            "visaStatus": "Visa Status",
+            "action": "Action",
+            "viewProfile": "View Profile",
+            "editDetails": "Edit Details",
+            "delete": "Delete"
+        }
+    },
+    "leavesPage": {
+        "searchPlaceholder": "Search employee...",
+        "advanceFilter": "Advance Filter",
+        "thisMonth": "This Month",
+        "export": "Export",
+        "subtitle": "Track staff leaves, status, and upcoming holidays.",
+        "addLeaveRequest": "Add Leave Request",
+        "approvalStatus": "Approval Status",
+        "leaveType": "Leave Type",
+        "upcomingHolidays": "Upcoming Holidays",
+        "totalTimeOff": "Total Time Off",
+        "viewAll": "View All",
+        "employeesLeaveList": "Employees Leave List",
+        "approveAll": "Approve All",
+        "table": {
+            "employee": "Employee",
+            "designation": "Designation",
+            "type": "Leave Type",
+            "reason": "Reason",
+            "startDate": "Start Date",
+            "endDate": "End Date",
+            "days": "Days",
+            "action": "Action",
+            "approve": "Approve",
+            "status": {
+                "approved": "Approved",
+                "pending": "Pending",
+                "rejected": "Rejected",
+                "requested": "Requested"
+            }
+        },
+        "types": {
+            "sickLeave": "Sick Leave",
+            "maternityLeave": "Maternity Leave",
+            "casualLeave": "Casual Leave",
+            "otherLeave": "Other Leave"
+        }
+    }
+}

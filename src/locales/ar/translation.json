@@ -1,0 +1,87 @@
+{
+    "menu": {
+        "dashboard": "لوحة القيادة",
+        "jobs": "وظائف",
+        "message": "رسائل",
+        "employee": "موظف",
+        "employees": "الموظفين",
+        "payroll": "كشف الرواتب",
+        "attendance": "حضور",
+        "leaves": "إجازات",
+        "statistics": "إحصائيات",
+        "schedule": "جدول",
+        "profile": "الملف الشخصي",
+        "helpCenter": "مركز المساعدة",
+        "settings": "إعدادات",
+        "logOut": "تسجيل خروج"
+    },
+    "header": {
+        "leaves": "إجازات",
+        "subtitle": "تتبع أنشطة الموظفين والإحصائيات والتحديثات."
+    },
+    "employeesPage": {
+        "searchPlaceholder": "البحث عن موظف...",
+        "export": "تصدير",
+        "addEmployee": "إضافة موظف",
+        "allEmployees": "جميع الموظفين",
+        "stats": {
+            "designation": "اللقب الوظيفي",
+            "department": "القسم",
+            "statusOverview": "نظرة عامة على الحالة",
+            "total": "الإجمالي",
+            "active": "نشط",
+            "onLeave": "في إجازة",
+            "probation": "فترة تجربة"
+        },
+        "table": {
+            "employee": "الموظف",
+            "location": "الموقع",
+            "joiningDate": "تاريخ الانضمام",
+            "department": "القسم",
+            "designation": "اللقب الوظيفي",
+            "status": "الحالة",
+            "visaStatus": "حالة التأشيرة",
+            "action": "إجراء",
+            "viewProfile": "عرض الملف الشخصي",
+            "editDetails": "تعديل التفاصيل",
+            "delete": "حذف"
+        }
+    },
+    "leavesPage": {
+        "searchPlaceholder": "البحث عن موظف...",
+        "advanceFilter": "بحث متقدم",
+        "thisMonth": "هذا الشهر",
+        "export": "تصدير",
+        "addLeaveRequest": "إضافة طلب إجازة",
+        "approvalStatus": "حالة الموافقة",
+        "leaveType": "نوع الإجازة",
+        "upcomingHolidays": "العطلات القادمة",
+        "totalTimeOff": "إجمالي الإجازات",
+        "viewAll": "عرض الكل",
+        "employeesLeaveList": "قائمة إجازات الموظفين",
+        "approveAll": "الموافقة على الكل",
+        "table": {
+            "employee": "الموظف",
+            "designation": "اللقب الوظيفي",
+            "type": "نوع الإجازة",
+            "reason": "السبب",
+            "startDate": "تاريخ البدء",
+            "endDate": "تاريخ الانتهاء",
+            "days": "الأيام",
+            "action": "إجراء",
+            "approve": "موافقة",
+            "status": {
+                "approved": "تمت الموافقة",
+                "pending": "قيد الانتظار",
+                "rejected": "مرفوض",
+                "requested": "مطلوب"
+            }
+        },
+        "types": {
+            "sickLeave": "إجازة مرضية",
+            "maternityLeave": "إجازة أمومة",
+            "casualLeave": "إجازة عارضة",
+            "otherLeave": "إجازة أخرى"
+        }
+    }
+}
