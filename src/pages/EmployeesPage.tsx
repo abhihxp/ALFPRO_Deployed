@@ -766,7 +766,12 @@ const EmployeesPage = () => {
                     <Button icon={<Download size={14} />} className="flex items-center text-gray-600 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700">
                         {t('employeesPage.export')}
                     </Button>
-                    <Button type="primary" icon={<Plus size={16} />} className="bg-primary hover:bg-purple-700 h-9">
+                    <Button
+                        type="primary"
+                        icon={<Plus size={16} />}
+                        className="bg-primary hover:bg-purple-700 h-9"
+                        onClick={() => window.location.href = '/employees/new'} // Using window location for simplicity as useNavigate is inside child
+                    >
                         {t('employeesPage.addEmployee')}
                     </Button>
                 </div>
