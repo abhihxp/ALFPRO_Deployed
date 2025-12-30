@@ -2,6 +2,7 @@ import { Search, Download, Plus, List, Grid, MoreVertical } from 'lucide-react';
 import { Button, Table, Avatar, Tag, Dropdown } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
+import { useTranslation } from 'react-i18next';
 
 // --- Types ---
 interface Employee {
@@ -584,10 +585,17 @@ const getStatusStats = (data: Employee[]) => {
 
 
 const EmployeesPage = () => {
+    const { t, i18n } = useTranslation();
+
     // --- Stats Data ---
     const designationData = getDesignationStats(employeesData);
     const departmentData = getDepartmentStats(employeesData);
-    const statusData = getStatusStats(employeesData);
+    const statusData = getStatusStats(employeesData).map(item => ({
+        ...item,
+        name: item.name === 'Active' ? t('employeesPage.stats.active') :
+            item.name === 'On Leave' ? t('employeesPage.stats.onLeave') :
+                item.name === 'Probation' ? t('employeesPage.stats.probation') : item.name
+    }));
     const totalEmployees = employeesData.length;
 
     // --- Filter Helpers ---
@@ -599,9 +607,9 @@ const EmployeesPage = () => {
     // --- Table Configuration ---
     const columns: ColumnsType<Employee> = [
         {
-            title: 'Employee',
-            dataIndex: 'fullNameEn',
-            key: 'fullNameEn',
+            title: t('employeesPage.table.employee'),
+            dataIndex: i18n.language === 'ar' ? 'fullNameAr' : 'fullNameEn',
+            key: 'fullName',
             fixed: 'left',
             width: 250,
             render: (text, record) => (
@@ -615,77 +623,77 @@ const EmployeesPage = () => {
             ),
         },
         {
-            title: 'Location',
+            title: t('employeesPage.table.location'),
             dataIndex: 'location',
             key: 'location',
             width: 120,
-            className: 'text-gray-600',
+            className: 'text-gray-600 dark:text-gray-300',
             filters: getFilters('location'),
             onFilter: (value, record) => record.location === value
         },
-        { title: 'Joining Date', dataIndex: 'joiningDate', key: 'joiningDate', width: 120, className: 'text-gray-600' },
+        { title: t('employeesPage.table.joiningDate'), dataIndex: 'joiningDate', key: 'joiningDate', width: 120, className: 'text-gray-600 dark:text-gray-300' },
         {
-            title: 'Department',
+            title: t('employeesPage.table.department'),
             dataIndex: 'department',
             key: 'department',
             width: 120,
             render: (text) => <span className="capitalize">{text}</span>,
-            className: 'text-gray-600',
+            className: 'text-gray-600 dark:text-gray-300',
             filters: getFilters('department'),
             onFilter: (value, record) => record.department === value
         },
         {
-            title: 'Designation',
+            title: t('employeesPage.table.designation'),
             dataIndex: 'designation',
             key: 'designation',
             width: 180,
-            className: 'text-gray-600',
+            className: 'text-gray-600 dark:text-gray-300',
             filters: getFilters('designation'),
             onFilter: (value, record) => record.designation === value
         },
         {
-            title: 'Status',
+            title: t('employeesPage.table.status'),
             dataIndex: 'status',
             key: 'status',
             width: 120,
             filters: [
-                { text: 'Active', value: 'active' },
-                { text: 'On Leave', value: 'on_leave' },
-                { text: 'Probation', value: 'probation' }
+                { text: t('employeesPage.stats.active'), value: 'active' },
+                { text: t('employeesPage.stats.onLeave'), value: 'on_leave' },
+                { text: t('employeesPage.stats.probation'), value: 'probation' }
             ],
             onFilter: (value, record) => record.status === value,
             render: (status) => {
                 let color = 'green';
-                let label = 'Active';
+                let label = t('employeesPage.stats.active');
                 switch (status) {
-                    case 'active': color = 'success'; label = 'Active'; break;
-                    case 'on_leave': color = 'warning'; label = 'On Leave'; break;
-                    case 'probation': color = 'processing'; label = 'Probation'; break;
+                    case 'active': color = 'success'; label = t('employeesPage.stats.active'); break;
+                    case 'on_leave': color = 'warning'; label = t('employeesPage.stats.onLeave'); break;
+                    case 'probation': color = 'processing'; label = t('employeesPage.stats.probation'); break;
                     default: color = 'default'; label = status;
                 }
                 return <Tag color={color}>{label}</Tag>;
             }
         },
         {
-            title: 'Visa Status',
+            title: t('employeesPage.table.visaStatus'),
             dataIndex: 'visaType',
             key: 'visaType',
             width: 120,
-            render: (text) => <span className="capitalize text-gray-600">{text}</span>,
+            render: (text) => <span className="capitalize text-gray-600 dark:text-gray-300">{text}</span>,
             filters: getFilters('visaType'),
             onFilter: (value, record) => record.visaType === value
         },
         {
-            title: 'Action',
+            title: t('employeesPage.table.action'),
             key: 'action',
             fixed: 'right',
             width: 80,
             render: () => (
                 <Dropdown menu={{
                     items: [
-                        { key: '1', label: 'View Profile' },
-                        { key: '2', label: 'Edit Details' },
-                        { key: '3', label: 'Delete', danger: true },
+                        { key: '1', label: t('employeesPage.table.viewProfile') },
+                        { key: '2', label: t('employeesPage.table.editDetails') },
+                        { key: '3', label: t('employeesPage.table.delete'), danger: true },
                     ]
                 }}>
                     <Button type="text" icon={<MoreVertical size={16} />} className="text-gray-400 hover:text-primary" />
@@ -695,8 +703,8 @@ const EmployeesPage = () => {
     ];
 
     const StatCard = ({ title, data, showTotal = false }: { title: string, data: { name: string, value: number, color: string }[], showTotal?: boolean }) => (
-        <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 h-full flex flex-col">
-            <h3 className="font-semibold text-gray-800 border-l-4 border-primary pl-2 mb-4">{title}</h3>
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 h-full flex flex-col">
+            <h3 className="font-semibold text-gray-800 dark:text-gray-100 border-l-4 border-primary pl-2 mb-4">{title}</h3>
             <div className="flex items-center gap-4 flex-1">
                 <div className="w-32 h-32 relative flex-shrink-0">
                     <ResponsiveContainer width="100%" height="100%">
@@ -712,13 +720,13 @@ const EmployeesPage = () => {
                                     <Cell key={`cell-${index}`} fill={entry.color} strokeWidth={0} />
                                 ))}
                             </Pie>
-                            <Tooltip />
+                            <Tooltip contentStyle={{ backgroundColor: '#1f2937', borderColor: '#374151', color: '#fff' }} />
                         </PieChart>
                     </ResponsiveContainer>
                     {showTotal && (
                         <div className="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
-                            <span className="text-xs text-gray-400">Total</span>
-                            <span className="text-xl font-bold text-gray-800">{totalEmployees}</span>
+                            <span className="text-xs text-gray-400">{t('employeesPage.stats.total')}</span>
+                            <span className="text-xl font-bold text-gray-800 dark:text-white">{totalEmployees}</span>
                         </div>
                     )}
                 </div>
@@ -728,9 +736,9 @@ const EmployeesPage = () => {
                         <div key={item.name} className="flex items-center justify-between text-xs mb-1 last:mb-0">
                             <div className="flex items-center gap-2 flex-1 min-w-0">
                                 <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }}></span>
-                                <span className="text-gray-500 truncate" title={item.name}>{item.name}</span>
+                                <span className="text-gray-500 dark:text-gray-400 truncate" title={item.name}>{item.name}</span>
                             </div>
-                            <span className="font-semibold text-gray-700 ml-2">{item.value}</span>
+                            <span className="font-semibold text-gray-700 dark:text-gray-300 ml-2">{item.value}</span>
                         </div>
                     ))}
                 </div>
@@ -743,44 +751,44 @@ const EmployeesPage = () => {
             {/* Top Controls */}
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                 <div className="flex items-center gap-4 w-full md:w-auto">
-                    <div className="bg-white flex items-center px-3 py-2 rounded-lg border border-gray-100 flex-1 md:w-64">
+                    <div className="bg-white dark:bg-gray-800 flex items-center px-3 py-2 rounded-lg border border-gray-100 dark:border-gray-700 flex-1 md:w-64">
                         <Search className="w-4 h-4 text-gray-400" />
                         <input
                             type="text"
-                            placeholder="Search employee..."
-                            className="bg-transparent border-none text-sm ml-2 w-full focus:outline-none text-gray-600 placeholder:text-gray-400"
+                            placeholder={t('employeesPage.searchPlaceholder')}
+                            className="bg-transparent border-none text-sm ml-2 w-full focus:outline-none text-gray-600 dark:text-gray-200 placeholder:text-gray-400"
                         />
                         <span className="text-xs text-gray-400">⌘/</span>
                     </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                    <Button icon={<Download size={14} />} className="flex items-center text-gray-600">
-                        Export
+                    <Button icon={<Download size={14} />} className="flex items-center text-gray-600 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700">
+                        {t('employeesPage.export')}
                     </Button>
                     <Button type="primary" icon={<Plus size={16} />} className="bg-primary hover:bg-purple-700 h-9">
-                        Add Employee
+                        {t('employeesPage.addEmployee')}
                     </Button>
                 </div>
             </div>
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <StatCard title="Designation" data={designationData} />
-                <StatCard title="Department" data={departmentData} />
-                <StatCard title="Status Overview" data={statusData} showTotal />
+                <StatCard title={t('employeesPage.stats.designation')} data={designationData} />
+                <StatCard title={t('employeesPage.stats.department')} data={departmentData} />
+                <StatCard title={t('employeesPage.stats.statusOverview')} data={statusData} showTotal />
             </div>
 
             {/* Table Section - Ensure max-w-full to prevent horizontal scroll on body */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden w-full">
-                <div className="p-6 flex justify-between items-center border-b border-gray-100">
-                    <h3 className="font-semibold text-gray-800 border-l-4 border-primary pl-2">All Employees</h3>
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden w-full">
+                <div className="p-6 flex justify-between items-center border-b border-gray-100 dark:border-gray-700">
+                    <h3 className="font-semibold text-gray-800 dark:text-white border-l-4 border-primary pl-2">{t('employeesPage.allEmployees')}</h3>
                     <div className="flex gap-2">
-                        <Button icon={<List size={16} />} className="text-gray-500" />
-                        <Button icon={<Grid size={16} />} className="text-gray-500" />
+                        <Button icon={<List size={16} />} className="text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600" />
+                        <Button icon={<Grid size={16} />} className="text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600" />
                     </div>
                 </div>
-                <div className="h-[600px] w-[calc(100vw-12rem)]"> {/* Fixed height for sticky header effectiveness */}
+                <div className="h-[600px]"> {/* Fixed height for sticky header effectiveness */}
                     <Table
                         columns={columns}
                         dataSource={employeesData}
