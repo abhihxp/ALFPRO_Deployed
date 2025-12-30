@@ -1,11 +1,11 @@
-import { Search, Download, Plus, List, Grid, MoreVertical } from 'lucide-react';
-import { Button, Table, Avatar, Tag, Dropdown } from 'antd';
+import { useMemo } from 'react';
+import { Search, Download, Plus, List, Grid, MoreVertical, X } from 'lucide-react';
+import { Button, Table, Avatar, Tag, Dropdown, DatePicker } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
-import { useTranslation } from 'react-i18next';
+import { useEmployeeFilters } from '../hooks/useEmployeeFilters';
 
-// --- Types ---
-interface Employee {
+export interface Employee {
     id: string;
     fullNameEn: string;
     fullNameAr: string;
@@ -583,29 +583,168 @@ const getStatusStats = (data: Employee[]) => {
     ];
 };
 
+// --- Filter Column Mapping ---
+const filterColumnMap: Record<string, string> = {
+    'location': 'Location',
+    'department': 'Department',
+    'designation': 'Designation',
+    'status': 'Status',
+    'visaType': 'Visa Status',
+    'joiningDate': 'Joining Date'
+};
+
+// --- Get Filter Display Label ---
+const getFilterLabel = (columnKey: string, value: string): string => {
+    // For status, use the display label
+    if (columnKey === 'status') {
+        const statusMap: Record<string, string> = {
+            'active': 'Active',
+            'on_leave': 'On Leave',
+            'probation': 'Probation'
+        };
+        return statusMap[value] || value;
+    }
+    // Capitalize other values
+    return value.charAt(0).toUpperCase() + value.slice(1);
+};
+
+// --- StatCard Component ---
+const StatCard = ({ title, data, showTotal = false, totalEmployees = 0 }: {
+    title: string,
+    data: { name: string, value: number, color: string }[],
+    showTotal?: boolean,
+    totalEmployees?: number
+}) => (
+    <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 h-full flex flex-col">
+        <h3 className="font-semibold text-gray-800 border-l-4 border-primary pl-2 mb-4">{title}</h3>
+        <div className="flex items-center gap-4 flex-1">
+            <div className="w-32 h-32 relative flex-shrink-0">
+                <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                        <Pie
+                            data={data}
+                            innerRadius={40}
+                            outerRadius={60}
+                            paddingAngle={2}
+                            dataKey="value"
+                        >
+                            {data.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={entry.color} strokeWidth={0} />
+                            ))}
+                        </Pie>
+                        <Tooltip />
+                    </PieChart>
+                </ResponsiveContainer>
+                {showTotal && (
+                    <div className="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
+                        <span className="text-xs text-gray-400">Total</span>
+                        <span className="text-xl font-bold text-gray-800">{totalEmployees}</span>
+                    </div>
+                )}
+            </div>
+            {/* Legend Section */}
+            <div className="flex-1 overflow-auto max-h-32 custom-scrollbar flex flex-col justify-center">
+                {data.map((item) => (
+                    <div key={item.name} className="flex items-center justify-between text-xs mb-1 last:mb-0">
+                        <div className="flex items-center gap-2 flex-1 min-w-0">
+                            <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }}></span>
+                            <span className="text-gray-500 truncate" title={item.name}>{item.name}</span>
+                        </div>
+                        <span className="font-semibold text-gray-700 ml-2">{item.value}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+);
+
+// --- ActiveFilters Component ---
+interface ActiveFiltersProps {
+    activeFilters: Record<string, (string | number)[]>;
+    onClearFilter: (columnKey: string, value?: string | number) => void;
+    onClearAll: () => void;
+}
+
+const ActiveFilters = ({ activeFilters, onClearFilter, onClearAll }: ActiveFiltersProps) => {
+    const filterEntries = Object.entries(activeFilters);
+    if (filterEntries.length === 0) return null;
+
+    return (
+        <div className="px-6 py-4 border-b border-gray-100">
+            <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-sm text-gray-500 font-medium mr-1">Active Filters:</span>
+                {filterEntries.map(([columnKey, values]) => (
+                    <div
+                        key={columnKey}
+                        className="flex items-center justify-between px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700"
+                    >
+                        <span className="font-medium text-gray-500 whitespace-nowrap">{filterColumnMap[columnKey]}:</span>
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                            {values.map((value) => (
+                                <div
+                                    key={`${columnKey}-${value}`}
+                                    className="flex items-center gap-1 px-2 py-0.5 bg-white border border-gray-200 rounded-md hover:bg-gray-50 transition-colors"
+                                >
+                                    <span>{getFilterLabel(columnKey, String(value))}</span>
+                                    <button
+                                        onClick={() => onClearFilter(columnKey, value)}
+                                        className="ml-0.5 p-0.5 hover:bg-gray-200 rounded transition-colors flex-shrink-0"
+                                        aria-label={`Remove ${filterColumnMap[columnKey]} filter: ${value}`}
+                                    >
+                                        <X size={12} className="text-gray-500" />
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                        {values.length > 1 && (
+                            <button
+                                onClick={() => onClearFilter(columnKey)}
+                                className="p-0.5 hover:bg-gray-200 rounded transition-colors flex-shrink-0"
+                                aria-label={`Clear all ${filterColumnMap[columnKey]} filters`}
+                            >
+                                <X size={12} className="text-gray-500" />
+                            </button>
+                        )}
+                    </div>
+                ))}
+                <button
+                    onClick={onClearAll}
+                    className="ml-auto px-3 py-1.5 text-sm text-white ant-btn-primary ant-btn-color-primary ant-btn-variant-solid bg-primary hover:bg-purple-700 h-9 rounded-lg"
+                >
+                    Clear All
+                </button>
+            </div>
+        </div>
+    );
+};
+
 
 const EmployeesPage = () => {
-    const { t, i18n } = useTranslation();
+    const {
+        filteredEmployees,
+        activeFilters,
+        clearFilter,
+        clearAllFilters,
+        handleTableChange,
+        handleDateRangeChange,
+        searchQuery,
+        setSearchQuery,
+        dateRange,
+        tableFilters
+    } = useEmployeeFilters(employeesData);
 
-    // --- Stats Data ---
     const designationData = getDesignationStats(employeesData);
     const departmentData = getDepartmentStats(employeesData);
-    const statusData = getStatusStats(employeesData).map(item => ({
-        ...item,
-        name: item.name === 'Active' ? t('employeesPage.stats.active') :
-            item.name === 'On Leave' ? t('employeesPage.stats.onLeave') :
-                item.name === 'Probation' ? t('employeesPage.stats.probation') : item.name
-    }));
-    const totalEmployees = employeesData.length;
+    const statusData = getStatusStats(employeesData);
+    const totalEmployees = filteredEmployees.length;
 
-    // --- Filter Helpers ---
     const getFilters = (key: keyof Employee) => {
         const uniqueValues = Array.from(new Set(employeesData.map(e => e[key])));
         return uniqueValues.map(v => ({ text: String(v), value: String(v) }));
     };
 
-    // --- Table Configuration ---
-    const columns: ColumnsType<Employee> = [
+    // --- Table Configuration (with controlled filters) ---
+    const columns: ColumnsType<Employee> = useMemo(() => [
         {
             title: t('employeesPage.table.employee'),
             dataIndex: i18n.language === 'ar' ? 'fullNameAr' : 'fullNameEn',
@@ -629,6 +768,7 @@ const EmployeesPage = () => {
             width: 120,
             className: 'text-gray-600 dark:text-gray-300',
             filters: getFilters('location'),
+            filteredValue: (tableFilters.location ?? null) as (string | number)[] | null,
             onFilter: (value, record) => record.location === value
         },
         { title: t('employeesPage.table.joiningDate'), dataIndex: 'joiningDate', key: 'joiningDate', width: 120, className: 'text-gray-600 dark:text-gray-300' },
@@ -640,6 +780,7 @@ const EmployeesPage = () => {
             render: (text) => <span className="capitalize">{text}</span>,
             className: 'text-gray-600 dark:text-gray-300',
             filters: getFilters('department'),
+            filteredValue: (tableFilters.department ?? null) as (string | number)[] | null,
             onFilter: (value, record) => record.department === value
         },
         {
@@ -649,6 +790,7 @@ const EmployeesPage = () => {
             width: 180,
             className: 'text-gray-600 dark:text-gray-300',
             filters: getFilters('designation'),
+            filteredValue: (tableFilters.designation ?? null) as (string | number)[] | null,
             onFilter: (value, record) => record.designation === value
         },
         {
@@ -661,6 +803,7 @@ const EmployeesPage = () => {
                 { text: t('employeesPage.stats.onLeave'), value: 'on_leave' },
                 { text: t('employeesPage.stats.probation'), value: 'probation' }
             ],
+            filteredValue: (tableFilters.status ?? null) as (string | number)[] | null,
             onFilter: (value, record) => record.status === value,
             render: (status) => {
                 let color = 'green';
@@ -681,6 +824,7 @@ const EmployeesPage = () => {
             width: 120,
             render: (text) => <span className="capitalize text-gray-600 dark:text-gray-300">{text}</span>,
             filters: getFilters('visaType'),
+            filteredValue: (tableFilters.visaType ?? null) as (string | number)[] | null,
             onFilter: (value, record) => record.visaType === value
         },
         {
@@ -700,103 +844,80 @@ const EmployeesPage = () => {
                 </Dropdown>
             ),
         }
-    ];
+    ], [tableFilters]);
 
-    const StatCard = ({ title, data, showTotal = false }: { title: string, data: { name: string, value: number, color: string }[], showTotal?: boolean }) => (
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 h-full flex flex-col">
-            <h3 className="font-semibold text-gray-800 dark:text-gray-100 border-l-4 border-primary pl-2 mb-4">{title}</h3>
-            <div className="flex items-center gap-4 flex-1">
-                <div className="w-32 h-32 relative flex-shrink-0">
-                    <ResponsiveContainer width="100%" height="100%">
-                        <PieChart>
-                            <Pie
-                                data={data}
-                                innerRadius={40}
-                                outerRadius={60}
-                                paddingAngle={2}
-                                dataKey="value"
-                            >
-                                {data.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={entry.color} strokeWidth={0} />
-                                ))}
-                            </Pie>
-                            <Tooltip contentStyle={{ backgroundColor: '#1f2937', borderColor: '#374151', color: '#fff' }} />
-                        </PieChart>
-                    </ResponsiveContainer>
-                    {showTotal && (
-                        <div className="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
-                            <span className="text-xs text-gray-400">{t('employeesPage.stats.total')}</span>
-                            <span className="text-xl font-bold text-gray-800 dark:text-white">{totalEmployees}</span>
-                        </div>
-                    )}
-                </div>
-                {/* Legend Section */}
-                <div className="flex-1 overflow-auto max-h-32 custom-scrollbar flex flex-col justify-center">
-                    {data.map((item) => (
-                        <div key={item.name} className="flex items-center justify-between text-xs mb-1 last:mb-0">
-                            <div className="flex items-center gap-2 flex-1 min-w-0">
-                                <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }}></span>
-                                <span className="text-gray-500 dark:text-gray-400 truncate" title={item.name}>{item.name}</span>
-                            </div>
-                            <span className="font-semibold text-gray-700 dark:text-gray-300 ml-2">{item.value}</span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
-    );
 
     return (
         <div className="space-y-6">
-            {/* Top Controls */}
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-                <div className="flex items-center gap-4 w-full md:w-auto">
-                    <div className="bg-white dark:bg-gray-800 flex items-center px-3 py-2 rounded-lg border border-gray-100 dark:border-gray-700 flex-1 md:w-64">
-                        <Search className="w-4 h-4 text-gray-400" />
-                        <input
-                            type="text"
-                            placeholder={t('employeesPage.searchPlaceholder')}
-                            className="bg-transparent border-none text-sm ml-2 w-full focus:outline-none text-gray-600 dark:text-gray-200 placeholder:text-gray-400"
-                        />
-                        <span className="text-xs text-gray-400">⌘/</span>
-                    </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                    <Button icon={<Download size={14} />} className="flex items-center text-gray-600 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700">
-                        {t('employeesPage.export')}
-                    </Button>
-                    <Button type="primary" icon={<Plus size={16} />} className="bg-primary hover:bg-purple-700 h-9">
-                        {t('employeesPage.addEmployee')}
-                    </Button>
-                </div>
-            </div>
-
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <StatCard title={t('employeesPage.stats.designation')} data={designationData} />
-                <StatCard title={t('employeesPage.stats.department')} data={departmentData} />
-                <StatCard title={t('employeesPage.stats.statusOverview')} data={statusData} showTotal />
+                <StatCard title="Designation" data={designationData} totalEmployees={totalEmployees} />
+                <StatCard title="Department" data={departmentData} totalEmployees={totalEmployees} />
+                <StatCard title="Status Overview" data={statusData} showTotal totalEmployees={totalEmployees} />
             </div>
 
             {/* Table Section - Ensure max-w-full to prevent horizontal scroll on body */}
-            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden w-full">
-                <div className="p-6 flex justify-between items-center border-b border-gray-100 dark:border-gray-700">
-                    <h3 className="font-semibold text-gray-800 dark:text-white border-l-4 border-primary pl-2">{t('employeesPage.allEmployees')}</h3>
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden w-full">
+                <div className="p-6 flex justify-between items-center border-b border-gray-100">
+                    <h3 className="font-semibold text-gray-800 border-l-4 border-primary pl-2">All Employees</h3>
                     <div className="flex gap-2">
-                        <Button icon={<List size={16} />} className="text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600" />
-                        <Button icon={<Grid size={16} />} className="text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600" />
+                        <Button icon={<List size={16} />} className="text-gray-500" />
+                        <Button icon={<Grid size={16} />} className="text-gray-500" />
                     </div>
                 </div>
-                <div className="h-[600px]"> {/* Fixed height for sticky header effectiveness */}
+
+                {/* Top Controls */}
+                <div className="px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div className="flex items-center gap-4 w-full md:w-auto">
+                        <div className="bg-white flex items-center px-3 py-2 rounded-lg border border-gray-100 flex-1 md:w-64">
+                            <Search className="w-4 h-4 text-gray-400" />
+                            <input
+                                type="text"
+                                placeholder="Search employee..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="bg-transparent border-none text-sm ml-2 w-full focus:outline-none text-gray-600 placeholder:text-gray-400"
+                            />
+                            <span className="text-xs text-gray-400">⌘/</span>
+                        </div>
+                        <DatePicker.RangePicker
+                            value={dateRange}
+                            onChange={handleDateRangeChange}
+                            placeholder={['Start Date', 'End Date']}
+                            format="YYYY-MM-DD"
+                            className="h-9"
+                            allowClear
+                            style={{ borderRadius: '0.5rem' }}
+                        />
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                        <Button icon={<Download size={14} />} className="flex items-center text-gray-600">
+                            Export
+                        </Button>
+                        <Button type="primary" icon={<Plus size={16} />} className="bg-primary hover:bg-purple-700 h-9">
+                            Add Employee
+                        </Button>
+                    </div>
+                </div>
+
+                {/* Active Filters */}
+                <ActiveFilters
+                    activeFilters={activeFilters}
+                    onClearFilter={clearFilter}
+                    onClearAll={clearAllFilters}
+                />
+
+                <div className="h-[600px] w-[calc(100vw-12rem)]"> {/* Fixed height for sticky header effectiveness */}
                     <Table
                         columns={columns}
-                        dataSource={employeesData}
+                        dataSource={filteredEmployees}
                         rowKey="id"
                         pagination={{ pageSize: 15 }}
                         size="middle"
                         scroll={{ x: 1300, y: 500 }} // Increased x width slightly to ensure scrolling happens inside
                         sticky
+                        onChange={handleTableChange}
                     />
                 </div>
             </div>
