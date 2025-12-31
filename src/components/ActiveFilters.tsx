@@ -13,7 +13,7 @@ const ActiveFilters: React.FC<ActiveFiltersProps> = ({
   onClearFilter,
   onClearAll,
 }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const filterColumnMap: Record<string, string> = {
     location: t('employeesPage.table.location'),
@@ -82,9 +82,9 @@ const ActiveFilters: React.FC<ActiveFiltersProps> = ({
         ))}
         <button
           onClick={onClearAll}
-          className={`px-3 py-1.5 text-sm text-white ant-btn-primary ant-btn-color-primary ant-btn-variant-solid bg-primary hover:bg-purple-700 h-9 rounded-lg ${i18n.dir() === 'rtl' ? 'mr-auto' : 'ml-auto'}`}
+          className="ml-auto px-3 py-1.5 text-sm text-white ant-btn-primary ant-btn-color-primary ant-btn-variant-solid bg-primary hover:bg-purple-700 h-9 rounded-lg"
         >
-          {t('employeesPage.clearAll')}
+          Clear All
         </button>
       </div>
     </div>

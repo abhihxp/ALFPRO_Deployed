@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import { useActiveFilters, type ActiveFiltersState } from '../hooks/useActiveFilters';
 import ActiveFilters from '../components/ActiveFilters';
 
+// --- StatCard Component ---
 const StatCard = ({ title, data, showTotal = false, total }: { title: string, data: { name: string, value: number, color: string }[], showTotal?: boolean, total?: number }) => (
     <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 h-full flex flex-col">
         <h3 className="font-semibold text-gray-800 dark:text-gray-100 border-l-4 border-primary pl-2 mb-4">{title}</h3>
@@ -675,9 +676,9 @@ const EmployeesPage = () => {
     });
 
     // --- Stats Data ---
-    const designationData = getDesignationStats(employeesData);
-    const departmentData = getDepartmentStats(employeesData);
-    const statusData = getStatusStats(employeesData).map(item => ({
+    const designationData = getDesignationStats(filteredData);
+    const departmentData = getDepartmentStats(filteredData);
+    const statusData = getStatusStats(filteredData).map(item => ({
         ...item,
         name: item.name === 'Active' ? t('employeesPage.stats.active') :
             item.name === 'On Leave' ? t('employeesPage.stats.onLeave') :
@@ -788,108 +789,85 @@ const EmployeesPage = () => {
     ];
 
     return (
-      <div className="space-y-6">
-        {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <StatCard
-            title={t("employeesPage.stats.designation")}
-            data={designationData}
-          />
-          <StatCard
-            title={t("employeesPage.stats.department")}
-            data={departmentData}
-          />
-          <StatCard
-            title={t("employeesPage.stats.statusOverview")}
-            data={statusData}
-            showTotal
-          />
-        </div>
-
-        {/* Top Controls */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="flex items-center gap-4 w-full md:w-auto">
-            <div className="bg-white dark:bg-gray-800 flex items-center px-3 py-2 rounded-lg border border-gray-100 dark:border-gray-700 flex-1 md:w-64">
-              <Search className="w-4 h-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder={t("employeesPage.searchPlaceholder")}
-                className="bg-transparent border-none text-sm ml-2 w-full focus:outline-none text-gray-600 dark:text-gray-200 placeholder:text-gray-400"
-              />
-              <span className="text-xs text-gray-400">⌘/</span>
+        <div className="space-y-6">
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <StatCard title={t('employeesPage.stats.designation')} data={designationData} />
+                <StatCard title={t('employeesPage.stats.department')} data={departmentData} />
+                <StatCard title={t('employeesPage.stats.statusOverview')} data={statusData} showTotal />
             </div>
-              <DatePicker.RangePicker
-                value={dateRange}
-                onChange={(dates) => setDateRange(dates || [null, null])}
-                placeholder={["Joined After", "Joined Before"]}
-                className="w-128"
-              />
-          </div>
 
-          <div className="flex items-center gap-3">
-            <Button
-              icon={<Download size={14} />}
-              className="flex items-center text-gray-600 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700"
-            >
-              {t("employeesPage.export")}
-            </Button>
-            <Button
-              type="primary"
-              icon={<Plus size={16} />}
-              className="bg-primary hover:bg-purple-700 h-9"
-              onClick={() => (window.location.href = "/employees/new")} // Using window location for simplicity as useNavigate is inside child
-            >
-              {t("employeesPage.addEmployee")}
-            </Button>
-          </div>
-        </div>
+            {/* Top Controls */}
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div className="flex items-center gap-4 w-full md:w-auto">
+                    <div className="bg-white dark:bg-gray-800 flex items-center px-3 py-2 rounded-lg border border-gray-100 dark:border-gray-700 flex-1 md:w-64">
+                        <Search className="w-4 h-4 text-gray-400" />
+                        <input
+                            type="text"
+                            placeholder={t('employeesPage.searchPlaceholder')}
+                            className="bg-transparent border-none text-sm ml-2 w-full focus:outline-none text-gray-600 dark:text-gray-200 placeholder:text-gray-400"
+                        />
+                        <span className="text-xs text-gray-400">⌘/</span>
+                    </div>
+                    <DatePicker.RangePicker
+                        value={dateRange}
+                        onChange={(dates) => setDateRange(dates || [null, null])}
+                        placeholder={['Start Date', 'End Date']}
+                        className="w-64"
+                    />
+                </div>
 
-        {/* Table Section - Ensure max-w-full to prevent horizontal scroll on body */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden w-full">
-          <div className="p-6 flex justify-between items-center border-b border-gray-100 dark:border-gray-700">
-            <h3 className="font-semibold text-gray-800 dark:text-white border-l-4 border-primary pl-2">
-              {t("employeesPage.allEmployees")}
-            </h3>
-            <div className="flex gap-2">
-              <Button
-                icon={<List size={16} />}
-                className="text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600"
-              />
-              <Button
-                icon={<Grid size={16} />}
-                className="text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600"
-              />
+                <div className="flex items-center gap-3">
+                    <Button icon={<Download size={14} />} className="flex items-center text-gray-600 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700">
+                        {t('employeesPage.export')}
+                    </Button>
+                    <Button
+                        type="primary"
+                        icon={<Plus size={16} />}
+                        className="bg-primary hover:bg-purple-700 h-9"
+                        onClick={() => window.location.href = '/employees/new'} // Using window location for simplicity as useNavigate is inside child
+                    >
+                        {t('employeesPage.addEmployee')}
+                    </Button>
+                </div>
             </div>
-          </div>
 
-          {/* Active Filters */}
-          {Object.keys(getGroupedActiveFilters()).length > 0 && (
-            <div className="p-4">
-              <ActiveFilters
-                activeFilters={getGroupedActiveFilters()}
-                onClearFilter={clearFilter}
-                onClearAll={clearAllFilters}
-              />
+            {/* Table Section - Ensure max-w-full to prevent horizontal scroll on body */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden w-full">
+                <div className="p-6 flex justify-between items-center border-b border-gray-100 dark:border-gray-700">
+                    <h3 className="font-semibold text-gray-800 dark:text-white border-l-4 border-primary pl-2">{t('employeesPage.allEmployees')}</h3>
+                    <div className="flex gap-2">
+                        <Button icon={<List size={16} />} className="text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600" />
+                        <Button icon={<Grid size={16} />} className="text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600" />
+                    </div>
+                </div>
+
+                {/* Active Filters */}
+                {Object.keys(getGroupedActiveFilters()).length > 0 && (
+                    <div className="p-4">
+                        <ActiveFilters
+                            activeFilters={getGroupedActiveFilters()}
+                            onClearFilter={clearFilter}
+                            onClearAll={clearAllFilters}
+                        />
+                    </div>
+                )}
+
+                <div className="h-[600px]"> {/* Fixed height for sticky header effectiveness */}
+                    <Table
+                        key={JSON.stringify(activeFilters)}
+                        columns={columns}
+                        dataSource={filteredData}
+                        rowKey="id"
+                        pagination={{ pageSize: 15 }}
+                        size="middle"
+                        scroll={{ x: 1300, y: 500 }} // Increased x width slightly to ensure scrolling happens inside
+                        sticky
+                        onChange={handleTableChange}
+                    />
+                </div>
             </div>
-          )}
-
-          <div className="h-[600px]">
-            {" "}
-            {/* Fixed height for sticky header effectiveness */}
-            <Table
-              key={JSON.stringify(activeFilters)}
-              columns={columns}
-              dataSource={filteredData}
-              rowKey="id"
-              pagination={{ pageSize: 15 }}
-              size="middle"
-              scroll={{ x: 1300, y: 500 }} // Increased x width slightly to ensure scrolling happens inside
-              sticky
-              onChange={handleTableChange}
-            />
-          </div>
         </div>
-      </div>
     );
 };
 
