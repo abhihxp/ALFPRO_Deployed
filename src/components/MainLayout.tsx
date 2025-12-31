@@ -30,35 +30,38 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     const { t, i18n } = useTranslation();
     const location = useLocation();
 
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-                setIsDropdownOpen(false);
-            }
+    const getPageHeader = () => {
+        const path = location.pathname;
+        if (path.includes('/employees')) {
+            return {
+                title: t('menu.employees'),
+                subtitle: t('employeesPage.subtitle')
+            };
+        } else if (path.includes('/leaves')) {
+            return {
+                title: t('header.leaves'),
+                subtitle: t('leavesPage.subtitle')
+            };
+        }
+        // Default
+        return {
+            title: 'Dashboard',
+            subtitle: 'Welcome back'
         };
+    };
 
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, []);
+    const headerInfo = getPageHeader();
 
     return (
-      <div className="flex bg-[#F8F9FB] min-h-screen">
-        <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
-        <div
-          className={`flex-1 p-8 pt-0 transition-all duration-300 ${
-            collapsed ? "ml-20" : "ml-64"
-          } min-w-0 overflow-x-hidden`}
-        >
-          {/* Sticky Header */}
-          <header className="sticky top-0 z-50 bg-[#F8F9FB]/95 backdrop-blur-sm -mx-8 px-8 py-4 mb-4 flex justify-between items-start">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">HRMS</h1>
-              <p className="text-gray-500 text-sm mt-1">
-                Track staff activities, stats, and updates.
-              </p>
-            </div>
+        <div className="flex bg-[#F8F9FB] dark:bg-gray-900 min-h-screen relative text-gray-900 dark:text-gray-100">
+            <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+            <div className={`flex-1 p-8 pt-0 transition-all duration-300 ${collapsed ? 'ltr:ml-20 rtl:mr-20' : 'ltr:ml-64 rtl:mr-64'} min-w-0`}>
+                {/* Sticky Header */}
+                <header className="sticky top-0 z-50 bg-[#F8F9FB]/95 dark:bg-gray-900/95 backdrop-blur-sm -mx-8 px-8 py-4 mb-4 flex justify-between items-start border-b border-gray-100 dark:border-gray-800 shadow-sm">
+                    <div>
+                        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{headerInfo.title}</h1>
+                        <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">{headerInfo.subtitle}</p>
+                    </div>
 
                     <div className="flex items-center gap-4">
                         <button
@@ -123,15 +126,13 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                             )}
                         </div>
                     </div>
-                  </div>
-                )};
-              </div>
-            </div>
-          </header>
+                </header>
 
-          <main className="">{children}</main>
+                <main className="">
+                    {children}
+                </main>
+            </div>
         </div>
-      </div>
     );
 };
 
