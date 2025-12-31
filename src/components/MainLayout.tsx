@@ -124,7 +124,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                         </div>
                     </div>
                   </div>
-                )}
+                )};
               </div>
             </div>
           </header>
