@@ -35,23 +35,15 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     const headerInfo = getPageHeader();
 
     return (
-      <div className="flex bg-[#F8F9FB] dark:bg-gray-900 min-h-screen relative text-gray-900 dark:text-gray-100">
-        <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
-        <div
-          className={`flex-1 p-8 pt-0 transition-all duration-300 ${
-            collapsed ? "ltr:ml-20 rtl:mr-20" : "ltr:ml-64 rtl:mr-64"
-          } min-w-0`}
-        >
-          {/* Sticky Header */}
-          <header className="sticky top-0 z-50 bg-[#F8F9FB]/95 dark:bg-gray-900/95 backdrop-blur-sm -mx-8 px-8 py-4 mb-4 flex justify-between items-start border-b border-gray-100 dark:border-gray-800 shadow-sm">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
-                {headerInfo.title}
-              </h1>
-              <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
-                {headerInfo.subtitle}
-              </p>
-            </div>
+        <div className="flex bg-[#F8F9FB] dark:bg-gray-900 min-h-screen relative text-gray-900 dark:text-gray-100">
+            <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+            <div className={`flex-1 p-8 pt-0 transition-all duration-300 ${collapsed ? 'ltr:ml-20 rtl:mr-20' : 'ltr:ml-64 rtl:mr-64'} min-w-0`}>
+                {/* Sticky Header */}
+                <header className="sticky top-0 z-50 bg-[#F8F9FB]/95 dark:bg-gray-900/95 backdrop-blur-sm -mx-8 px-8 py-4 mb-4 flex justify-between items-start border-b border-gray-100 dark:border-gray-800 shadow-sm">
+                    <div>
+                        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">{headerInfo.title}</h1>
+                        <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">{headerInfo.subtitle}</p>
+                    </div>
 
                     <div className="flex items-center gap-4">
                         <button
@@ -88,9 +80,11 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                     </div>
                 </header>
 
-          <main className="">{children}</main>
+                <main className="">
+                    {children}
+                </main>
+            </div>
         </div>
-      </div>
     );
 };
 
