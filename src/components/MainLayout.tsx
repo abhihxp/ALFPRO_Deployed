@@ -31,7 +31,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
           {/* Sticky Header */}
           <header className="sticky top-0 z-50 bg-[#F8F9FB]/95 backdrop-blur-sm -mx-8 px-8 py-4 mb-4 flex justify-between items-start">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Leaves</h1>
+              <h1 className="text-2xl font-bold text-gray-900">HRMS</h1>
               <p className="text-gray-500 text-sm mt-1">
                 Track staff activities, stats, and updates.
               </p>
