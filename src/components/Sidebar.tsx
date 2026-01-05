@@ -136,7 +136,7 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
             </div>
 
             {/* Toggle Button - Fixed to bottom */}
-            <div className="sticky bottom-0 p-4 border-t border-gray-100 dark:border-gray-800 flex-shrink-0 bg-white dark:bg-gray-900 z-10">
+            <div className="sticky bottom-0 p-4 border-t border-gray-100 flex-shrink-0 bg-white z-10">
                 <button
                     onClick={() => setCollapsed(!collapsed)}
                     className="w-full flex items-center justify-center p-2 text-gray-400 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
