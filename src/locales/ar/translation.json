@@ -24,10 +24,6 @@
         "export": "تصدير",
         "addEmployee": "إضافة موظف",
         "allEmployees": "جميع الموظفين",
-        "subtitle": "تتبع أنشطة الموظفين والإحصائيات والتحديثات.",
-        "activeFilters": "الفلاتر النشطة",
-        "clearAll": "مسح الكل",
-        "noActiveFilters": "لا توجد فلاتر نشطة",
         "stats": {
             "designation": "اللقب الوظيفي",
             "department": "القسم",
