@@ -32,7 +32,7 @@ export const useEmployeeFilters = (employeesData: Employee[]) => {
                 const startDate = dateRange[0]!.startOf('day');
                 const endDate = dateRange[1]!.startOf('day');
                 return (joiningDate.isSame(startDate) || joiningDate.isAfter(startDate)) &&
-                       (joiningDate.isSame(endDate) || joiningDate.isBefore(endDate));
+                    (joiningDate.isSame(endDate) || joiningDate.isBefore(endDate));
             });
         }
 
