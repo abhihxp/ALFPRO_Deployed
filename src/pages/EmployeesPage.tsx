@@ -53,7 +53,7 @@ const StatCard = ({ title, data, showTotal = false, total }: { title: string, da
 );
 
 // --- Types ---
-interface Employee {
+export interface Employee {
     id: string;
     fullNameEn: string;
     fullNameAr: string;
@@ -644,7 +644,7 @@ const EmployeesPage = () => {
     };
 
     // --- Handle Table Filter Changes ---
-    const handleTableChange: TableProps<Employee>['onChange'] = (pagination, filters) => {
+    const handleTableChange: TableProps<Employee>['onChange'] = (_pagination, filters) => {
         const newActiveFilters: ActiveFiltersState = { ...activeFilters };
         Object.keys(filters).forEach(key => {
             if (filters[key] && filters[key].length > 0) {
