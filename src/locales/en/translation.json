@@ -25,6 +25,9 @@
         "addEmployee": "Add Employee",
         "allEmployees": "All Employees",
         "subtitle": "Track employee activities, stats, and updates.",
+        "activeFilters": "Active Filters",
+        "clearAll": "Clear All",
+        "noActiveFilters": "No active filters",
         "stats": {
             "designation": "Designation",
             "department": "Department",

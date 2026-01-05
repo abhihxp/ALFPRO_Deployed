@@ -1,11 +1,59 @@
 import { Search, Download, Plus, List, Grid, MoreVertical } from 'lucide-react';
-import { Button, Table, Avatar, Tag, Dropdown } from 'antd';
-import type { ColumnsType } from 'antd/es/table';
+import { Button, Table, Avatar, Tag, Dropdown, DatePicker } from 'antd';
+import type { ColumnsType, TableProps } from 'antd/es/table';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
+import dayjs from 'dayjs';
+import { useActiveFilters, type ActiveFiltersState } from '../hooks/useActiveFilters';
+import ActiveFilters from '../components/ActiveFilters';
+
+const StatCard = ({ title, data, showTotal = false, total }: { title: string, data: { name: string, value: number, color: string }[], showTotal?: boolean, total?: number }) => (
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 h-full flex flex-col">
+        <h3 className="font-semibold text-gray-800 dark:text-gray-100 border-l-4 border-primary pl-2 mb-4">{title}</h3>
+        <div className="flex items-center gap-4 flex-1">
+            <div className="w-32 h-32 relative flex-shrink-0">
+                <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                        <Pie
+                            data={data}
+                            innerRadius={40}
+                            outerRadius={60}
+                            paddingAngle={2}
+                            dataKey="value"
+                        >
+                            {data.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={entry.color} strokeWidth={0} />
+                            ))}
+                        </Pie>
+                        <Tooltip contentStyle={{ backgroundColor: '#1f2937', borderColor: '#374151', color: '#fff' }} />
+                    </PieChart>
+                </ResponsiveContainer>
+                {showTotal && (
+                    <div className="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
+                        <span className="text-xs text-gray-400">Total</span>
+                        <span className="text-xl font-bold text-gray-800 dark:text-white">{total}</span>
+                    </div>
+                )}
+            </div>
+            {/* Legend Section */}
+            <div className="flex-1 overflow-auto max-h-32 custom-scrollbar flex flex-col justify-center">
+                {data.map((item) => (
+                    <div key={item.name} className="flex items-center justify-between text-xs mb-1 last:mb-0">
+                        <div className="flex items-center gap-2 flex-1 min-w-0">
+                            <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }}></span>
+                            <span className="text-gray-500 dark:text-gray-400 truncate" title={item.name}>{item.name}</span>
+                        </div>
+                        <span className="font-semibold text-gray-700 dark:text-gray-300 ml-2">{item.value}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+);
 
 // --- Types ---
-interface Employee {
+export interface Employee {
     id: string;
     fullNameEn: string;
     fullNameAr: string;
@@ -586,6 +634,45 @@ const getStatusStats = (data: Employee[]) => {
 
 const EmployeesPage = () => {
     const { t, i18n } = useTranslation();
+    const { activeFilters, updateActiveFilters, clearFilter, clearAllFilters, getGroupedActiveFilters } = useActiveFilters();
+    const [dateRange, setDateRange] = useState<[dayjs.Dayjs | null, dayjs.Dayjs | null]>([null, null]);
+
+    // --- Filter Helpers ---
+    const getFilters = (key: keyof Employee) => {
+        const uniqueValues = Array.from(new Set(employeesData.map(e => e[key])));
+        return uniqueValues.map(v => ({ text: String(v), value: String(v) }));
+    };
+
+    // --- Handle Table Filter Changes ---
+    const handleTableChange: TableProps<Employee>['onChange'] = (_pagination, filters) => {
+        const newActiveFilters: ActiveFiltersState = { ...activeFilters };
+        Object.keys(filters).forEach(key => {
+            if (filters[key] && filters[key].length > 0) {
+                newActiveFilters[key] = filters[key] as string[];
+            } else {
+                delete newActiveFilters[key];
+            }
+        });
+        updateActiveFilters(newActiveFilters);
+    };
+
+    // --- Filter Data Based on Active Filters ---
+    const filteredData = employeesData.filter(employee => {
+        // Check active filters
+        const activeFilterMatch = Object.entries(activeFilters).every(([key, values]) => {
+            if (!values || values.length === 0) return true;
+            return values.includes(employee[key as keyof Employee] as string);
+        });
+
+        // Check date range filter
+        let dateRangeMatch = true;
+        if (dateRange && dateRange[0] && dateRange[1]) {
+            const joiningDate = dayjs(employee.joiningDate);
+            dateRangeMatch = joiningDate.isAfter(dateRange[0].subtract(1, 'day')) && joiningDate.isBefore(dateRange[1].add(1, 'day'));
+        }
+
+        return activeFilterMatch && dateRangeMatch;
+    });
 
     // --- Stats Data ---
     const designationData = getDesignationStats(employeesData);
@@ -596,13 +683,6 @@ const EmployeesPage = () => {
             item.name === 'On Leave' ? t('employeesPage.stats.onLeave') :
                 item.name === 'Probation' ? t('employeesPage.stats.probation') : item.name
     }));
-    const totalEmployees = employeesData.length;
-
-    // --- Filter Helpers ---
-    const getFilters = (key: keyof Employee) => {
-        const uniqueValues = Array.from(new Set(employeesData.map(e => e[key])));
-        return uniqueValues.map(v => ({ text: String(v), value: String(v) }));
-    };
 
     // --- Table Configuration ---
     const columns: ColumnsType<Employee> = [
@@ -612,7 +692,7 @@ const EmployeesPage = () => {
             key: 'fullName',
             fixed: 'left',
             width: 250,
-            render: (text, record) => (
+            render: (text: string, record: Employee) => (
                 <div className="flex items-center gap-3">
                     <Avatar className="bg-primary flex-shrink-0">{text.charAt(0)}</Avatar>
                     <div>
@@ -629,6 +709,7 @@ const EmployeesPage = () => {
             width: 120,
             className: 'text-gray-600 dark:text-gray-300',
             filters: getFilters('location'),
+            filteredValue: activeFilters.location || [],
             onFilter: (value, record) => record.location === value
         },
         { title: t('employeesPage.table.joiningDate'), dataIndex: 'joiningDate', key: 'joiningDate', width: 120, className: 'text-gray-600 dark:text-gray-300' },
@@ -637,9 +718,10 @@ const EmployeesPage = () => {
             dataIndex: 'department',
             key: 'department',
             width: 120,
-            render: (text) => <span className="capitalize">{text}</span>,
+            render: (text: string) => <span className="capitalize">{text}</span>,
             className: 'text-gray-600 dark:text-gray-300',
             filters: getFilters('department'),
+            filteredValue: activeFilters.department || [],
             onFilter: (value, record) => record.department === value
         },
         {
@@ -649,6 +731,7 @@ const EmployeesPage = () => {
             width: 180,
             className: 'text-gray-600 dark:text-gray-300',
             filters: getFilters('designation'),
+            filteredValue: activeFilters.designation || [],
             onFilter: (value, record) => record.designation === value
         },
         {
@@ -661,6 +744,7 @@ const EmployeesPage = () => {
                 { text: t('employeesPage.stats.onLeave'), value: 'on_leave' },
                 { text: t('employeesPage.stats.probation'), value: 'probation' }
             ],
+            filteredValue: activeFilters.status || [],
             onFilter: (value, record) => record.status === value,
             render: (status) => {
                 let color = 'green';
@@ -681,6 +765,7 @@ const EmployeesPage = () => {
             width: 120,
             render: (text) => <span className="capitalize text-gray-600 dark:text-gray-300">{text}</span>,
             filters: getFilters('visaType'),
+            filteredValue: activeFilters.visaType || [],
             onFilter: (value, record) => record.visaType === value
         },
         {
@@ -702,52 +787,25 @@ const EmployeesPage = () => {
         }
     ];
 
-    const StatCard = ({ title, data, showTotal = false }: { title: string, data: { name: string, value: number, color: string }[], showTotal?: boolean }) => (
-        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 h-full flex flex-col">
-            <h3 className="font-semibold text-gray-800 dark:text-gray-100 border-l-4 border-primary pl-2 mb-4">{title}</h3>
-            <div className="flex items-center gap-4 flex-1">
-                <div className="w-32 h-32 relative flex-shrink-0">
-                    <ResponsiveContainer width="100%" height="100%">
-                        <PieChart>
-                            <Pie
-                                data={data}
-                                innerRadius={40}
-                                outerRadius={60}
-                                paddingAngle={2}
-                                dataKey="value"
-                            >
-                                {data.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={entry.color} strokeWidth={0} />
-                                ))}
-                            </Pie>
-                            <Tooltip contentStyle={{ backgroundColor: '#1f2937', borderColor: '#374151', color: '#fff' }} />
-                        </PieChart>
-                    </ResponsiveContainer>
-                    {showTotal && (
-                        <div className="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
-                            <span className="text-xs text-gray-400">{t('employeesPage.stats.total')}</span>
-                            <span className="text-xl font-bold text-gray-800 dark:text-white">{totalEmployees}</span>
-                        </div>
-                    )}
-                </div>
-                {/* Legend Section */}
-                <div className="flex-1 overflow-auto max-h-32 custom-scrollbar flex flex-col justify-center">
-                    {data.map((item) => (
-                        <div key={item.name} className="flex items-center justify-between text-xs mb-1 last:mb-0">
-                            <div className="flex items-center gap-2 flex-1 min-w-0">
-                                <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: item.color }}></span>
-                                <span className="text-gray-500 dark:text-gray-400 truncate" title={item.name}>{item.name}</span>
-                            </div>
-                            <span className="font-semibold text-gray-700 dark:text-gray-300 ml-2">{item.value}</span>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
-    );
-
     return (
         <div className="space-y-6">
+            {/* Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <StatCard
+                    title={t("employeesPage.stats.designation")}
+                    data={designationData}
+                />
+                <StatCard
+                    title={t("employeesPage.stats.department")}
+                    data={departmentData}
+                />
+                <StatCard
+                    title={t("employeesPage.stats.statusOverview")}
+                    data={statusData}
+                    showTotal
+                />
+            </div>
+
             {/* Top Controls */}
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
                 <div className="flex items-center gap-4 w-full md:w-auto">
@@ -755,53 +813,79 @@ const EmployeesPage = () => {
                         <Search className="w-4 h-4 text-gray-400" />
                         <input
                             type="text"
-                            placeholder={t('employeesPage.searchPlaceholder')}
+                            placeholder={t("employeesPage.searchPlaceholder")}
                             className="bg-transparent border-none text-sm ml-2 w-full focus:outline-none text-gray-600 dark:text-gray-200 placeholder:text-gray-400"
                         />
                         <span className="text-xs text-gray-400">⌘/</span>
                     </div>
+                    <DatePicker.RangePicker
+                        value={dateRange}
+                        onChange={(dates) => setDateRange(dates || [null, null])}
+                        placeholder={["Joined After", "Joined Before"]}
+                        className="w-128"
+                    />
                 </div>
 
                 <div className="flex items-center gap-3">
-                    <Button icon={<Download size={14} />} className="flex items-center text-gray-600 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700">
-                        {t('employeesPage.export')}
+                    <Button
+                        icon={<Download size={14} />}
+                        className="flex items-center text-gray-600 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700"
+                    >
+                        {t("employeesPage.export")}
                     </Button>
                     <Button
                         type="primary"
                         icon={<Plus size={16} />}
                         className="bg-primary hover:bg-purple-700 h-9"
-                        onClick={() => window.location.href = '/employees/new'} // Using window location for simplicity as useNavigate is inside child
+                        onClick={() => (window.location.href = "/employees/new")} // Using window location for simplicity as useNavigate is inside child
                     >
-                        {t('employeesPage.addEmployee')}
+                        {t("employeesPage.addEmployee")}
                     </Button>
                 </div>
-            </div>
-
-            {/* Stats Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <StatCard title={t('employeesPage.stats.designation')} data={designationData} />
-                <StatCard title={t('employeesPage.stats.department')} data={departmentData} />
-                <StatCard title={t('employeesPage.stats.statusOverview')} data={statusData} showTotal />
             </div>
 
             {/* Table Section - Ensure max-w-full to prevent horizontal scroll on body */}
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden w-full">
                 <div className="p-6 flex justify-between items-center border-b border-gray-100 dark:border-gray-700">
-                    <h3 className="font-semibold text-gray-800 dark:text-white border-l-4 border-primary pl-2">{t('employeesPage.allEmployees')}</h3>
+                    <h3 className="font-semibold text-gray-800 dark:text-white border-l-4 border-primary pl-2">
+                        {t("employeesPage.allEmployees")}
+                    </h3>
                     <div className="flex gap-2">
-                        <Button icon={<List size={16} />} className="text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600" />
-                        <Button icon={<Grid size={16} />} className="text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600" />
+                        <Button
+                            icon={<List size={16} />}
+                            className="text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600"
+                        />
+                        <Button
+                            icon={<Grid size={16} />}
+                            className="text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600"
+                        />
                     </div>
                 </div>
-                <div className="h-[600px]"> {/* Fixed height for sticky header effectiveness */}
+
+                {/* Active Filters */}
+                {Object.keys(getGroupedActiveFilters()).length > 0 && (
+                    <div className="p-4">
+                        <ActiveFilters
+                            activeFilters={getGroupedActiveFilters()}
+                            onClearFilter={clearFilter}
+                            onClearAll={clearAllFilters}
+                        />
+                    </div>
+                )}
+
+                <div className="h-[600px]">
+                    {" "}
+                    {/* Fixed height for sticky header effectiveness */}
                     <Table
+                        key={JSON.stringify(activeFilters)}
                         columns={columns}
-                        dataSource={employeesData}
+                        dataSource={filteredData}
                         rowKey="id"
                         pagination={{ pageSize: 15 }}
                         size="middle"
                         scroll={{ x: 1300, y: 500 }} // Increased x width slightly to ensure scrolling happens inside
                         sticky
+                        onChange={handleTableChange}
                     />
                 </div>
             </div>
