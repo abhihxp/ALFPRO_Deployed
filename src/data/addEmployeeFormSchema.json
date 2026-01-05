@@ -1,0 +1,169 @@
+[
+  {
+    "name": "firstName",
+    "label": "First Name",
+    "type": "text",
+    "required": true,
+    "validation": {
+      "minLength": 1,
+      "maxLength": 50
+    }
+  },
+  {
+    "name": "middleName",
+    "label": "Middle Name",
+    "type": "text",
+    "required": false,
+    "validation": {
+      "maxLength": 50
+    }
+  },
+  {
+    "name": "lastName",
+    "label": "Last Name",
+    "type": "text",
+    "required": true,
+    "validation": {
+      "minLength": 1,
+      "maxLength": 50
+    }
+  },
+  {
+    "name": "employeeId",
+    "label": "Employee ID",
+    "type": "text",
+    "required": true,
+    "validation": {
+      "pattern": "^[A-Za-z0-9]+$",
+      "minLength": 1,
+      "maxLength": 10
+    }
+  },
+  {
+    "name": "dob",
+    "label": "Date of Birth",
+    "type": "date",
+    "required": true
+  },
+  {
+    "name": "gender",
+    "label": "Gender",
+    "type": "select",
+    "required": true,
+    "options": [
+      { "value": "Male", "label": "Male" },
+      { "value": "Female", "label": "Female" }
+    ]
+  },
+  {
+    "name": "contactNo",
+    "label": "Contact No.",
+    "type": "text",
+    "required": true,
+    "validation": {
+      "pattern": "^\\d{10}$",
+      "message": "Must be exactly 10 digits"
+    }
+  },
+  {
+    "name": "alternateContactNo",
+    "label": "Alternate Contact No.",
+    "type": "text",
+    "required": false,
+    "validation": {
+      "pattern": "^\\d{10}$",
+      "message": "Must be exactly 10 digits"
+    }
+  },
+  {
+    "name": "city",
+    "label": "City",
+    "type": "text",
+    "required": true,
+    "validation": {
+      "minLength": 1,
+      "maxLength": 100
+    }
+  },
+  {
+    "name": "state",
+    "label": "State",
+    "type": "text",
+    "required": true,
+    "validation": {
+      "minLength": 1,
+      "maxLength": 100
+    }
+  },
+  {
+    "name": "country",
+    "label": "Country",
+    "type": "select",
+    "required": true,
+    "options": [
+        
+    ]
+  },
+  {
+    "name": "postalCode",
+    "label": "Postal Code",
+    "type": "text",
+    "required": true,
+    "validation": {
+      "pattern": "^\\d+$",
+      "minLength": 1,
+      "maxLength": 10,
+      "message": "Must contain only numbers"
+    }
+  },
+  {
+    "name": "presentAddress",
+    "label": "Present Address",
+    "type": "textarea",
+    "required": true,
+    "validation": {
+      "minLength": 10,
+      "maxLength": 500
+    }
+  },
+  {
+    "name": "permanentAddress",
+    "label": "Permanent Address",
+    "type": "textarea",
+    "required": true,
+    "validation": {
+      "minLength": 10,
+      "maxLength": 500
+    }
+  },
+  {
+    "name": "emergencyContactName",
+    "label": "Emergency Contact Name",
+    "type": "text",
+    "required": true,
+    "validation": {
+      "minLength": 1,
+      "maxLength": 100
+    }
+  },
+  {
+    "name": "relation",
+    "label": "Relation",
+    "type": "text",
+    "required": true,
+    "validation": {
+      "minLength": 1,
+      "maxLength": 50
+    }
+  },
+  {
+    "name": "emergencyContactNo",
+    "label": "Emergency Contact No.",
+    "type": "text",
+    "required": true,
+    "validation": {
+      "pattern": "^\\d{10}$",
+      "message": "Must be exactly 10 digits"
+    }
+  }
+]

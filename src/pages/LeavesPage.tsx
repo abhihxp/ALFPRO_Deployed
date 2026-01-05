@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Search, Filter, Calendar as CalendarIcon, Download, Plus, List, Grid } from 'lucide-react';
 import { Button, Table, Avatar } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
