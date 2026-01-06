@@ -4,6 +4,7 @@ import { ConfigProvider, theme as antTheme } from 'antd';
 import MainLayout from './components/MainLayout';
 import EmployeesPage from './pages/EmployeesPage';
 import AddEmployeePage from './pages/AddEmployeePage';
+import AddEmployeePage2 from "./pages/AddEmployeePage2";
 import DashboardPage from './pages/DashboardPage';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 
@@ -53,6 +54,7 @@ const AppContent = () => {
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/employees" element={<EmployeesPage />} />
             <Route path="/employees/new" element={<AddEmployeePage />} />
+            <Route path="/employees/new2" element={<AddEmployeePage2 />} />
           </Routes>
         </MainLayout>
       </Router>

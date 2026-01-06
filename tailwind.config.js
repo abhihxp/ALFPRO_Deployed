@@ -11,6 +11,12 @@ export default {
       }
     },
   },
+  safelist: [
+    'col-span-3',
+    'col-span-4',
+    'col-span-6',
+    'col-span-12',
+  ],
   plugins: [],
 }
 

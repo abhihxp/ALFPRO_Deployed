@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Form, Input, Select, DatePicker, Radio, Upload, Button, InputNumber } from 'antd';
 import { UploadOutlined, InfoCircleOutlined } from '@ant-design/icons';
@@ -29,25 +30,44 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ fields, form }) => {
                     if (!conditionMet) return null;
                 }
 
+                if (field.type === 'heading') {
+                    return (
+                        <div key={field.name} className={`col-span-12 mt-6 mb-4`}>
+                            <h3 className="text-lg text-white">{field.label[currentLang]}</h3>
+                        </div>
+                    );
+                }
+
                 // Generic Rule for required fields
                 const rules = field.required ? [{ required: true, message: `${field.label[currentLang]} is required` }] : [];
 
+                console.log(`${field.name}: colSpan = ${field.colSpan}`);
                 return (
-                    <div key={field.name} className={`col-span-12 md:col-span-${field.colSpan || 12}`}>
-                        <Form.Item
-                            name={field.name}
-                            label={field.label[currentLang]}
-                            rules={rules}
-                            tooltip={field.tooltip ? {
-                                title: field.tooltip[currentLang],
-                                icon: <InfoCircleOutlined className="text-gray-400" />
-                            } : undefined}
-                            className="mb-0"
-                            layout="vertical"
-                        >
-                            {renderFieldInput(field, currentLang)}
-                        </Form.Item>
-                    </div>
+                  <div
+                    key={field.name}
+                    className={`col-span-${field.colSpan}`}
+                    style={{ gridColumn: `span ${field.colSpan}` }}
+                  >
+                    <Form.Item
+                      name={field.name}
+                      label={field.label[currentLang]}
+                      rules={rules}
+                      tooltip={
+                        field.tooltip
+                          ? {
+                              title: field.tooltip[currentLang],
+                              icon: (
+                                <InfoCircleOutlined className="text-gray-400" />
+                              ),
+                            }
+                          : undefined
+                      }
+                      className="mb-0"
+                      layout="vertical"
+                    >
+                      {renderFieldInput(field, currentLang)}
+                    </Form.Item>
+                  </div>
                 );
             })}
         </div>
@@ -92,6 +112,11 @@ const renderFieldInput = (field: WizardField, lang: 'en' | 'ar') => {
                     ))}
                 </Radio.Group>
             );
+
+        case 'textarea': {
+            const rows = field.name === 'presentAddress' || field.name === 'permanentAddress' ? 8 : 6;
+            return <Input.TextArea rows={rows} placeholder={placeholder} className="rounded-lg" />;
+        }
 
         case 'file':
             return (

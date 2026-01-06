@@ -76,6 +76,26 @@
     }
   },
   {
+    "name": "personalEmailId",
+    "label": "Personal Email ID",
+    "type": "text",
+    "required": false,
+    "validation": {
+      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      "message": "Invalid email format"
+    }
+  },
+  {
+    "name": "officialEmailId",
+    "label": "Official Email ID",
+    "type": "text",
+    "required": true,
+    "validation": {
+      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+      "message": "Invalid email format"
+    }
+  },
+  {
     "name": "city",
     "label": "City",
     "type": "text",

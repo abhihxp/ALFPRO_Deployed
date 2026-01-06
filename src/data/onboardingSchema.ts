@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 export interface BilingualString {
     en: string;
@@ -6,7 +7,7 @@ export interface BilingualString {
 
 export interface WizardField {
     name: string;
-    type: 'text' | 'number' | 'date' | 'select' | 'radio' | 'file';
+    type: 'text' | 'number' | 'date' | 'select' | 'radio' | 'file' | 'textarea' | 'heading';
     label: BilingualString;
     placeholder?: BilingualString;
     required?: boolean;
