@@ -8,6 +8,7 @@ import AddEmployeePage2 from "./pages/AddEmployeePage2";
 import ResignationPage from './pages/ResignationPage';
 import BulkOnboardingPage from './pages/BulkOnboardingPage';
 import TenantOnboardingPage from './pages/TenantOnboardingPage';
+import ExitWorkflowPage from './pages/ExitWorkflowPage';
 
 import DashboardPage from './pages/DashboardPage';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
@@ -62,6 +63,7 @@ const AppContent = () => {
             <Route path="/resignation" element={<ResignationPage />} />
             <Route path="/bulk-onboarding" element={<BulkOnboardingPage />} />
             <Route path="/tenant-onboard" element={<TenantOnboardingPage />} />
+            <Route path="/exit-workflow" element={<ExitWorkflowPage />} />
           </Routes>
         </MainLayout>
       </Router>

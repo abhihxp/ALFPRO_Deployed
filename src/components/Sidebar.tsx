@@ -157,9 +157,9 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                 <NavLink to="/resignation" className={SubButtonClassName}>
                   Resignation
                 </NavLink>
-                <button type="button" className={SubButtonClassName}>
+                <NavLink to="/exit-workflow" className={SubButtonClassName}>
                   Exit Workflow
-                </button>
+                </NavLink>
                 <button type="button" className={SubButtonClassName}>
                   FnF
                 </button>
