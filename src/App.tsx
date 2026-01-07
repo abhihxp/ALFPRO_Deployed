@@ -5,6 +5,10 @@ import MainLayout from './components/MainLayout';
 import EmployeesPage from './pages/EmployeesPage';
 import AddEmployeePage from './pages/AddEmployeePage';
 import AddEmployeePage2 from "./pages/AddEmployeePage2";
+import ResignationPage from './pages/ResignationPage';
+import BulkOnboardingPage from './pages/BulkOnboardingPage';
+import TenantOnboardingPage from './pages/TenantOnboardingPage';
+
 import DashboardPage from './pages/DashboardPage';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 
@@ -55,6 +59,9 @@ const AppContent = () => {
             <Route path="/employees" element={<EmployeesPage />} />
             <Route path="/employees/new" element={<AddEmployeePage />} />
             <Route path="/employees/new2" element={<AddEmployeePage2 />} />
+            <Route path="/resignation" element={<ResignationPage />} />
+            <Route path="/bulk-onboarding" element={<BulkOnboardingPage />} />
+            <Route path="/tenant-onboard" element={<TenantOnboardingPage />} />
           </Routes>
         </MainLayout>
       </Router>

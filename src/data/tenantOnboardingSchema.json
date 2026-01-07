@@ -1,0 +1,145 @@
+[
+    {
+        "title": "Organization Details",
+        "fields": [
+            {
+                "name": "tenantName",
+                "label": "Tenant Name",
+                "placeholder": "Enter Tenant Name",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "domain",
+                "label": "Domain / Subdomain",
+                "placeholder": "Enter Domain (e.g. acme.com)",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "industry",
+                "label": "Industry",
+                "placeholder": "Select Industry",
+                "type": "select",
+                "options": [
+                    {
+                        "value": "technology",
+                        "label": "Technology"
+                    },
+                    {
+                        "value": "finance",
+                        "label": "Finance"
+                    },
+                    {
+                        "value": "healthcare",
+                        "label": "Healthcare"
+                    },
+                    {
+                        "value": "retail",
+                        "label": "Retail"
+                    },
+                    {
+                        "value": "other",
+                        "label": "Other"
+                    }
+                ],
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "website",
+                "label": "Website",
+                "placeholder": "Website URL (Optional)",
+                "type": "text",
+                "required": false,
+                "colSpan": "12 md:col-span-6"
+            }
+        ]
+    },
+    {
+        "title": "Contact & Admin",
+        "fields": [
+            {
+                "name": "adminName",
+                "label": "Admin Name",
+                "placeholder": "Enter Admin Name",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "adminEmail",
+                "label": "Admin Email",
+                "placeholder": "Enter Admin Email",
+                "type": "text",
+                "required": true,
+                "validation": {
+                    "pattern": "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$",
+                    "message": "Invalid email format"
+                },
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "phoneNumber",
+                "label": "Phone Number",
+                "placeholder": "Enter Phone Number",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "address",
+                "label": "Address",
+                "placeholder": "Enter Official Address",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            }
+        ]
+    },
+    {
+        "title": "Subscription & Branding",
+        "fields": [
+            {
+                "name": "plan",
+                "label": "Subscription Plan",
+                "placeholder": "Select Plan",
+                "type": "select",
+                "options": [
+                    {
+                        "value": "starter",
+                        "label": "Starter"
+                    },
+                    {
+                        "value": "pro",
+                        "label": "Pro"
+                    },
+                    {
+                        "value": "enterprise",
+                        "label": "Enterprise"
+                    }
+                ],
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "logo",
+                "label": "Logo",
+                "placeholder": "Upload Logo",
+                "type": "file",
+                "required": false,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "brandColor",
+                "label": "Brand Color",
+                "placeholder": "Enter Brand Color (Hex)",
+                "type": "text",
+                "required": false,
+                "colSpan": "12 md:col-span-6"
+            }
+        ]
+    }
+]

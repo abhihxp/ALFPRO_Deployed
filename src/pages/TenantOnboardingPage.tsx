@@ -1,9 +1,9 @@
 import { Form, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import DynamicForm from '../components/wizard/DynamicForm';
-import addEmployeeFormSchemaJson from '../data/addEmployeeFormSchema.json';
+import tenantOnboardingSchemaJson from '../data/tenantOnboardingSchema.json';
 
-const AddEmployeePage2 = () => {
+const TenantOnboardingPage = () => {
     const [form] = Form.useForm();
     const { t } = useTranslation();
 
@@ -14,9 +14,9 @@ const AddEmployeePage2 = () => {
     return (
         <div className="w-full mx-auto">
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-8">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('Add New Employee')}</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('Tenant Onboarding')}</h2>
                 <Form form={form} component={false} onFinish={handleFinish} layout="vertical">
-                    <DynamicForm schema={addEmployeeFormSchemaJson} form={form} />
+                    <DynamicForm schema={tenantOnboardingSchemaJson} form={form} />
 
                     <div className="mt-8 flex justify-end gap-3 border-t border-gray-100 dark:border-gray-700 pt-6">
                         <Button
@@ -44,4 +44,4 @@ const AddEmployeePage2 = () => {
     );
 };
 
-export default AddEmployeePage2;
+export default TenantOnboardingPage;

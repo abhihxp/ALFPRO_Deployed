@@ -1,0 +1,4 @@
+firstName,middleName,lastName,employeeId,dob,gender,contactNo,alternateContactNo,personalEmailId,officialEmailId,presentAddress,permanentAddress,city,state,country,postalCode,emergencyContactName,relation,emergencyContactNo
+John,Robert,Doe,EMP001,1990-05-15,Male,9876543210,9876543211,john.doe@email.com,john.doe@company.com,123 Main St,456 Family House,Dubai,Dubai,AE,12345,Jane Doe,Spouse,9876543222
+Sarah,Ann,Smith,EMP002,1992-08-22,Female,971501234567,,sarah.smith@email.com,sarah.smith@company.com,Apartment 4B,Villa 12,Abu Dhabi,Abu Dhabi,AE,54321,Michael Smith,Father,971509876543
+Ahmed,,Ali,EMP003,1988-12-01,Male,971550000001,,ahmed.ali@email.com,ahmed.ali@company.com,Tower A Apt 101,Same as Present,Sharjah,Sharjah,AE,11223,Fatima Ali,Sister,971551112222

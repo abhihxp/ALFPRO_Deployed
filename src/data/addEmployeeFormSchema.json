@@ -1,189 +1,249 @@
 [
   {
-    "name": "firstName",
-    "label": "First Name",
-    "type": "text",
-    "required": true,
-    "validation": {
-      "minLength": 1,
-      "maxLength": 50
-    }
-  },
-  {
-    "name": "middleName",
-    "label": "Middle Name",
-    "type": "text",
-    "required": false,
-    "validation": {
-      "maxLength": 50
-    }
-  },
-  {
-    "name": "lastName",
-    "label": "Last Name",
-    "type": "text",
-    "required": true,
-    "validation": {
-      "minLength": 1,
-      "maxLength": 50
-    }
-  },
-  {
-    "name": "employeeId",
-    "label": "Employee ID",
-    "type": "text",
-    "required": true,
-    "validation": {
-      "pattern": "^[A-Za-z0-9]+$",
-      "minLength": 1,
-      "maxLength": 10
-    }
-  },
-  {
-    "name": "dob",
-    "label": "Date of Birth",
-    "type": "date",
-    "required": true
-  },
-  {
-    "name": "gender",
-    "label": "Gender",
-    "type": "select",
-    "required": true,
-    "options": [
-      { "value": "Male", "label": "Male" },
-      { "value": "Female", "label": "Female" }
+    "title": "Personal Details",
+    "fields": [
+      {
+        "name": "firstName",
+        "label": "First Name",
+        "placeholder": "Enter first name",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "minLength": 1,
+          "maxLength": 50
+        }
+      },
+      {
+        "name": "middleName",
+        "label": "Middle Name",
+        "placeholder": "Enter middle name",
+        "type": "text",
+        "required": false,
+        "validation": {
+          "maxLength": 50
+        }
+      },
+      {
+        "name": "lastName",
+        "label": "Last Name",
+        "placeholder": "Enter last name",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "minLength": 1,
+          "maxLength": 50
+        }
+      },
+      {
+        "name": "employeeId",
+        "label": "Employee ID",
+        "placeholder": "Enter employee ID",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "pattern": "^[A-Za-z0-9]+$",
+          "minLength": 1,
+          "maxLength": 10
+        }
+      },
+      {
+        "name": "dob",
+        "label": "Date of Birth",
+        "placeholder": "Select date of birth",
+        "type": "date",
+        "required": true
+      },
+      {
+        "name": "gender",
+        "label": "Gender",
+        "placeholder": "Select gender",
+        "type": "select",
+        "required": true,
+        "options": [
+          {
+            "value": "Male",
+            "label": "Male"
+          },
+          {
+            "value": "Female",
+            "label": "Female"
+          }
+        ]
+      }
     ]
   },
   {
-    "name": "contactNo",
-    "label": "Contact No.",
-    "type": "text",
-    "required": true,
-    "validation": {
-      "pattern": "^\\d{10}$",
-      "message": "Must be exactly 10 digits"
-    }
-  },
-  {
-    "name": "alternateContactNo",
-    "label": "Alternate Contact No.",
-    "type": "text",
-    "required": false,
-    "validation": {
-      "pattern": "^\\d{10}$",
-      "message": "Must be exactly 10 digits"
-    }
-  },
-  {
-    "name": "personalEmailId",
-    "label": "Personal Email ID",
-    "type": "text",
-    "required": false,
-    "validation": {
-      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
-      "message": "Invalid email format"
-    }
-  },
-  {
-    "name": "officialEmailId",
-    "label": "Official Email ID",
-    "type": "text",
-    "required": true,
-    "validation": {
-      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
-      "message": "Invalid email format"
-    }
-  },
-  {
-    "name": "city",
-    "label": "City",
-    "type": "text",
-    "required": true,
-    "validation": {
-      "minLength": 1,
-      "maxLength": 100
-    }
-  },
-  {
-    "name": "state",
-    "label": "State",
-    "type": "text",
-    "required": true,
-    "validation": {
-      "minLength": 1,
-      "maxLength": 100
-    }
-  },
-  {
-    "name": "country",
-    "label": "Country",
-    "type": "select",
-    "required": true,
-    "options": [
-        
+    "title": "Contact Details",
+    "fields": [
+      {
+        "name": "contactNo",
+        "label": "Contact No.",
+        "placeholder": "Enter contact number",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "pattern": "^\\d{10}$",
+          "message": "Must be exactly 10 digits"
+        }
+      },
+      {
+        "name": "alternateContactNo",
+        "label": "Alternate Contact No.",
+        "placeholder": "Enter alternate contact number",
+        "type": "text",
+        "required": false,
+        "validation": {
+          "pattern": "^\\d{10}$",
+          "message": "Must be exactly 10 digits"
+        }
+      },
+      {
+        "name": "personalEmailId",
+        "label": "Personal Email ID",
+        "placeholder": "Enter personal email",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+          "message": "Invalid email format"
+        }
+      },
+      {
+        "name": "officialEmailId",
+        "label": "Official Email ID",
+        "placeholder": "Enter official email",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+          "message": "Invalid email format"
+        }
+      }
     ]
   },
   {
-    "name": "postalCode",
-    "label": "Postal Code",
-    "type": "text",
-    "required": true,
-    "validation": {
-      "pattern": "^\\d+$",
-      "minLength": 1,
-      "maxLength": 10,
-      "message": "Must contain only numbers"
-    }
+    "title": "Address Details",
+    "fields": [
+      {
+        "name": "presentAddress",
+        "label": "Present Address",
+        "placeholder": "Enter present address",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "minLength": 10,
+          "maxLength": 500
+        }
+      },
+      {
+        "name": "permanentAddress",
+        "label": "Permanent Address",
+        "placeholder": "Enter permanent address",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "minLength": 10,
+          "maxLength": 500
+        }
+      },
+      {
+        "name": "city",
+        "label": "City",
+        "placeholder": "Enter city",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "minLength": 1,
+          "maxLength": 100
+        }
+      },
+      {
+        "name": "state",
+        "label": "State",
+        "placeholder": "Enter state",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "minLength": 1,
+          "maxLength": 100
+        }
+      },
+      {
+        "name": "country",
+        "label": "Country",
+        "placeholder": "Select country",
+        "type": "select",
+        "required": true,
+        "options": [
+          {
+            "value": "UAE",
+            "label": "United Arab Emirates"
+          },
+          {
+            "value": "USA",
+            "label": "United States"
+          },
+          {
+            "value": "UK",
+            "label": "United Kingdom"
+          },
+          {
+            "value": "India",
+            "label": "India"
+          }
+        ]
+      },
+      {
+        "name": "postalCode",
+        "label": "Postal Code",
+        "placeholder": "Enter postal code",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "pattern": "^\\d+$",
+          "minLength": 1,
+          "maxLength": 10,
+          "message": "Must contain only numbers"
+        }
+      }
+    ]
   },
   {
-    "name": "presentAddress",
-    "label": "Present Address",
-    "type": "textarea",
-    "required": true,
-    "validation": {
-      "minLength": 10,
-      "maxLength": 500
-    }
-  },
-  {
-    "name": "permanentAddress",
-    "label": "Permanent Address",
-    "type": "textarea",
-    "required": true,
-    "validation": {
-      "minLength": 10,
-      "maxLength": 500
-    }
-  },
-  {
-    "name": "emergencyContactName",
-    "label": "Emergency Contact Name",
-    "type": "text",
-    "required": true,
-    "validation": {
-      "minLength": 1,
-      "maxLength": 100
-    }
-  },
-  {
-    "name": "relation",
-    "label": "Relation",
-    "type": "text",
-    "required": true,
-    "validation": {
-      "minLength": 1,
-      "maxLength": 50
-    }
-  },
-  {
-    "name": "emergencyContactNo",
-    "label": "Emergency Contact No.",
-    "type": "text",
-    "required": true,
-    "validation": {
-      "pattern": "^\\d{10}$",
-      "message": "Must be exactly 10 digits"
-    }
+    "title": "Emergency Contact",
+    "fields": [
+      {
+        "name": "emergencyContactName",
+        "label": "Emergency Contact Name",
+        "placeholder": "Enter contact name",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "minLength": 1,
+          "maxLength": 100
+        }
+      },
+      {
+        "name": "relation",
+        "label": "Relation",
+        "placeholder": "Enter relationship",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "minLength": 1,
+          "maxLength": 50
+        }
+      },
+      {
+        "name": "emergencyContactNo",
+        "label": "Emergency Contact No.",
+        "placeholder": "Enter contact number",
+        "type": "text",
+        "required": true,
+        "validation": {
+          "pattern": "^\\d{10}$",
+          "message": "Must be exactly 10 digits"
+        }
+      }
+    ]
   }
 ]
