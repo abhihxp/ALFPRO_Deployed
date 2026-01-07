@@ -35,24 +35,31 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
           }`}
       >
         {collapsed ? (
-          <img
-            src="/assets/mini-version.png"
-            alt="Logo"
-            className="h-8 object-contain"
-          />
+          <>
+            <img
+              src="/assets/mini-version.png"
+              alt="Logo"
+              className="h-8 object-contain block dark:hidden"
+            />
+            <img
+              src="/assets/dark-mini.png"
+              alt="Logo"
+              className="h-8 object-contain hidden dark:block"
+            />
+          </>
         ) : (
-          <img
-            src="/assets/full-version.png"
-            alt="Logo"
-            className="h-10 object-contain block dark:hidden"
-          />
-        )}
-        {!collapsed && (
-          <img
-            src="/assets/full-version.png" // Ideally this would be a white version for dark mode, but keeping same for now or using filter
-            alt="Logo"
-            className="h-10 object-contain hidden dark:block filter brightness-0 invert"
-          />
+          <>
+            <img
+              src="/assets/full-version.png"
+              alt="Logo"
+              className="h-10 object-contain block dark:hidden"
+            />
+            <img
+              src="/assets/dark-long.png"
+              alt="Logo"
+              className="h-10 object-contain hidden dark:block"
+            />
+          </>
         )}
       </div>
 
