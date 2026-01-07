@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
     Descriptions,
     Tag,
@@ -6,16 +6,13 @@ import {
     Steps,
     Table,
     Button,
-    Tabs,
     Timeline,
     Statistic,
     Row,
     Col,
-    Badge,
     Space
 } from 'antd';
 import {
-    CheckCircleOutlined,
     ClockCircleOutlined,
     FileTextOutlined,
     UserOutlined,
@@ -26,12 +23,9 @@ import {
 } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
-const { Step } = Steps;
-const { TabPane } = Tabs;
-
 const ExitWorkflowPage = () => {
     const { t } = useTranslation();
-    const [currentStep, setCurrentStep] = useState(2); // 0-indexed, so 2 is Clearance Process
+    const [currentStep] = useState(2); // 0-indexed, so 2 is Clearance Process
 
     // Mock Core Data
     const exitData = {
@@ -137,6 +131,14 @@ const ExitWorkflowPage = () => {
         }
     };
 
+    const stepItems = [
+        { title: t("Resignation"), description: "Submitted Nov 1" },
+        { title: t("Manager Approval"), description: "Approved Nov 3" },
+        { title: t("Asset Clearance"), description: "In Progress", icon: <ClockCircleOutlined /> },
+        { title: t("Finance & FnF"), description: "Pending" },
+        { title: t("Relieved"), description: "Nov 30" }
+    ];
+
     return (
         <div className="w-full mx-auto space-y-6">
 
@@ -159,15 +161,9 @@ const ExitWorkflowPage = () => {
             </div>
 
             {/* Workflow Progress Timeline */}
-            {/* <Card className="shadow-sm border-gray-100 dark:border-gray-700 dark:bg-gray-800">
-                <Steps current={currentStep} className="p-4" labelPlacement="vertical">
-                    <Step title={t("Resignation")} description="Submitted Nov 1" />
-                    <Step title={t("Manager Approval")} description="Approved Nov 3" />
-                    <Step title={t("Asset Clearance")} description="In Progress" icon={<ClockCircleOutlined />} />
-                    <Step title={t("Finance & FnF")} description="Pending" />
-                    <Step title={t("Relieved")} description="Nov 30" />
-                </Steps>
-            </Card> */}
+            <Card className="shadow-sm border-gray-100 dark:border-gray-700 dark:bg-gray-800">
+                <Steps current={currentStep} className="p-4" labelPlacement="vertical" items={stepItems} />
+            </Card>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
