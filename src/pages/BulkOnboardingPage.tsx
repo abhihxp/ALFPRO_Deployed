@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Button, message, Upload, Select } from 'antd'; // Added imports
 import { UploadOutlined, DownloadOutlined } from '@ant-design/icons'; // Added imports
 import { useTranslation } from 'react-i18next';
@@ -10,8 +10,8 @@ import * as XLSX from 'xlsx';
 
 const BulkOnboardingPage = () => {
     const [form] = Form.useForm();
-    const { t, i18n } = useTranslation();
-    const currentLang = i18n.language as 'en' | 'ar';
+    const { t } = useTranslation();
+
     const [previewData, setPreviewData] = useState<any[]>([]);
     const [headers, setHeaders] = useState<string[]>([]);
 

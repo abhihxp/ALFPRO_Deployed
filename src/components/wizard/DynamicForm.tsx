@@ -14,7 +14,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
     const currentLang = i18n.language as 'en' | 'ar';
 
     // Watch for dependency changes
-    const values = Form.useWatch([], form);
+    const values = Form.useWatch([], form) as any;
 
     const getLocalizedText = (text: any) => {
         if (!text) return '';
