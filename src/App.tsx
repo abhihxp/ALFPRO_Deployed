@@ -9,6 +9,8 @@ import ResignationPage from './pages/ResignationPage';
 import BulkOnboardingPage from './pages/BulkOnboardingPage';
 import TenantOnboardingPage from './pages/TenantOnboardingPage';
 import ExitWorkflowPage from './pages/ExitWorkflowPage';
+import FnFPage from './pages/FnFPage';
+import RelievingPoliciesPage from './pages/RelievingPoliciesPage';
 
 import DashboardPage from './pages/DashboardPage';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
@@ -64,6 +66,8 @@ const AppContent = () => {
             <Route path="/bulk-onboarding" element={<BulkOnboardingPage />} />
             <Route path="/tenant-onboard" element={<TenantOnboardingPage />} />
             <Route path="/exit-workflow" element={<ExitWorkflowPage />} />
+            <Route path="/fnf" element={<FnFPage />} />
+            <Route path="/relieving-policies" element={<RelievingPoliciesPage />} />
           </Routes>
         </MainLayout>
       </Router>
