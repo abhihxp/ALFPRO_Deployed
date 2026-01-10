@@ -1,0 +1,69 @@
+[
+    {
+        "title": "Add a new office location or branch",
+        "fields": [
+            {
+                "name": "locationName",
+                "label": "Location Name",
+                "placeholder": "e.g., Headquarters, NYC Office",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "locationCode",
+                "label": "Location Code",
+                "placeholder": "e.g., HQ, NYC, LON",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6",
+                "tooltip": "Short unique code for this location"
+            },
+            {
+                "name": "address",
+                "label": "Address",
+                "placeholder": "Street address",
+                "type": "text",
+                "required": true,
+                "colSpan": "12"
+            },
+            {
+                "name": "city",
+                "label": "City",
+                "placeholder": "e.g., New York",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "state",
+                "label": "State/Province",
+                "placeholder": "e.g., NY, California",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "country",
+                "label": "Country",
+                "placeholder": "e.g., USA, UK, India",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "postalCode",
+                "label": "Postal Code",
+                "placeholder": "e.g., 10001",
+                "type": "text",
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "isActive",
+                "label": "Active",
+                "type": "switch",
+                "colSpan": "12"
+            }
+        ]
+    }
+]

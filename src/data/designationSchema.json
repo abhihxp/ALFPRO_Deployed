@@ -1,0 +1,64 @@
+[
+    {
+        "title": "Add a new job designation or title",
+        "fields": [
+            {
+                "name": "designationName",
+                "label": "Designation Name",
+                "placeholder": "e.g., Senior Manager, Team Lead, Developer",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "designationCode",
+                "label": "Designation Code",
+                "placeholder": "e.g., MGR, TL, DEV",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6",
+                "tooltip": "Short unique code for this designation"
+            },
+            {
+                "name": "description",
+                "label": "Description",
+                "placeholder": "Brief description of the designation's role and responsibilities",
+                "type": "textarea",
+                "colSpan": "12"
+            },
+            {
+                "name": "hierarchyLevel",
+                "label": "Hierarchy Level",
+                "type": "select",
+                "required": true,
+                "colSpan": "12",
+                "placeholder": "1 - Entry Level",
+                "options": [
+                    {
+                        "label": "1 - Entry Level",
+                        "value": "1"
+                    },
+                    {
+                        "label": "2 - Mid Level",
+                        "value": "2"
+                    },
+                    {
+                        "label": "3 - Senior Level",
+                        "value": "3"
+                    },
+                    {
+                        "label": "4 - Executive Level",
+                        "value": "4"
+                    }
+                ],
+                "tooltip": "Used for organizational hierarchy"
+            },
+            {
+                "name": "isActive",
+                "label": "Active",
+                "type": "switch",
+                "colSpan": "12"
+            }
+        ]
+    }
+]

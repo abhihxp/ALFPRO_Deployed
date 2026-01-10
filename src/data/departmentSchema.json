@@ -1,0 +1,55 @@
+[
+    {
+        "title": "Add a new department to your organization",
+        "fields": [
+            {
+                "name": "departmentName",
+                "label": "Department Name",
+                "placeholder": "e.g., Information Technology, Human Resources",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "departmentCode",
+                "label": "Department Code",
+                "placeholder": "e.g., IT, HR, FIN",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6",
+                "tooltip": "Short unique code for this department"
+            },
+            {
+                "name": "description",
+                "label": "Description",
+                "placeholder": "Brief description of the department's responsibilities",
+                "type": "textarea",
+                "colSpan": "12"
+            },
+            {
+                "name": "headOfDepartment",
+                "label": "Head of Department",
+                "placeholder": "Select Head of Department",
+                "type": "select",
+                "colSpan": "12",
+                "options": [
+                    {
+                        "label": "John Doe",
+                        "value": "john_doe"
+                    },
+                    {
+                        "label": "Jane Smith",
+                        "value": "jane_smith"
+                    }
+                ],
+                "tooltip": "Can be assigned later"
+            },
+            {
+                "name": "isActive",
+                "label": "Active",
+                "type": "switch",
+                "colSpan": "12"
+            }
+        ]
+    }
+]

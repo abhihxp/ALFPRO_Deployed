@@ -1,0 +1,111 @@
+[
+    {
+        "fields": [
+            {
+                "name": "shiftName",
+                "label": "Shift Name",
+                "placeholder": "e.g., Morning Shift, Night Shift",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "shiftCode",
+                "label": "Shift Code",
+                "placeholder": "e.g., MS, ES, NS",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6",
+                "tooltip": "Short unique code"
+            },
+            {
+                "name": "description",
+                "label": "Description",
+                "placeholder": "Brief description of the shift",
+                "type": "textarea",
+                "colSpan": "12"
+            }
+        ]
+    },
+    {
+        "title": "Shift Timings",
+        "fields": [
+            {
+                "name": "startTime",
+                "label": "Start Time",
+                "type": "time",
+                "required": true,
+                "colSpan": "12 md:col-span-4"
+            },
+            {
+                "name": "endTime",
+                "label": "End Time",
+                "type": "time",
+                "required": true,
+                "colSpan": "12 md:col-span-4"
+            },
+            {
+                "name": "workingHours",
+                "label": "Working Hours",
+                "type": "number",
+                "required": true,
+                "colSpan": "12 md:col-span-4",
+                "placeholder": "8.0"
+            },
+            {
+                "name": "breakDuration",
+                "label": "Break Duration (Minutes)",
+                "type": "number",
+                "required": true,
+                "colSpan": "12 md:col-span-6",
+                "placeholder": "60",
+                "tooltip": "Lunch/Tea break time"
+            },
+            {
+                "name": "gracePeriod",
+                "label": "Grace Period (Minutes)",
+                "type": "number",
+                "required": true,
+                "colSpan": "12 md:col-span-6",
+                "placeholder": "15",
+                "tooltip": "Late coming grace"
+            }
+        ]
+    },
+    {
+        "title": "Shift Configuration",
+        "fields": [
+            {
+                "name": "shiftType",
+                "label": "Shift Type",
+                "type": "select",
+                "required": true,
+                "colSpan": "12 md:col-span-6",
+                "options": [
+                    {
+                        "label": "Fixed - Same timing every day",
+                        "value": "fixed"
+                    },
+                    {
+                        "label": "Rotational",
+                        "value": "rotational"
+                    }
+                ]
+            },
+            {
+                "name": "colorCode",
+                "label": "Color Code",
+                "type": "text",
+                "colSpan": "12 md:col-span-6",
+                "placeholder": "#000000",
+                "tooltip": "For calendar display"
+            },
+            {
+                "name": "isActive",
+                "label": "Active",
+                "type": "switch",
+                "colSpan": "12"
+            }
+        ]
+    }
+]
