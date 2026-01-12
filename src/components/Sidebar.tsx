@@ -16,8 +16,7 @@ const SubButtonClassName =
 
 const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
   const [activeSection, setActiveSection] = useState<string | null>('employee');
-  const { t, i18n } = useTranslation();
-  const isRTL = i18n.language === 'ar';
+  const { t } = useTranslation();
 
   /* 
      Note: menuItems and footerItems are currently defined inline in the JSX below 
@@ -464,7 +463,7 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
           onClick={() => setCollapsed(!collapsed)}
           className="w-full flex items-center justify-center p-2 text-gray-400 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
         >
-          {collapsed ? (isRTL ? <ChevronLeft size={20} /> : <ChevronRight size={20} />) : (isRTL ? <ChevronRight size={20} /> : <ChevronLeft size={20} />)}
+          {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
         </button>
       </div>
     </div>
