@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { Form, Input, Select, DatePicker, Radio, Upload, Button, InputNumber } from 'antd';
+import { Form, Input, Select, DatePicker, Radio, Upload, Button, InputNumber, Switch, Checkbox, TimePicker } from 'antd';
 import { UploadOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
@@ -61,6 +61,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                                     <Form.Item
                                         name={field.name}
                                         rules={rules}
+                                        valuePropName={field.type === 'switch' ? 'checked' : 'value'}
                                         tooltip={
                                             field.tooltip
                                                 ? {
@@ -140,6 +141,10 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
             inputElement = <DatePicker className={`w-full h-10 ${commonClasses}`} placeholder={inputPlaceholder} />;
             break;
 
+        case 'time':
+            inputElement = <TimePicker className={`w-full h-10 ${commonClasses}`} placeholder={inputPlaceholder} format={field.format || "HH:mm"} />;
+            break;
+
         case 'radio':
             // Radio doesn't generally have a placeholder in the same way, but preventing error
             return (
@@ -150,6 +155,27 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
                         </Radio>
                     ))}
                 </Radio.Group>
+            );
+
+        case 'switch':
+            return (
+                <div className="flex items-center gap-2">
+                    <Switch />
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{getLocalizedText(field.label)}</span>
+                </div>
+            );
+
+        case 'checkbox-group':
+            return (
+                <Checkbox.Group className="w-full">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {field.options?.map((opt: any) => (
+                            <Checkbox key={opt.value} value={opt.value}>
+                                {getLocalizedText(opt.label)}
+                            </Checkbox>
+                        ))}
+                    </div>
+                </Checkbox.Group>
             );
 
         case 'textarea': {

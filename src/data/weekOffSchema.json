@@ -1,0 +1,99 @@
+[
+    {
+        "title": "Define a new week-off pattern for your organization",
+        "fields": [
+            {
+                "name": "patternName",
+                "label": "Pattern Name",
+                "placeholder": "e.g., Weekend, Sunday Only",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "patternCode",
+                "label": "Pattern Code",
+                "placeholder": "e.g., WKD, SUN, ROT",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6",
+                "tooltip": "Short unique code"
+            },
+            {
+                "name": "description",
+                "label": "Description",
+                "placeholder": "Brief description",
+                "type": "textarea",
+                "colSpan": "12"
+            }
+        ]
+    },
+    {
+        "title": "Week-Off Days",
+        "fields": [
+            {
+                "name": "weekOffDays",
+                "label": "",
+                "type": "checkbox-group",
+                "colSpan": "12",
+                "options": [
+                    {
+                        "label": "Sunday",
+                        "value": "sunday"
+                    },
+                    {
+                        "label": "Monday",
+                        "value": "monday"
+                    },
+                    {
+                        "label": "Tuesday",
+                        "value": "tuesday"
+                    },
+                    {
+                        "label": "Wednesday",
+                        "value": "wednesday"
+                    },
+                    {
+                        "label": "Thursday",
+                        "value": "thursday"
+                    },
+                    {
+                        "label": "Friday",
+                        "value": "friday"
+                    },
+                    {
+                        "label": "Saturday",
+                        "value": "saturday"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "Rotational Settings",
+        "fields": [
+            {
+                "name": "isRotational",
+                "label": "Rotational Week-Off",
+                "type": "switch",
+                "colSpan": "12",
+                "tooltip": "Week-offs are rotational (not fixed days)"
+            },
+            {
+                "name": "weekOffsPerMonth",
+                "label": "Week-Offs Per Month",
+                "type": "number",
+                "required": true,
+                "colSpan": "12 md:col-span-6",
+                "placeholder": "1",
+                "min": 0
+            },
+            {
+                "name": "isActive",
+                "label": "Active",
+                "type": "switch",
+                "colSpan": "12"
+            }
+        ]
+    }
+]

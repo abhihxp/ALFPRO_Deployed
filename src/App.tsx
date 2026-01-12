@@ -11,6 +11,11 @@ import TenantOnboardingPage from './pages/TenantOnboardingPage';
 import ExitWorkflowPage from './pages/ExitWorkflowPage';
 import FnFPage from './pages/FnFPage';
 import RelievingPoliciesPage from './pages/RelievingPoliciesPage';
+import WeekOffPatternPage from './pages/WeekOffPatternPage';
+import LocationPage from './pages/LocationPage';
+import DepartmentPage from './pages/DepartmentPage';
+import ShiftPage from './pages/ShiftPage';
+import DesignationPage from './pages/DesignationPage';
 
 import DashboardPage from './pages/DashboardPage';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
@@ -68,6 +73,11 @@ const AppContent = () => {
             <Route path="/exit-workflow" element={<ExitWorkflowPage />} />
             <Route path="/fnf" element={<FnFPage />} />
             <Route path="/relieving-policies" element={<RelievingPoliciesPage />} />
+            <Route path="/attendance/week-off/new" element={<WeekOffPatternPage />} />
+            <Route path="/organization/location/new" element={<LocationPage />} />
+            <Route path="/organization/department/new" element={<DepartmentPage />} />
+            <Route path="/attendance/shift/new" element={<ShiftPage />} />
+            <Route path="/organization/designation/new" element={<DesignationPage />} />
           </Routes>
         </MainLayout>
       </Router>

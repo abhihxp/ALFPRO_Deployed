@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, Calendar, Settings, HelpCircle, LogOut, ChevronLeft, ChevronRight, Building, DollarSign, Package } from 'lucide-react';
+import { LayoutDashboard, Users, Calendar, Settings, HelpCircle, LogOut, ChevronLeft, ChevronRight, Building, DollarSign, Package, Briefcase } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 interface SidebarProps {
@@ -120,6 +120,45 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
             )}
           </div>
 
+          {/* Organization Section */}
+          <div className="mt-2">
+            <button
+              onClick={() => {
+                if (collapsed) setCollapsed(false);
+                setActiveSection(
+                  activeSection === "organization" ? null : "organization"
+                );
+              }}
+              className={`${sectionButtonClassName} ${collapsed ? "justify-center" : ""
+                }`}
+            >
+              <Briefcase size={18} />
+              {!collapsed && (
+                <span className="text-sm font-medium">Organization</span>
+              )}
+              {!collapsed &&
+                (activeSection === "organization" ? (
+                  <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
+                ) : (
+                  <ChevronRight className="ml-auto w-4 h-4" />
+                ))}
+            </button>
+
+            {!collapsed && activeSection === "organization" && (
+              <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
+                <NavLink to="/organization/location/new" className={SubButtonClassName}>
+                  Locations
+                </NavLink>
+                <NavLink to="/organization/department/new" className={SubButtonClassName}>
+                  Departments
+                </NavLink>
+                <NavLink to="/organization/designation/new" className={SubButtonClassName}>
+                  Designations
+                </NavLink>
+              </div>
+            )}
+          </div>
+
           {/* Employee Section */}
           <div className="mt-2">
             <button
@@ -206,12 +245,12 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                 <button type="button" className={SubButtonClassName}>
                   Master settings
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <NavLink to="/attendance/shift/new" className={SubButtonClassName}>
                   Shift Masters
-                </button>
-                <button type="button" className={SubButtonClassName}>
+                </NavLink>
+                <NavLink to="/attendance/week-off/new" className={SubButtonClassName}>
                   WO Masters
-                </button>
+                </NavLink>
                 <button type="button" className={SubButtonClassName}>
                   Employee Linking to masters
                 </button>
