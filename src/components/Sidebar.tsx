@@ -16,7 +16,8 @@ const SubButtonClassName =
 
 const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
   const [activeSection, setActiveSection] = useState<string | null>('employee');
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const isRTL = i18n.language === 'ar';
 
   /* 
      Note: menuItems and footerItems are currently defined inline in the JSX below 
@@ -26,13 +27,15 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
 
   return (
     <div
-      className={`h-screen bg-white dark:bg-gray-900 ltr:border-r rtl:border-l border-gray-100 dark:border-gray-800 flex flex-col fixed ltr:left-0 rtl:right-0 top-0 overflow-y-auto transition-all duration-300 ${collapsed ? "w-20" : "w-64"
-        } z-50`}
+      className={`h-screen bg-white dark:bg-gray-900 ltr:border-r rtl:border-l border-gray-100 dark:border-gray-800 flex flex-col fixed ltr:left-0 rtl:right-0 top-0 overflow-y-auto transition-all duration-300 ${
+        collapsed ? "w-20" : "w-64"
+      } z-50`}
     >
       {/* Logo */}
       <div
-        className={`p-6 flex items-center ${collapsed ? "justify-center" : "gap-2"
-          }`}
+        className={`p-6 flex items-center ${
+          collapsed ? "justify-center" : "gap-2"
+        }`}
       >
         {collapsed ? (
           <>
@@ -67,19 +70,20 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
       <div className={`px-4 flex-1 ${collapsed ? "px-2" : ""}`}>
         {!collapsed && (
           <div className="text-xs font-semibold text-gray-400 mb-2 px-2">
-            MENU
+            {t("menu.menuLabel")}
           </div>
         )}
 
         <nav className="space-y-1">
           <NavLink
             to="/dashboard"
-            className={`${sectionButtonClassName} ${collapsed ? "justify-center" : ""
-              }`}
+            className={`${sectionButtonClassName} ${
+              collapsed ? "justify-center" : ""
+            }`}
           >
             <LayoutDashboard size={18} />
             {!collapsed && (
-              <span className="text-sm font-medium">Dashboard</span>
+              <span className="text-sm font-medium">{t("menu.dashboard")}</span>
             )}
           </NavLink>
 
@@ -88,33 +92,34 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
             <button
               onClick={() => {
                 if (collapsed) setCollapsed(false);
-                setActiveSection(
-                  activeSection === "tenant" ? null : "tenant"
-                );
+                setActiveSection(activeSection === "tenant" ? null : "tenant");
               }}
-              className={`${sectionButtonClassName} ${collapsed ? "justify-center" : ""
-                }`}
+              className={`${sectionButtonClassName} ${
+                collapsed ? "justify-center" : ""
+              }`}
             >
               <Building size={18} />
               {!collapsed && (
-                <span className="text-sm font-medium">Tenant</span>
+                <span className="text-sm font-medium">{t("menu.tenant")}</span>
               )}
               {!collapsed &&
                 (activeSection === "tenant" ? (
-                  <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
+                  isRTL ? <ChevronRight className="ml-auto w-4 h-4 rotate-90" /> : <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
                 ) : (
-                  <ChevronRight className="ml-auto w-4 h-4" />
+                  isRTL ? <ChevronLeft className="ml-auto w-4 h-4" /> : <ChevronRight className="ml-auto w-4 h-4" />
                 ))}
             </button>
 
             {!collapsed && activeSection === "tenant" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
                 <NavLink to="/tenant-onboard" className={SubButtonClassName}>
-                  Onboard
+                  {t("sidebar.tenant.onboard")}
                 </NavLink>
-                <button className={SubButtonClassName}>Master Data</button>
+                <button className={SubButtonClassName}>
+                  {t("sidebar.tenant.masterData")}
+                </button>
                 <button type="button" className={SubButtonClassName}>
-                  Settings
+                  {t("sidebar.tenant.settings")}
                 </button>
               </div>
             )}
@@ -129,31 +134,43 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                   activeSection === "organization" ? null : "organization"
                 );
               }}
-              className={`${sectionButtonClassName} ${collapsed ? "justify-center" : ""
-                }`}
+              className={`${sectionButtonClassName} ${
+                collapsed ? "justify-center" : ""
+              }`}
             >
               <Briefcase size={18} />
               {!collapsed && (
-                <span className="text-sm font-medium">Organization</span>
+                <span className="text-sm font-medium">
+                  {t("menu.organization")}
+                </span>
               )}
               {!collapsed &&
                 (activeSection === "organization" ? (
-                  <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
+                  isRTL ? <ChevronRight className="ml-auto w-4 h-4 rotate-90" /> : <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
                 ) : (
-                  <ChevronRight className="ml-auto w-4 h-4" />
+                  isRTL ? <ChevronLeft className="ml-auto w-4 h-4" /> : <ChevronRight className="ml-auto w-4 h-4" />
                 ))}
             </button>
 
             {!collapsed && activeSection === "organization" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
-                <NavLink to="/organization/location/new" className={SubButtonClassName}>
-                  Locations
+                <NavLink
+                  to="/organization/location/new"
+                  className={SubButtonClassName}
+                >
+                  {t("sidebar.organization.locations")}
                 </NavLink>
-                <NavLink to="/organization/department/new" className={SubButtonClassName}>
-                  Departments
+                <NavLink
+                  to="/organization/department/new"
+                  className={SubButtonClassName}
+                >
+                  {t("sidebar.organization.departments")}
                 </NavLink>
-                <NavLink to="/organization/designation/new" className={SubButtonClassName}>
-                  Designations
+                <NavLink
+                  to="/organization/designation/new"
+                  className={SubButtonClassName}
+                >
+                  {t("sidebar.organization.designations")}
                 </NavLink>
               </div>
             )}
@@ -168,49 +185,55 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                   activeSection === "employee" ? null : "employee"
                 );
               }}
-              className={`${sectionButtonClassName} ${collapsed ? "justify-center" : ""
-                }`}
+              className={`${sectionButtonClassName} ${
+                collapsed ? "justify-center" : ""
+              }`}
             >
               <Users size={18} />
               {!collapsed && (
-                <span className="text-sm font-medium">Employee</span>
+                <span className="text-sm font-medium">
+                  {t("menu.employee")}
+                </span>
               )}
               {!collapsed &&
                 (activeSection === "employee" ? (
-                  <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
+                  isRTL ? <ChevronRight className="ml-auto w-4 h-4 rotate-90" /> : <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
                 ) : (
-                  <ChevronRight className="ml-auto w-4 h-4" />
+                  isRTL ? <ChevronLeft className="ml-auto w-4 h-4" /> : <ChevronRight className="ml-auto w-4 h-4" />
                 ))}
             </button>
 
             {!collapsed && activeSection === "employee" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
                 <NavLink to="/employees" className={SubButtonClassName}>
-                  On-Boarding
+                  {t("sidebar.employee.onBoarding")}
                 </NavLink>
                 <NavLink to="/bulk-onboarding" className={SubButtonClassName}>
-                  Bulk on-boarding
+                  {t("sidebar.employee.bulkOnboarding")}
                 </NavLink>
                 <button type="button" className={SubButtonClassName}>
-                  Link to org chart
+                  {t("sidebar.employee.linkToOrgChart")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Statutory data
+                  {t("sidebar.employee.statutoryData")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Master settings
+                  {t("sidebar.employee.masterSettings")}
                 </button>
                 <NavLink to="/resignation" className={SubButtonClassName}>
-                  Resignation
+                  {t("sidebar.employee.resignation")}
                 </NavLink>
                 <NavLink to="/exit-workflow" className={SubButtonClassName}>
-                  Exit Workflow
+                  {t("sidebar.employee.exitWorkflow")}
                 </NavLink>
                 <NavLink to="/fnf" className={SubButtonClassName}>
-                  FnF
+                  {t("sidebar.employee.fnf")}
                 </NavLink>
-                <NavLink to="/relieving-policies" className={SubButtonClassName}>
-                  Relieving policies
+                <NavLink
+                  to="/relieving-policies"
+                  className={SubButtonClassName}
+                >
+                  {t("sidebar.employee.relievingPolicies")}
                 </NavLink>
               </div>
             )}
@@ -225,55 +248,64 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                   activeSection === "attendance" ? null : "attendance"
                 );
               }}
-              className={`${sectionButtonClassName} ${collapsed ? "justify-center" : ""
-                }`}
+              className={`${sectionButtonClassName} ${
+                collapsed ? "justify-center" : ""
+              }`}
             >
               <Calendar size={18} />
               {!collapsed && (
-                <span className="text-sm font-medium">Attendance</span>
+                <span className="text-sm font-medium">
+                  {t("menu.attendance")}
+                </span>
               )}
               {!collapsed &&
                 (activeSection === "attendance" ? (
-                  <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
+                  isRTL ? <ChevronRight className="ml-auto w-4 h-4 rotate-90" /> : <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
                 ) : (
-                  <ChevronRight className="ml-auto w-4 h-4" />
+                  isRTL ? <ChevronLeft className="ml-auto w-4 h-4" /> : <ChevronRight className="ml-auto w-4 h-4" />
                 ))}
             </button>
 
             {!collapsed && activeSection === "attendance" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
                 <button type="button" className={SubButtonClassName}>
-                  Master settings
+                  {t("sidebar.attendance.masterSettings")}
                 </button>
-                <NavLink to="/attendance/shift/new" className={SubButtonClassName}>
-                  Shift Masters
+                <NavLink
+                  to="/attendance/shift/new"
+                  className={SubButtonClassName}
+                >
+                  {t("sidebar.attendance.shiftMasters")}
                 </NavLink>
-                <NavLink to="/attendance/week-off/new" className={SubButtonClassName}>
-                  WO Masters
+                <NavLink
+                  to="/attendance/week-off/new"
+                  className={SubButtonClassName}
+                >
+                  {t("sidebar.attendance.woMasters")}
                 </NavLink>
                 <button type="button" className={SubButtonClassName}>
-                  Employee Linking to masters
+                  {t("sidebar.attendance.employeeLinkingToMasters")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Attendance policies
+                  {t("sidebar.attendance.attendancePolicies")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Time sheet upload
+                  {t("sidebar.attendance.timeSheetUpload")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Swipe regulations
+                  {t("sidebar.attendance.swipeRegulations")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Mark Attendance
+                  {t("sidebar.attendance.markAttendance")}
                 </button>
                 <NavLink to="/leaves" className={SubButtonClassName}>
-                  View Attendance
+                  {t("sidebar.attendance.viewAttendance")}
                 </NavLink>
                 <button type="button" className={SubButtonClassName}>
-                  Approvals
+                  {t("sidebar.attendance.approvals")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Reports
+                  {t("sidebar.attendance.reports")}
                 </button>
               </div>
             )}
@@ -286,37 +318,38 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                 if (collapsed) setCollapsed(false);
                 setActiveSection(activeSection === "leave" ? null : "leave");
               }}
-              className={`${sectionButtonClassName} ${collapsed ? "justify-center" : ""
-                }`}
+              className={`${sectionButtonClassName} ${
+                collapsed ? "justify-center" : ""
+              }`}
             >
               <Calendar size={18} />
               {!collapsed && (
-                <span className="text-sm font-medium">Leave</span>
+                <span className="text-sm font-medium">{t("menu.leaves")}</span>
               )}
               {!collapsed &&
                 (activeSection === "leave" ? (
-                  <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
+                  isRTL ? <ChevronRight className="ml-auto w-4 h-4 rotate-90" /> : <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
                 ) : (
-                  <ChevronRight className="ml-auto w-4 h-4" />
+                  isRTL ? <ChevronLeft className="ml-auto w-4 h-4" /> : <ChevronRight className="ml-auto w-4 h-4" />
                 ))}
             </button>
 
             {!collapsed && activeSection === "leave" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
                 <button type="button" className={SubButtonClassName}>
-                  Master settings and policies
+                  {t("sidebar.leave.masterSettingsAndPolicies")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Grouping leave policies
+                  {t("sidebar.leave.groupingLeavePolicies")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Linking employee to leave masters
+                  {t("sidebar.leave.linkingEmployeeToLeaveMasters")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  View and apply leaves
+                  {t("sidebar.leave.viewAndApplyLeaves")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Approvals
+                  {t("sidebar.leave.approvals")}
                 </button>
               </div>
             )}
@@ -331,46 +364,47 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                   activeSection === "payroll" ? null : "payroll"
                 );
               }}
-              className={`${sectionButtonClassName} ${collapsed ? "justify-center" : ""
-                }`}
+              className={`${sectionButtonClassName} ${
+                collapsed ? "justify-center" : ""
+              }`}
             >
               <DollarSign size={18} />
               {!collapsed && (
-                <span className="text-sm font-medium">Payroll</span>
+                <span className="text-sm font-medium">{t("menu.payroll")}</span>
               )}
               {!collapsed &&
                 (activeSection === "payroll" ? (
-                  <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
+                  isRTL ? <ChevronRight className="ml-auto w-4 h-4 rotate-90" /> : <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
                 ) : (
-                  <ChevronRight className="ml-auto w-4 h-4" />
+                  isRTL ? <ChevronLeft className="ml-auto w-4 h-4" /> : <ChevronRight className="ml-auto w-4 h-4" />
                 ))}
             </button>
 
             {!collapsed && activeSection === "payroll" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
                 <button type="button" className={SubButtonClassName}>
-                  salary components
+                  {t("sidebar.payroll.salaryComponents")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  salary structure
+                  {t("sidebar.payroll.salaryStructure")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  link employee to salary structure
+                  {t("sidebar.payroll.linkEmployeeToSalaryStructure")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  processing the payroll
+                  {t("sidebar.payroll.processingThePayroll")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Lock the month and year
+                  {t("sidebar.payroll.lockTheMonthAndYear")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Reports
+                  {t("sidebar.payroll.reports")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Bank statements
+                  {t("sidebar.payroll.bankStatements")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  View salary history
+                  {t("sidebar.payroll.viewSalaryHistory")}
                 </button>
               </div>
             )}
@@ -383,34 +417,33 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                 if (collapsed) setCollapsed(false);
                 setActiveSection(activeSection === "asset" ? null : "asset");
               }}
-              className={`${sectionButtonClassName} ${collapsed ? "justify-center" : ""
-                }`}
+              className={`${sectionButtonClassName} ${
+                collapsed ? "justify-center" : ""
+              }`}
             >
               <Package size={18} />
-              {!collapsed && (
-                <span className="text-sm font-medium">Asset</span>
-              )}
+              {!collapsed && <span className="text-sm font-medium">{t("menu.asset")}</span>}
               {!collapsed &&
                 (activeSection === "asset" ? (
-                  <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
+                  isRTL ? <ChevronRight className="ml-auto w-4 h-4 rotate-90" /> : <ChevronLeft className="ml-auto w-4 h-4 rotate-90" />
                 ) : (
-                  <ChevronRight className="ml-auto w-4 h-4" />
+                  isRTL ? <ChevronLeft className="ml-auto w-4 h-4" /> : <ChevronRight className="ml-auto w-4 h-4" />
                 ))}
             </button>
 
             {!collapsed && activeSection === "asset" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
                 <button type="button" className={SubButtonClassName}>
-                  Asset flow master with ref name
+                  {t("sidebar.asset.assetFlowMasterWithRefName")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Providing the assets and approvals
+                  {t("sidebar.asset.providingTheAssetsAndApprovals")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Assest return/exchange flow
+                  {t("sidebar.asset.assetReturnExchangeFlow")}
                 </button>
                 <button type="button" className={SubButtonClassName}>
-                  Receivable assets and approvals
+                  {t("sidebar.asset.receivableAssetsAndApprovals")}
                 </button>
               </div>
             )}
@@ -422,23 +455,25 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
       <div className={`px-4 mt-auto ${collapsed ? "px-2" : ""}`}>
         <nav className="space-y-1">
           <button
-            className={`${SubButtonClassName} ${collapsed ? "justify-center" : ""
-              }`}
+            className={`${SubButtonClassName} ${
+              collapsed ? "justify-center" : ""
+            }`}
           >
             <HelpCircle size={18} />
             {!collapsed && (
-              <span className="text-sm font-medium">Help Center</span>
+              <span className="text-sm font-medium">{t("menu.helpCenter")}</span>
             )}
           </button>
           {!collapsed && (
             <>
               <button className={SubButtonClassName}>
                 <Settings size={18} />
-                <span className="text-sm font-medium">Settings</span>
+                <span className="text-sm font-medium">{t("menu.settings")}</span>
               </button>
               <button
-                className={`w-full flex items-center gap-3 px-3 py-2.5 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 rounded-lg transition-colors mt-1 ${collapsed ? "justify-center" : ""
-                  }`}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 rounded-lg transition-colors mt-1 ${
+                  collapsed ? "justify-center" : ""
+                }`}
               >
                 <LogOut size={18} />
                 {!collapsed && (
@@ -463,11 +498,12 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
           onClick={() => setCollapsed(!collapsed)}
           className="w-full flex items-center justify-center p-2 text-gray-400 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
         >
-          {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
+          {collapsed ? (isRTL ? <ChevronLeft size={20} /> : <ChevronRight size={20} />) : (isRTL ? <ChevronRight size={20} /> : <ChevronLeft size={20} />)}
         </button>
       </div>
     </div>
   );
 };
+
 
 export default Sidebar;

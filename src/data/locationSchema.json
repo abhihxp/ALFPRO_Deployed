@@ -1,66 +1,66 @@
 [
     {
-        "title": "Add a new office location or branch",
+        "title": "form.location.title",
         "fields": [
             {
                 "name": "locationName",
-                "label": "Location Name",
-                "placeholder": "e.g., Headquarters, NYC Office",
+                "label": "form.location.locationName.label",
+                "placeholder": "form.location.locationName.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6"
             },
             {
                 "name": "locationCode",
-                "label": "Location Code",
-                "placeholder": "e.g., HQ, NYC, LON",
+                "label": "form.location.locationCode.label",
+                "placeholder": "form.location.locationCode.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6",
-                "tooltip": "Short unique code for this location"
+                "tooltip": "form.location.locationCode.tooltip"
             },
             {
                 "name": "address",
-                "label": "Address",
-                "placeholder": "Street address",
+                "label": "form.location.address.label",
+                "placeholder": "form.location.address.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12"
             },
             {
                 "name": "city",
-                "label": "City",
-                "placeholder": "e.g., New York",
+                "label": "form.location.city.label",
+                "placeholder": "form.location.city.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6"
             },
             {
                 "name": "state",
-                "label": "State/Province",
-                "placeholder": "e.g., NY, California",
+                "label": "form.location.state.label",
+                "placeholder": "form.location.state.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6"
             },
             {
                 "name": "country",
-                "label": "Country",
-                "placeholder": "e.g., USA, UK, India",
+                "label": "form.location.country.label",
+                "placeholder": "form.location.country.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6"
             },
             {
                 "name": "postalCode",
-                "label": "Postal Code",
-                "placeholder": "e.g., 10001",
+                "label": "form.location.postalCode.label",
+                "placeholder": "form.location.postalCode.placeholder",
                 "type": "text",
                 "colSpan": "12 md:col-span-6"
             },
             {
                 "name": "isActive",
-                "label": "Active",
+                "label": "form.location.isActive.label",
                 "type": "switch",
                 "colSpan": "12"
             }

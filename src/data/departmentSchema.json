@@ -1,35 +1,35 @@
 [
     {
-        "title": "Add a new department to your organization",
+        "title": "form.department.title",
         "fields": [
             {
                 "name": "departmentName",
-                "label": "Department Name",
-                "placeholder": "e.g., Information Technology, Human Resources",
+                "label": "form.department.departmentName.label",
+                "placeholder": "form.department.departmentName.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6"
             },
             {
                 "name": "departmentCode",
-                "label": "Department Code",
-                "placeholder": "e.g., IT, HR, FIN",
+                "label": "form.department.departmentCode.label",
+                "placeholder": "form.department.departmentCode.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6",
-                "tooltip": "Short unique code for this department"
+                "tooltip": "form.department.departmentCode.tooltip"
             },
             {
                 "name": "description",
-                "label": "Description",
-                "placeholder": "Brief description of the department's responsibilities",
+                "label": "form.department.description.label",
+                "placeholder": "form.department.description.placeholder",
                 "type": "textarea",
                 "colSpan": "12"
             },
             {
                 "name": "headOfDepartment",
-                "label": "Head of Department",
-                "placeholder": "Select Head of Department",
+                "label": "form.department.headOfDepartment.label",
+                "placeholder": "form.department.headOfDepartment.placeholder",
                 "type": "select",
                 "colSpan": "12",
                 "options": [
@@ -42,11 +42,11 @@
                         "value": "jane_smith"
                     }
                 ],
-                "tooltip": "Can be assigned later"
+                "tooltip": "form.department.headOfDepartment.tooltip"
             },
             {
                 "name": "isActive",
-                "label": "Active",
+                "label": "form.department.isActive.label",
                 "type": "switch",
                 "colSpan": "12"
             }

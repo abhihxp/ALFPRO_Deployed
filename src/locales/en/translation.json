@@ -13,7 +13,70 @@
         "profile": "Profile",
         "helpCenter": "Help Center",
         "settings": "Settings",
-        "logOut": "Log Out"
+        "logOut": "Log Out",
+        "tenant": "Tenant",
+        "organization": "Organization",
+        "asset": "Asset",
+        "menuLabel": "MENU"
+    },
+    "sidebar": {
+        "tenant": {
+            "onboard": "Onboard",
+            "masterData": "Master Data",
+            "settings": "Settings"
+        },
+        "organization": {
+            "locations": "Locations",
+            "departments": "Departments",
+            "designations": "Designations"
+        },
+        "employee": {
+            "onBoarding": "On-Boarding",
+            "bulkOnboarding": "Bulk on-boarding",
+            "linkToOrgChart": "Link to org chart",
+            "statutoryData": "Statutory data",
+            "masterSettings": "Master settings",
+            "resignation": "Resignation",
+            "exitWorkflow": "Exit Workflow",
+            "fnf": "FnF",
+            "relievingPolicies": "Relieving policies"
+        },
+        "attendance": {
+            "masterSettings": "Master settings",
+            "shiftMasters": "Shift Masters",
+            "woMasters": "WO Masters",
+            "employeeLinkingToMasters": "Employee Linking to masters",
+            "attendancePolicies": "Attendance policies",
+            "timeSheetUpload": "Time sheet upload",
+            "swipeRegulations": "Swipe regulations",
+            "markAttendance": "Mark Attendance",
+            "viewAttendance": "View Attendance",
+            "approvals": "Approvals",
+            "reports": "Reports"
+        },
+        "leave": {
+            "masterSettingsAndPolicies": "Master settings and policies",
+            "groupingLeavePolicies": "Grouping leave policies",
+            "linkingEmployeeToLeaveMasters": "Linking employee to leave masters",
+            "viewAndApplyLeaves": "View and apply leaves",
+            "approvals": "Approvals"
+        },
+        "payroll": {
+            "salaryComponents": "salary components",
+            "salaryStructure": "salary structure",
+            "linkEmployeeToSalaryStructure": "link employee to salary structure",
+            "processingThePayroll": "processing the payroll",
+            "lockTheMonthAndYear": "Lock the month and year",
+            "reports": "Reports",
+            "bankStatements": "Bank statements",
+            "viewSalaryHistory": "View salary history"
+        },
+        "asset": {
+            "assetFlowMasterWithRefName": "Asset flow master with ref name",
+            "providingTheAssetsAndApprovals": "Providing the assets and approvals",
+            "assetReturnExchangeFlow": "Assest return/exchange flow",
+            "receivableAssetsAndApprovals": "Receivable assets and approvals"
+        }
     },
     "header": {
         "leaves": "Leaves",
@@ -87,6 +150,378 @@
             "maternityLeave": "Maternity Leave",
             "casualLeave": "Casual Leave",
             "otherLeave": "Other Leave"
+        }
+    },
+    "form": {
+        "location": {
+            "title": "Add a new office location or branch",
+            "locationName": {
+                "label": "Location Name",
+                "placeholder": "e.g., Headquarters, NYC Office"
+            },
+            "locationCode": {
+                "label": "Location Code",
+                "placeholder": "e.g., HQ, NYC, LON",
+                "tooltip": "Short unique code for this location"
+            },
+            "address": {
+                "label": "Address",
+                "placeholder": "Street address"
+            },
+            "city": {
+                "label": "City",
+                "placeholder": "e.g., New York"
+            },
+            "state": {
+                "label": "State/Province",
+                "placeholder": "e.g., NY, California"
+            },
+            "country": {
+                "label": "Country",
+                "placeholder": "e.g., USA, UK, India"
+            },
+            "postalCode": {
+                "label": "Postal Code",
+                "placeholder": "e.g., 10001"
+            },
+            "isActive": {
+                "label": "Active"
+            }
+        },
+        "department": {
+            "title": "Add a new department to your organization",
+            "departmentName": {
+                "label": "Department Name",
+                "placeholder": "e.g., Information Technology, Human Resources"
+            },
+            "departmentCode": {
+                "label": "Department Code",
+                "placeholder": "e.g., IT, HR, FIN",
+                "tooltip": "Short unique code for this department"
+            },
+            "description": {
+                "label": "Description",
+                "placeholder": "Brief description of the department's responsibilities"
+            },
+            "headOfDepartment": {
+                "label": "Head of Department",
+                "placeholder": "Select Head of Department",
+                "tooltip": "Can be assigned later"
+            },
+            "isActive": {
+                "label": "Active"
+            }
+        },
+        "designation": {
+            "title": "Add a new job designation or title",
+            "designationName": {
+                "label": "Designation Name",
+                "placeholder": "e.g., Senior Manager, Team Lead, Developer"
+            },
+            "designationCode": {
+                "label": "Designation Code",
+                "placeholder": "e.g., MGR, TL, DEV",
+                "tooltip": "Short unique code for this designation"
+            },
+            "description": {
+                "label": "Description",
+                "placeholder": "Brief description of the designation's role and responsibilities"
+            },
+            "hierarchyLevel": {
+                "label": "Hierarchy Level",
+                "placeholder": "1 - Entry Level",
+                "tooltip": "Used for organizational hierarchy"
+            },
+            "isActive": {
+                "label": "Active"
+            }
+        },
+        "resignation": {
+            "employeeInformation": {
+                "title": "Employee Information",
+                "employeeId": {
+                    "label": "Employee ID",
+                    "placeholder": "Employee ID"
+                },
+                "name": {
+                    "label": "Name",
+                    "placeholder": "Employee Name"
+                },
+                "designation": {
+                    "label": "Designation",
+                    "placeholder": "Designation"
+                },
+                "department": {
+                    "label": "Department",
+                    "placeholder": "Department"
+                },
+                "reportingManager": {
+                    "label": "Reporting Manager",
+                    "placeholder": "Reporting Manager"
+                },
+                "workLocation": {
+                    "label": "Work Location",
+                    "placeholder": "Work Location"
+                }
+            },
+            "resignationDetails": {
+                "title": "Resignation Details",
+                "resignationType": {
+                    "label": "Resignation Type",
+                    "placeholder": "Select Resignation Type"
+                },
+                "dateOfResignation": {
+                    "label": "Date of Resignation Submission",
+                    "placeholder": "Date of Resignation Submission"
+                },
+                "lastWorkingDay": {
+                    "label": "Last Working Day (LWD)",
+                    "placeholder": "Last Working Day (LWD)"
+                },
+                "noticePeriodRequired": {
+                    "label": "Notice Period (Required)",
+                    "placeholder": "Notice Period (Required Days)"
+                },
+                "noticePeriodServed": {
+                    "label": "Notice Period (Served)",
+                    "placeholder": "Notice Period (Served Days)"
+                },
+                "shortfallBuyout": {
+                    "label": "Shortfall / Buyout Details",
+                    "placeholder": "Shortfall / Buyout Details (if applicable)"
+                },
+                "resignationReason": {
+                    "label": "Reason for Resignation",
+                    "placeholder": "Reason for Resignation"
+                }
+            }
+        },
+        "shift": {
+            "shiftName": {
+                "label": "Shift Name",
+                "placeholder": "e.g., Morning Shift, Night Shift"
+            },
+            "shiftCode": {
+                "label": "Shift Code",
+                "placeholder": "e.g., MS, ES, NS",
+                "tooltip": "Short unique code"
+            },
+            "description": {
+                "label": "Description",
+                "placeholder": "Brief description of the shift"
+            },
+            "shiftTimings": {
+                "title": "Shift Timings",
+                "startTime": {
+                    "label": "Start Time"
+                },
+                "endTime": {
+                    "label": "End Time"
+                },
+                "workingHours": {
+                    "label": "Working Hours"
+                },
+                "breakDuration": {
+                    "label": "Break Duration (Minutes)",
+                    "tooltip": "Lunch/Tea break time"
+                },
+                "gracePeriod": {
+                    "label": "Grace Period (Minutes)",
+                    "tooltip": "Late coming grace"
+                }
+            },
+            "shiftConfiguration": {
+                "title": "Shift Configuration",
+                "shiftType": {
+                    "label": "Shift Type"
+                },
+                "colorCode": {
+                    "label": "Color Code",
+                    "tooltip": "For calendar display"
+                },
+                "isActive": {
+                    "label": "Active"
+                }
+            }
+        },
+        "employee": {
+            "personalDetails": {
+                "title": "Personal Details",
+                "firstName": {
+                    "label": "First Name",
+                    "placeholder": "Enter first name"
+                },
+                "middleName": {
+                    "label": "Middle Name",
+                    "placeholder": "Enter middle name"
+                },
+                "lastName": {
+                    "label": "Last Name",
+                    "placeholder": "Enter last name"
+                },
+                "employeeId": {
+                    "label": "Employee ID",
+                    "placeholder": "Enter employee ID"
+                },
+                "dob": {
+                    "label": "Date of Birth",
+                    "placeholder": "Select date of birth"
+                },
+                "gender": {
+                    "label": "Gender",
+                    "placeholder": "Select gender"
+                }
+            },
+            "contactDetails": {
+                "title": "Contact Details",
+                "contactNo": {
+                    "label": "Contact No.",
+                    "placeholder": "Enter contact number"
+                },
+                "alternateContactNo": {
+                    "label": "Alternate Contact No.",
+                    "placeholder": "Enter alternate contact number"
+                },
+                "personalEmailId": {
+                    "label": "Personal Email ID",
+                    "placeholder": "Enter personal email"
+                },
+                "officialEmailId": {
+                    "label": "Official Email ID",
+                    "placeholder": "Enter official email"
+                }
+            },
+            "addressDetails": {
+                "title": "Address Details",
+                "presentAddress": {
+                    "label": "Present Address",
+                    "placeholder": "Enter present address"
+                },
+                "permanentAddress": {
+                    "label": "Permanent Address",
+                    "placeholder": "Enter permanent address"
+                },
+                "city": {
+                    "label": "City",
+                    "placeholder": "Enter city"
+                },
+                "state": {
+                    "label": "State",
+                    "placeholder": "Enter state"
+                },
+                "country": {
+                    "label": "Country",
+                    "placeholder": "Select country"
+                },
+                "postalCode": {
+                    "label": "Postal Code",
+                    "placeholder": "Enter postal code"
+                }
+            },
+            "emergencyContact": {
+                "title": "Emergency Contact",
+                "emergencyContactName": {
+                    "label": "Emergency Contact Name",
+                    "placeholder": "Enter contact name"
+                },
+                "relation": {
+                    "label": "Relation",
+                    "placeholder": "Enter relationship"
+                },
+                "emergencyContactNo": {
+                    "label": "Emergency Contact No.",
+                    "placeholder": "Enter contact number"
+                }
+            }
+        },
+        "tenant": {
+            "organizationDetails": {
+                "title": "Organization Details",
+                "tenantName": {
+                    "label": "Tenant Name",
+                    "placeholder": "Enter Tenant Name"
+                },
+                "domain": {
+                    "label": "Domain / Subdomain",
+                    "placeholder": "Enter Domain (e.g. acme.com)"
+                },
+                "industry": {
+                    "label": "Industry",
+                    "placeholder": "Select Industry"
+                },
+                "website": {
+                    "label": "Website",
+                    "placeholder": "Website URL (Optional)"
+                }
+            },
+            "contactAndAdmin": {
+                "title": "Contact & Admin",
+                "adminName": {
+                    "label": "Admin Name",
+                    "placeholder": "Enter Admin Name"
+                },
+                "adminEmail": {
+                    "label": "Admin Email",
+                    "placeholder": "Enter Admin Email"
+                },
+                "phoneNumber": {
+                    "label": "Phone Number",
+                    "placeholder": "Enter Phone Number"
+                },
+                "address": {
+                    "label": "Address",
+                    "placeholder": "Enter Official Address"
+                }
+            },
+            "subscriptionAndBranding": {
+                "title": "Subscription & Branding",
+                "plan": {
+                    "label": "Subscription Plan",
+                    "placeholder": "Select Plan"
+                },
+                "logo": {
+                    "label": "Logo",
+                    "placeholder": "Upload Logo"
+                },
+                "brandColor": {
+                    "label": "Brand Color",
+                    "placeholder": "Enter Brand Color (Hex)"
+                }
+            }
+        },
+        "weekOff": {
+            "definePattern": {
+                "title": "Define a new week-off pattern for your organization",
+                "patternName": {
+                    "label": "Pattern Name",
+                    "placeholder": "e.g., Weekend, Sunday Only"
+                },
+                "patternCode": {
+                    "label": "Pattern Code",
+                    "placeholder": "e.g., WKD, SUN, ROT",
+                    "tooltip": "Short unique code"
+                },
+                "description": {
+                    "label": "Description",
+                    "placeholder": "Brief description"
+                }
+            },
+            "weekOffDays": {
+                "title": "Week-Off Days"
+            },
+            "rotationalSettings": {
+                "title": "Rotational Settings",
+                "isRotational": {
+                    "label": "Rotational Week-Off",
+                    "tooltip": "Week-offs are rotational (not fixed days)"
+                },
+                "weekOffsPerMonth": {
+                    "label": "Week-Offs Per Month"
+                },
+                "isActive": {
+                    "label": "Active"
+                }
+            }
         }
     }
 }

@@ -176,7 +176,7 @@ const DashboardPage = () => {
 
     return (
         <div className="space-y-6">
-            <h1 className="text-2xl font-bold text-gray-800 dark:text-white">Dashboard</h1>
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-white">{t("menu.dashboard")}</h1>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <StatCard
                     title={t("employeesPage.stats.designation")}

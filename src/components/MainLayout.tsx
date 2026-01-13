@@ -116,7 +116,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                 {profileDropdownOpen && (
                   <div
                     ref={dropdownRef}
-                    className="absolute right-0 top-0 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-4 z-50"
+                    className={`absolute ${i18n.language === 'ar' ? 'left-0' : 'right-0'} top-0 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-4 z-50`}
                   >
                     <div className="flex items-center gap-4 mb-4">
                       <img

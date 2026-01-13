@@ -1,35 +1,35 @@
 [
     {
-        "title": "Define a new week-off pattern for your organization",
+        "title": "form.weekOff.definePattern.title",
         "fields": [
             {
                 "name": "patternName",
-                "label": "Pattern Name",
-                "placeholder": "e.g., Weekend, Sunday Only",
+                "label": "form.weekOff.definePattern.patternName.label",
+                "placeholder": "form.weekOff.definePattern.patternName.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6"
             },
             {
                 "name": "patternCode",
-                "label": "Pattern Code",
-                "placeholder": "e.g., WKD, SUN, ROT",
+                "label": "form.weekOff.definePattern.patternCode.label",
+                "placeholder": "form.weekOff.definePattern.patternCode.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6",
-                "tooltip": "Short unique code"
+                "tooltip": "form.weekOff.definePattern.patternCode.tooltip"
             },
             {
                 "name": "description",
-                "label": "Description",
-                "placeholder": "Brief description",
+                "label": "form.weekOff.definePattern.description.label",
+                "placeholder": "form.weekOff.definePattern.description.placeholder",
                 "type": "textarea",
                 "colSpan": "12"
             }
         ]
     },
     {
-        "title": "Week-Off Days",
+        "title": "form.weekOff.weekOffDays.title",
         "fields": [
             {
                 "name": "weekOffDays",
@@ -70,18 +70,18 @@
         ]
     },
     {
-        "title": "Rotational Settings",
+        "title": "form.weekOff.rotationalSettings.title",
         "fields": [
             {
                 "name": "isRotational",
-                "label": "Rotational Week-Off",
+                "label": "form.weekOff.rotationalSettings.isRotational.label",
                 "type": "switch",
                 "colSpan": "12",
-                "tooltip": "Week-offs are rotational (not fixed days)"
+                "tooltip": "form.weekOff.rotationalSettings.isRotational.tooltip"
             },
             {
                 "name": "weekOffsPerMonth",
-                "label": "Week-Offs Per Month",
+                "label": "form.weekOff.rotationalSettings.weekOffsPerMonth.label",
                 "type": "number",
                 "required": true,
                 "colSpan": "12 md:col-span-6",
@@ -90,7 +90,7 @@
             },
             {
                 "name": "isActive",
-                "label": "Active",
+                "label": "form.weekOff.rotationalSettings.isActive.label",
                 "type": "switch",
                 "colSpan": "12"
             }

@@ -10,7 +10,7 @@ interface DynamicFormProps {
 }
 
 const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
     const currentLang = i18n.language as 'en' | 'ar';
 
     // Watch for dependency changes
@@ -18,7 +18,12 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
 
     const getLocalizedText = (text: any) => {
         if (!text) return '';
-        if (typeof text === 'string') return text;
+        if (typeof text === 'string') {
+            if (text.startsWith('form.')) {
+                return t(text);
+            }
+            return text;
+        }
         return text[currentLang] || text.en || '';
     };
 
@@ -29,7 +34,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                     {section.title && (
                         <div className="mb-4">
                             <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider dark:text-gray-400 pb-2">
-                                {getLocalizedText(section.title)}
+                                {section.title.startsWith('form.') ? t(section.title) : section.title}
                             </h3>
                         </div>
                     )}
@@ -47,7 +52,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                             }
 
                             // Generic Rule for required fields
-                            const label = getLocalizedText(field.label);
+                            const label = field.label.startsWith('form.') ? t(field.label) : field.label;
                             const rules = field.required ? [{ required: true, message: `${label} is required` }] : [];
                             const fieldValue = values?.[field.name];
                             const colSpan = field.colSpan || "12 md:col-span-6 lg:col-span-6";
@@ -65,7 +70,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                                         tooltip={
                                             field.tooltip
                                                 ? {
-                                                    title: getLocalizedText(field.tooltip),
+                                                    title: field.tooltip.startsWith('form.') ? t(field.tooltip) : field.tooltip,
                                                     icon: (
                                                         <InfoCircleOutlined className="text-gray-400" />
                                                     ),
@@ -76,7 +81,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                                         layout="vertical"
                                     >
                                         <div className="relative">
-                                            {renderFieldInput(field, currentLang, fieldValue, getLocalizedText)}
+                                            {renderFieldInput(field, currentLang, fieldValue, getLocalizedText, t)}
                                         </div>
                                     </Form.Item>
                                 </div>
@@ -89,7 +94,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
     );
 };
 
-const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalizedText: (t: any) => string) => {
+const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalizedText: (t: any) => string, t: any) => {
     const originalPlaceholder = getLocalizedText(field.placeholder);
 
     // Check if field has value to toggle custom placeholder visibility
@@ -103,8 +108,10 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
     const commonClasses = "rounded-lg placeholder:!text-gray-500 dark:placeholder:!text-gray-400 w-full"; // Forced color
     const selectPlaceholderClass = "[&_.ant-select-selection-placeholder]:!text-gray-500 dark:[&_.ant-select-selection-placeholder]:!text-gray-400";
 
+    const positionClass = lang === 'ar' ? 'right-3' : 'left-3';
+
     const CustomPlaceholder = () => (
-        <span className={`absolute left-3 text-gray-500 pointer-events-none z-10 select-none ${field.type === 'textarea' ? 'top-3' : 'top-0 bottom-0 flex items-center'}`}>
+        <span className={`absolute ${positionClass} text-gray-500 pointer-events-none z-10 select-none ${field.type === 'textarea' ? 'top-3' : 'top-0 bottom-0 flex items-center'}`}>
             <span className="text-red-500 font-normal mr-1">*</span>
             <span className="text-gray-500 dark:text-gray-400">{originalPlaceholder}</span>
         </span>
@@ -130,7 +137,7 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
                 <Select placeholder={inputPlaceholder} className={`h-10 ${commonClasses} ${selectPlaceholderClass}`} allowClear>
                     {field.options?.map((opt: any) => (
                         <Select.Option key={opt.value} value={opt.value}>
-                            {getLocalizedText(opt.label)}
+                            {opt.label.startsWith('form.') ? t(opt.label) : opt.label}
                         </Select.Option>
                     ))}
                 </Select>
@@ -151,7 +158,7 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
                 <Radio.Group>
                     {field.options?.map((opt: any) => (
                         <Radio key={opt.value} value={opt.value}>
-                            {getLocalizedText(opt.label)}
+                            {opt.label.startsWith('form.') ? t(opt.label) : opt.label}
                         </Radio>
                     ))}
                 </Radio.Group>
@@ -161,7 +168,7 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
             return (
                 <div className="flex items-center gap-2">
                     <Switch />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">{getLocalizedText(field.label)}</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{field.label.startsWith('form.') ? t(field.label) : field.label}</span>
                 </div>
             );
 
@@ -171,7 +178,7 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {field.options?.map((opt: any) => (
                             <Checkbox key={opt.value} value={opt.value}>
-                                {getLocalizedText(opt.label)}
+                                {opt.label.startsWith('form.') ? t(opt.label) : opt.label}
                             </Checkbox>
                         ))}
                     </div>

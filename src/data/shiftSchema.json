@@ -3,50 +3,50 @@
         "fields": [
             {
                 "name": "shiftName",
-                "label": "Shift Name",
-                "placeholder": "e.g., Morning Shift, Night Shift",
+                "label": "form.shift.shiftName.label",
+                "placeholder": "form.shift.shiftName.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6"
             },
             {
                 "name": "shiftCode",
-                "label": "Shift Code",
-                "placeholder": "e.g., MS, ES, NS",
+                "label": "form.shift.shiftCode.label",
+                "placeholder": "form.shift.shiftCode.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6",
-                "tooltip": "Short unique code"
+                "tooltip": "form.shift.shiftCode.tooltip"
             },
             {
                 "name": "description",
-                "label": "Description",
-                "placeholder": "Brief description of the shift",
+                "label": "form.shift.description.label",
+                "placeholder": "form.shift.description.placeholder",
                 "type": "textarea",
                 "colSpan": "12"
             }
         ]
     },
     {
-        "title": "Shift Timings",
+        "title": "form.shift.shiftTimings.title",
         "fields": [
             {
                 "name": "startTime",
-                "label": "Start Time",
+                "label": "form.shift.shiftTimings.startTime.label",
                 "type": "time",
                 "required": true,
                 "colSpan": "12 md:col-span-4"
             },
             {
                 "name": "endTime",
-                "label": "End Time",
+                "label": "form.shift.shiftTimings.endTime.label",
                 "type": "time",
                 "required": true,
                 "colSpan": "12 md:col-span-4"
             },
             {
                 "name": "workingHours",
-                "label": "Working Hours",
+                "label": "form.shift.shiftTimings.workingHours.label",
                 "type": "number",
                 "required": true,
                 "colSpan": "12 md:col-span-4",
@@ -54,30 +54,30 @@
             },
             {
                 "name": "breakDuration",
-                "label": "Break Duration (Minutes)",
+                "label": "form.shift.shiftTimings.breakDuration.label",
                 "type": "number",
                 "required": true,
                 "colSpan": "12 md:col-span-6",
                 "placeholder": "60",
-                "tooltip": "Lunch/Tea break time"
+                "tooltip": "form.shift.shiftTimings.breakDuration.tooltip"
             },
             {
                 "name": "gracePeriod",
-                "label": "Grace Period (Minutes)",
+                "label": "form.shift.shiftTimings.gracePeriod.label",
                 "type": "number",
                 "required": true,
                 "colSpan": "12 md:col-span-6",
                 "placeholder": "15",
-                "tooltip": "Late coming grace"
+                "tooltip": "form.shift.shiftTimings.gracePeriod.tooltip"
             }
         ]
     },
     {
-        "title": "Shift Configuration",
+        "title": "form.shift.shiftConfiguration.title",
         "fields": [
             {
                 "name": "shiftType",
-                "label": "Shift Type",
+                "label": "form.shift.shiftConfiguration.shiftType.label",
                 "type": "select",
                 "required": true,
                 "colSpan": "12 md:col-span-6",
@@ -94,15 +94,15 @@
             },
             {
                 "name": "colorCode",
-                "label": "Color Code",
+                "label": "form.shift.shiftConfiguration.colorCode.label",
                 "type": "text",
                 "colSpan": "12 md:col-span-6",
                 "placeholder": "#000000",
-                "tooltip": "For calendar display"
+                "tooltip": "form.shift.shiftConfiguration.colorCode.tooltip"
             },
             {
                 "name": "isActive",
-                "label": "Active",
+                "label": "form.shift.shiftConfiguration.isActive.label",
                 "type": "switch",
                 "colSpan": "12"
             }
