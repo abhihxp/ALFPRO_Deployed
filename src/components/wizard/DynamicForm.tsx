@@ -5,13 +5,16 @@ import { UploadOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
 interface DynamicFormProps {
-    schema: any[];
+    schema: any;
     form: any; // Antd Form Instance
 }
 
 const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
     const { i18n } = useTranslation();
     const currentLang = i18n.language as 'en' | 'ar';
+
+    // Normalize schema to handle both array (legacy) and object (new) formats
+    const sections = Array.isArray(schema) ? schema : (schema.sections || []);
 
     // Watch for dependency changes
     const values = Form.useWatch([], form) as any;
@@ -24,7 +27,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
 
     return (
         <div className="flex flex-col gap-16">
-            {schema.map((section: any, sectionIdx: number) => (
+            {sections.map((section: any, sectionIdx: number) => (
                 <div key={sectionIdx}>
                     {section.title && (
                         <div className="mb-4">
@@ -59,6 +62,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                                     style={{ gridColumn: `span ${colSpan}` }}
                                 >
                                     <Form.Item
+                                        label={label}
                                         name={field.name}
                                         rules={rules}
                                         valuePropName={field.type === 'switch' ? 'checked' : 'value'}
@@ -75,9 +79,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                                         className="mb-0 dynamic-form-item"
                                         layout="vertical"
                                     >
-                                        <div className="relative">
-                                            {renderFieldInput(field, currentLang, fieldValue, getLocalizedText)}
-                                        </div>
+                                        {renderFieldInput(field, currentLang, getLocalizedText)}
                                     </Form.Item>
                                 </div>
                             );
@@ -89,26 +91,11 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
     );
 };
 
-const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalizedText: (t: any) => string) => {
-    const originalPlaceholder = getLocalizedText(field.placeholder);
+const renderFieldInput = (field: any, lang: 'en' | 'ar', getLocalizedText: (t: any) => string) => {
+    const inputPlaceholder = getLocalizedText(field.placeholder);
 
-    // Check if field has value to toggle custom placeholder visibility
-    const hasValue = value !== undefined && value !== null && value !== '' && (Array.isArray(value) ? value.length > 0 : true);
-    // Ensure custom placeholder shows if required and no value
-    const showCustomPlaceholder = field.required && !hasValue;
-
-    // If showing custom overlay, hide native placeholder. If not required, show native placeholder.
-    const inputPlaceholder = showCustomPlaceholder ? undefined : originalPlaceholder;
-
-    const commonClasses = "rounded-lg placeholder:!text-gray-500 dark:placeholder:!text-gray-400 w-full"; // Forced color
-    const selectPlaceholderClass = "[&_.ant-select-selection-placeholder]:!text-gray-500 dark:[&_.ant-select-selection-placeholder]:!text-gray-400";
-
-    const CustomPlaceholder = () => (
-        <span className={`absolute left-3 text-gray-500 pointer-events-none z-10 select-none ${field.type === 'textarea' ? 'top-3' : 'top-0 bottom-0 flex items-center'}`}>
-            <span className="text-red-500 font-normal mr-1">*</span>
-            <span className="text-gray-500 dark:text-gray-400">{originalPlaceholder}</span>
-        </span>
-    );
+    const commonClasses = "rounded-lg placeholder:text-gray-400 dark:placeholder:text-gray-500 w-full"; // Standard colors
+    const selectPlaceholderClass = "[&_.ant-select-selection-placeholder]:text-gray-400 dark:[&_.ant-select-selection-placeholder]:text-gray-500";
 
     let inputElement = <Input className={commonClasses} />;
 
@@ -146,7 +133,6 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
             break;
 
         case 'radio':
-            // Radio doesn't generally have a placeholder in the same way, but preventing error
             return (
                 <Radio.Group>
                     {field.options?.map((opt: any) => (
@@ -185,12 +171,10 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
         }
 
         case 'file':
-            // Custom simplified placeholder for file input (button) to include red star inside text
             return (
                 <Upload maxCount={1} action="/api/upload" className="w-full">
                     <Button icon={<UploadOutlined />} className={`w-full h-10 text-left flex items-center ${commonClasses} text-gray-500`}>
-                        {field.required ? <span className="text-red-500 mr-1">*</span> : null}
-                        {originalPlaceholder || (lang === 'ar' ? 'رفع ملف' : 'Click to Upload')}
+                        {inputPlaceholder || (lang === 'ar' ? 'رفع ملف' : 'Click to Upload')}
                     </Button>
                 </Upload>
             );
@@ -199,12 +183,7 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
             inputElement = <Input className={commonClasses} />;
     }
 
-    return (
-        <>
-            {inputElement}
-            {showCustomPlaceholder && field.type !== 'file' && <CustomPlaceholder />}
-        </>
-    );
+    return inputElement;
 };
 
 export default DynamicForm;

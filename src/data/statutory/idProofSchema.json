@@ -1,0 +1,58 @@
+{
+    "title": "ID Proof Details",
+    "sections": [
+        {
+            "title": "Identity Documents",
+            "fields": [
+                {
+                    "name": "idType",
+                    "label": "ID Type",
+                    "type": "select",
+                    "required": true,
+                    "options": [
+                        {
+                            "label": "Aadhaar Card",
+                            "value": "aadhaar"
+                        },
+                        {
+                            "label": "PAN Card",
+                            "value": "pan"
+                        },
+                        {
+                            "label": "Driving License",
+                            "value": "dl"
+                        },
+                        {
+                            "label": "Voter ID",
+                            "value": "voterType"
+                        }
+                    ],
+                    "colSpan": 6
+                },
+                {
+                    "name": "idNumber",
+                    "label": "ID Number",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter ID Number",
+                    "colSpan": 6
+                },
+                {
+                    "name": "nameOnId",
+                    "label": "Name on ID",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter Name as per ID",
+                    "colSpan": 6
+                },
+                {
+                    "name": "documentFile",
+                    "label": "Upload Document",
+                    "type": "file",
+                    "required": false,
+                    "colSpan": 6
+                }
+            ]
+        }
+    ]
+}

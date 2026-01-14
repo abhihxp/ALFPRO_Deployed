@@ -1,0 +1,71 @@
+{
+    "title": "Bank Details",
+    "sections": [
+        {
+            "title": "Bank Account Information",
+            "fields": [
+                {
+                    "name": "accountHolderName",
+                    "label": "Account Holder Name",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter Name as in Bank",
+                    "colSpan": 6
+                },
+                {
+                    "name": "bankName",
+                    "label": "Bank Name",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter Bank Name",
+                    "colSpan": 6
+                },
+                {
+                    "name": "accountNumber",
+                    "label": "Account Number",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter Account Number",
+                    "colSpan": 6
+                },
+                {
+                    "name": "ifscCode",
+                    "label": "IFSC/Sort Code",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter IFSC/Swift Code",
+                    "colSpan": 6
+                },
+                {
+                    "name": "branchName",
+                    "label": "Branch Name",
+                    "type": "text",
+                    "required": false,
+                    "placeholder": "Enter Branch Name",
+                    "colSpan": 6
+                },
+                {
+                    "name": "accountType",
+                    "label": "Account Type",
+                    "type": "select",
+                    "required": true,
+                    "options": [
+                        {
+                            "label": "Savings",
+                            "value": "savings"
+                        },
+                        {
+                            "label": "Current",
+                            "value": "current"
+                        },
+                        {
+                            "label": "Salary",
+                            "value": "salary"
+                        }
+                    ],
+                    "colSpan": 6
+                }
+            ]
+        }
+    ]
+}

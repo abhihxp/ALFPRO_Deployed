@@ -8,6 +8,8 @@ import AddEmployeePage2 from "./pages/AddEmployeePage2";
 import ResignationPage from './pages/ResignationPage';
 import BulkOnboardingPage from './pages/BulkOnboardingPage';
 import TenantOnboardingPage from './pages/TenantOnboardingPage';
+import MasterDataPage from './pages/MasterDataPage';
+import StatutoryDataPage from './pages/StatutoryDataPage';
 import ExitWorkflowPage from './pages/ExitWorkflowPage';
 import FnFPage from './pages/FnFPage';
 import RelievingPoliciesPage from './pages/RelievingPoliciesPage';
@@ -70,9 +72,13 @@ const AppContent = () => {
             <Route path="/resignation" element={<ResignationPage />} />
             <Route path="/bulk-onboarding" element={<BulkOnboardingPage />} />
             <Route path="/tenant-onboard" element={<TenantOnboardingPage />} />
+            <Route path="/tenant/master-data" element={<MasterDataPage />} />
+            <Route path="/employees/statutory-data" element={<StatutoryDataPage />} />
             <Route path="/exit-workflow" element={<ExitWorkflowPage />} />
             <Route path="/fnf" element={<FnFPage />} />
             <Route path="/relieving-policies" element={<RelievingPoliciesPage />} />
+
+            {/* Routes for individual pages - still accessible but potentially hidden from sidebar */}
             <Route path="/attendance/week-off/new" element={<WeekOffPatternPage />} />
             <Route path="/organization/location/new" element={<LocationPage />} />
             <Route path="/organization/department/new" element={<DepartmentPage />} />
@@ -94,3 +100,4 @@ function App() {
 }
 
 export default App;
+

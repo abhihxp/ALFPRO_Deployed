@@ -1,0 +1,48 @@
+{
+    "title": "Work Experience Details",
+    "sections": [
+        {
+            "title": "Previous Employment",
+            "fields": [
+                {
+                    "name": "companyName",
+                    "label": "Company Name",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter Company Name",
+                    "colSpan": 6
+                },
+                {
+                    "name": "jobTitle",
+                    "label": "Job Title",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter Job Designation",
+                    "colSpan": 6
+                },
+                {
+                    "name": "startDate",
+                    "label": "Start Date",
+                    "type": "date",
+                    "required": true,
+                    "colSpan": 6
+                },
+                {
+                    "name": "endDate",
+                    "label": "End Date",
+                    "type": "date",
+                    "required": true,
+                    "colSpan": 6
+                },
+                {
+                    "name": "location",
+                    "label": "Location",
+                    "type": "text",
+                    "required": false,
+                    "placeholder": "e.g. Bangalore",
+                    "colSpan": 12
+                }
+            ]
+        }
+    ]
+}

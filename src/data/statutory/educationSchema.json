@@ -1,0 +1,49 @@
+{
+    "title": "Education Details",
+    "sections": [
+        {
+            "title": "Education Qualification",
+            "fields": [
+                {
+                    "name": "qualification",
+                    "label": "Qualification/Degree",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "e.g. Bachelor of Technology",
+                    "colSpan": 6
+                },
+                {
+                    "name": "institution",
+                    "label": "Institution/University",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter University Name",
+                    "colSpan": 6
+                },
+                {
+                    "name": "yearOfPassing",
+                    "label": "Year of Passing",
+                    "type": "number",
+                    "required": true,
+                    "placeholder": "YYYY",
+                    "colSpan": 6
+                },
+                {
+                    "name": "percentage",
+                    "label": "Percentage/CGPA",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "e.g. 75% or 8.5",
+                    "colSpan": 6
+                },
+                {
+                    "name": "specialization",
+                    "label": "Specialization/Major",
+                    "type": "text",
+                    "required": false,
+                    "colSpan": 12
+                }
+            ]
+        }
+    ]
+}
