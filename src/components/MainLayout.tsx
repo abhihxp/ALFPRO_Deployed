@@ -28,6 +28,20 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, [profileDropdownOpen]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth >= 768) {
+                setMobileSidebarOpen(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
     const { t, i18n } = useTranslation();
     const location = useLocation();
 
