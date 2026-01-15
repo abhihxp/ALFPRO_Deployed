@@ -6,6 +6,8 @@ import { useTranslation } from 'react-i18next';
 interface SidebarProps {
   collapsed: boolean;
   setCollapsed: (collapsed: boolean) => void;
+  mobileOpen?: boolean;
+  onClose?: () => void;
 }
 
 const sectionButtonClassName =
@@ -14,7 +16,12 @@ const sectionButtonClassName =
 const SubButtonClassName =
   "w-full flex justify-start text-sm gap-3 px-3 py-2.5 text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary transition-colors";
 
-const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
+const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: SidebarProps) => {
+  const handleLinkClick = () => {
+    if (mobileOpen && onClose) {
+      onClose();
+    }
+  };
   const [activeSection, setActiveSection] = useState<string | null>('employee');
   const { t, i18n } = useTranslation();
   const isRTL = i18n.language === 'ar';
@@ -27,10 +34,15 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
 
   return (
     <div
-      className={`h-screen bg-white dark:bg-gray-900 ltr:border-r rtl:border-l border-gray-100 dark:border-gray-800 flex flex-col fixed ltr:left-0 rtl:right-0 top-0 overflow-y-auto transition-all duration-300 ${
-        collapsed ? "w-20" : "w-64"
-      } z-50`}
+      className={`bg-white dark:bg-gray-900 flex flex-col overflow-y-auto transition-all duration-300 ${
+        mobileOpen
+          ? "w-full h-full fixed inset-0 z-50"
+          : `h-screen ltr:border-r rtl:border-l border-gray-100 dark:border-gray-800 fixed ltr:left-0 rtl:right-0 top-0 ${
+              collapsed ? "w-20" : "w-64"
+            } z-50`
+      }`}
     >
+
       {/* Logo */}
       <div
         className={`p-6 flex items-center ${
@@ -80,6 +92,7 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
             className={`${sectionButtonClassName} ${
               collapsed ? "justify-center" : ""
             }`}
+            onClick={handleLinkClick}
           >
             <LayoutDashboard size={18} />
             {!collapsed && (
@@ -112,7 +125,7 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
 
             {!collapsed && activeSection === "tenant" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
-                <NavLink to="/tenant-onboard" className={SubButtonClassName}>
+                <NavLink to="/tenant-onboard" className={SubButtonClassName} onClick={handleLinkClick}>
                   {t("sidebar.tenant.onboard")}
                 </NavLink>
                 <button className={SubButtonClassName}>
@@ -157,18 +170,21 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                 <NavLink
                   to="/organization/location/new"
                   className={SubButtonClassName}
+                  onClick={handleLinkClick}
                 >
                   {t("sidebar.organization.locations")}
                 </NavLink>
                 <NavLink
                   to="/organization/department/new"
                   className={SubButtonClassName}
+                  onClick={handleLinkClick}
                 >
                   {t("sidebar.organization.departments")}
                 </NavLink>
                 <NavLink
                   to="/organization/designation/new"
                   className={SubButtonClassName}
+                  onClick={handleLinkClick}
                 >
                   {t("sidebar.organization.designations")}
                 </NavLink>
@@ -205,10 +221,10 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
 
             {!collapsed && activeSection === "employee" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
-                <NavLink to="/employees" className={SubButtonClassName}>
+                <NavLink to="/employees" className={SubButtonClassName} onClick={handleLinkClick}>
                   {t("sidebar.employee.onBoarding")}
                 </NavLink>
-                <NavLink to="/bulk-onboarding" className={SubButtonClassName}>
+                <NavLink to="/bulk-onboarding" className={SubButtonClassName} onClick={handleLinkClick}>
                   {t("sidebar.employee.bulkOnboarding")}
                 </NavLink>
                 <button type="button" className={SubButtonClassName}>
@@ -220,18 +236,19 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                 <button type="button" className={SubButtonClassName}>
                   {t("sidebar.employee.masterSettings")}
                 </button>
-                <NavLink to="/resignation" className={SubButtonClassName}>
+                <NavLink to="/resignation" className={SubButtonClassName} onClick={handleLinkClick}>
                   {t("sidebar.employee.resignation")}
                 </NavLink>
-                <NavLink to="/exit-workflow" className={SubButtonClassName}>
+                <NavLink to="/exit-workflow" className={SubButtonClassName} onClick={handleLinkClick}>
                   {t("sidebar.employee.exitWorkflow")}
                 </NavLink>
-                <NavLink to="/fnf" className={SubButtonClassName}>
+                <NavLink to="/fnf" className={SubButtonClassName} onClick={handleLinkClick}>
                   {t("sidebar.employee.fnf")}
                 </NavLink>
                 <NavLink
                   to="/relieving-policies"
                   className={SubButtonClassName}
+                  onClick={handleLinkClick}
                 >
                   {t("sidebar.employee.relievingPolicies")}
                 </NavLink>
@@ -274,12 +291,14 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                 <NavLink
                   to="/attendance/shift/new"
                   className={SubButtonClassName}
+                  onClick={handleLinkClick}
                 >
                   {t("sidebar.attendance.shiftMasters")}
                 </NavLink>
                 <NavLink
                   to="/attendance/week-off/new"
                   className={SubButtonClassName}
+                  onClick={handleLinkClick}
                 >
                   {t("sidebar.attendance.woMasters")}
                 </NavLink>
@@ -298,7 +317,7 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                 <button type="button" className={SubButtonClassName}>
                   {t("sidebar.attendance.markAttendance")}
                 </button>
-                <NavLink to="/leaves" className={SubButtonClassName}>
+                <NavLink to="/leaves" className={SubButtonClassName} onClick={handleLinkClick}>
                   {t("sidebar.attendance.viewAttendance")}
                 </NavLink>
                 <button type="button" className={SubButtonClassName}>
@@ -495,7 +514,10 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
       {/* Toggle Button - Fixed to bottom */}
       <div className="sticky bottom-0 p-4 border-t border-gray-100 dark:border-gray-800 flex-shrink-0 bg-white dark:bg-gray-900 z-10">
         <button
-          onClick={() => setCollapsed(!collapsed)}
+          onClick={() => {
+            setCollapsed(!collapsed);
+            handleLinkClick();
+          }}
           className="w-full flex items-center justify-center p-2 text-gray-400 hover:text-primary hover:bg-gray-50 dark:hover:bg-gray-800 rounded-lg transition-colors"
         >
           {collapsed ? (isRTL ? <ChevronLeft size={20} /> : <ChevronRight size={20} />) : (isRTL ? <ChevronRight size={20} /> : <ChevronLeft size={20} />)}

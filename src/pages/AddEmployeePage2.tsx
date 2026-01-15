@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import DynamicForm from '../components/wizard/DynamicForm';
