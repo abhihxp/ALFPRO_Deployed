@@ -1,0 +1,40 @@
+{
+    "sections": [
+        {
+            "title": "Company Details",
+            "fields": [
+                {
+                    "name": "code",
+                    "label": "Company Code",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter company code",
+                    "colSpan": 6
+                },
+                {
+                    "name": "name",
+                    "label": "Company Name",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter company name",
+                    "colSpan": 6
+                },
+                {
+                    "name": "description",
+                    "label": "Description",
+                    "type": "textarea",
+                    "required": false,
+                    "placeholder": "Enter company description",
+                    "colSpan": 12
+                },
+                {
+                    "name": "isActive",
+                    "label": "Active Status",
+                    "type": "switch",
+                    "required": false,
+                    "colSpan": 6
+                }
+            ]
+        }
+    ]
+}

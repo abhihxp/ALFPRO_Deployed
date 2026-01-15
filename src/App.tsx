@@ -13,6 +13,7 @@ import StatutoryDataPage from './pages/StatutoryDataPage';
 import ExitWorkflowPage from './pages/ExitWorkflowPage';
 import FnFPage from './pages/FnFPage';
 import RelievingPoliciesPage from './pages/RelievingPoliciesPage';
+import AttendanceMastersPage from './pages/AttendanceMastersPage';
 import WeekOffPatternPage from './pages/WeekOffPatternPage';
 import LocationPage from './pages/LocationPage';
 import DepartmentPage from './pages/DepartmentPage';
@@ -77,6 +78,7 @@ const AppContent = () => {
             <Route path="/exit-workflow" element={<ExitWorkflowPage />} />
             <Route path="/fnf" element={<FnFPage />} />
             <Route path="/relieving-policies" element={<RelievingPoliciesPage />} />
+            <Route path="/attendance/masters" element={<AttendanceMastersPage />} />
 
             {/* Routes for individual pages - still accessible but potentially hidden from sidebar */}
             <Route path="/attendance/week-off/new" element={<WeekOffPatternPage />} />

@@ -205,9 +205,9 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
 
             {!collapsed && activeSection === "attendance" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
-                <button type="button" className={SubButtonClassName}>
+                <NavLink to="/attendance/masters" className={SubButtonClassName}>
                   Master settings
-                </button>
+                </NavLink>
                 <button type="button" className={SubButtonClassName}>
                   Employee Linking to masters
                 </button>
