@@ -52,7 +52,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                             // Generic Rule for required fields
                             const label = getLocalizedText(field.label);
                             const rules = field.required ? [{ required: true, message: `${label} is required` }] : [];
-                            const fieldValue = values?.[field.name];
+                            // eslint-disable-next-line @typescript-eslint/no-unused-vars
                             const colSpan = field.colSpan || "12 md:col-span-6 lg:col-span-6";
 
                             return (
