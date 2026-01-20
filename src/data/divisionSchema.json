@@ -1,0 +1,54 @@
+{
+    "sections": [
+        {
+            "title": "Division Details",
+            "fields": [
+                {
+                    "name": "companyId",
+                    "label": "Company",
+                    "type": "select",
+                    "required": true,
+                    "placeholder": "Select Company",
+                    "options": [
+                        {
+                            "label": "ACME Corp",
+                            "value": "guid"
+                        }
+                    ],
+                    "colSpan": 6
+                },
+                {
+                    "name": "code",
+                    "label": "Division Code",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter division code",
+                    "colSpan": 6
+                },
+                {
+                    "name": "name",
+                    "label": "Division Name",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter division name",
+                    "colSpan": 6
+                },
+                {
+                    "name": "description",
+                    "label": "Description",
+                    "type": "textarea",
+                    "required": false,
+                    "placeholder": "Enter division description",
+                    "colSpan": 12
+                },
+                {
+                    "name": "isActive",
+                    "label": "Active Status",
+                    "type": "switch",
+                    "required": false,
+                    "colSpan": 6
+                }
+            ]
+        }
+    ]
+}

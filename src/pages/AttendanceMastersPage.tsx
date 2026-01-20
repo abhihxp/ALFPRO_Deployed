@@ -1,18 +1,11 @@
-<<<<<<< HEAD
-/* eslint-disable @typescript-eslint/no-explicit-any */
-=======
->>>>>>> 50aecbc8d4c7453f0d1d4bf164008ae77b75cd36
 import { useState } from 'react';
 import { Form, Button, Tabs } from 'antd';
 import { useTranslation } from 'react-i18next';
 import DynamicForm from '../components/wizard/DynamicForm';
-import companySchema from '../data/companySchema.json';
-import divisionSchema from '../data/divisionSchema.json';
-import locationSchema from '../data/locationSchema.json';
-import departmentSchema from '../data/departmentSchema.json';
-import designationSchema from '../data/designationSchema.json';
+import shiftSchema from '../data/shiftSchema.json';
+import weekOffSchema from '../data/weekOffSchema.json';
 
-const MasterDataPage = () => {
+const AttendanceMastersPage = () => {
     const { t } = useTranslation();
     const [activeTab, setActiveTab] = useState('1');
 
@@ -54,35 +47,20 @@ const MasterDataPage = () => {
     const items = [
         {
             key: '1',
-            label: t('Company'),
-            children: <MasterForm schema={companySchema} type="Company" />,
+            label: t('Shift'),
+            children: <MasterForm schema={shiftSchema} type="Shift" initialValues={{ isActive: true, shiftType: 'fixed' }} />,
         },
         {
             key: '2',
-            label: t('Division'),
-            children: <MasterForm schema={divisionSchema} type="Division" />,
-        },
-        {
-            key: '3',
-            label: t('Location'),
-            children: <MasterForm schema={locationSchema} type="Location" />,
-        },
-        {
-            key: '4',
-            label: t('Department'),
-            children: <MasterForm schema={departmentSchema} type="Department" />,
-        },
-        {
-            key: '5',
-            label: t('Designation'),
-            children: <MasterForm schema={designationSchema} type="Designation" />,
+            label: t('Week-Off'),
+            children: <MasterForm schema={weekOffSchema} type="Week-Off" initialValues={{ isActive: true, isRotational: false, weekOffsPerMonth: 4 }} />,
         },
     ];
 
     return (
         <div className="w-full mx-auto">
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-8">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('Master Data')}</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('Attendance Masters')}</h2>
 
                 <Tabs
                     activeKey={activeTab}
@@ -96,4 +74,4 @@ const MasterDataPage = () => {
     );
 };
 
-export default MasterDataPage;
+export default AttendanceMastersPage;
