@@ -189,7 +189,8 @@
             }
         },
         "department": {
-            "title": "Add a new department to your organization",
+            "title": "Create New Department",
+            "label": "Add a new department to your organization",
             "departmentName": {
                 "label": "Department Name",
                 "placeholder": "e.g., Information Technology, Human Resources"
@@ -213,7 +214,8 @@
             }
         },
         "designation": {
-            "title": "Add a new job designation or title",
+            "title": "Create New Designation",
+            "label": "Add a new job designation or title",
             "designationName": {
                 "label": "Designation Name",
                 "placeholder": "e.g., Senior Manager, Team Lead, Developer"
@@ -345,6 +347,7 @@
             }
         },
         "employee": {
+            "title": "Add New Employee",
             "personalDetails": {
                 "title": "Personal Details",
                 "firstName": {
@@ -434,7 +437,18 @@
                 }
             }
         },
+        "bulkOnboarding": {
+            "title": "Bulk Onboarding",
+            "label": "Upload employee data in bulk using CSV or Excel file",
+            "upload": {
+                "label": "Need a template?",
+                "download": " Download Sample CSV",
+                "placeholder": "Processing Mode",
+                "button":"Create or Upload File"
+            }
+        },
         "tenant": {
+            "title":"Tenant Onboarding Process",
             "organizationDetails": {
                 "title": "Organization Details",
                 "tenantName": {
@@ -522,6 +536,14 @@
                     "label": "Active"
                 }
             }
+        },
+        "buttons": {
+            "save": "Save",
+            "cancel": "Cancel",
+            "submit": "Submit",
+            "clear": "Clear",
+            "reset": "Reset",
+            "back": "Back"
         }
     }
 }

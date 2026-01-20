@@ -1,6 +1,6 @@
 [
     {
-        "title": "form.department.title",
+        "title": "form.department.label",
         "fields": [
             {
                 "name": "departmentName",

@@ -16,6 +16,7 @@ import LocationPage from './pages/LocationPage';
 import DepartmentPage from './pages/DepartmentPage';
 import ShiftPage from './pages/ShiftPage';
 import DesignationPage from './pages/DesignationPage';
+import LeavesPage from './pages/LeavesPage';
 
 import DashboardPage from './pages/DashboardPage';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
@@ -62,7 +63,7 @@ const AppContent = () => {
         <MainLayout>
           <Routes>
             <Route path="/" element={<Navigate to="/employees" replace />} />
-            {/* <Route path="/leaves" element={<LeavesPage />} /> */}
+            <Route path="/leaves" element={<LeavesPage />} />
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/employees" element={<EmployeesPage />} />
             <Route path="/employees/new" element={<AddEmployeePage />} />

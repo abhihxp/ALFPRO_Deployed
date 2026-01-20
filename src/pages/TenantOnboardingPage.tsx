@@ -16,7 +16,7 @@ const TenantOnboardingPage = () => {
       <div className="w-full mx-auto">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-8">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-            {t("tenantOnboardingPage.title")}
+            {t("form.tenant.title")}
           </h2>
           <Form
             form={form}
@@ -28,17 +28,17 @@ const TenantOnboardingPage = () => {
 
             <div className="mt-8 flex justify-end gap-3 border-t border-gray-100 dark:border-gray-700 pt-6">
               <Button className="h-10 px-6">
-                {t("tenantOnboardingPage.buttons.cancel")}
+                {t("form.buttons.cancel")}
               </Button>
               <Button onClick={() => form.resetFields()} className="h-10 px-6">
-                {t("tenantOnboardingPage.buttons.clearAll")}
+                {t("form.buttons.clear")}
               </Button>
               <Button
                 type="primary"
                 htmlType="submit"
                 className="bg-primary hover:bg-purple-700 border-none h-10 px-8"
               >
-                {t("tenantOnboardingPage.buttons.submit")}
+                {t("form.buttons.submit")}
               </Button>
             </div>
           </Form>

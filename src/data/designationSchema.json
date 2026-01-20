@@ -1,6 +1,6 @@
 [
     {
-        "title": "form.designation.title",
+        "title": "form.designation.label",
         "fields": [
             {
                 "name": "designationName",
