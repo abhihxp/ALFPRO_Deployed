@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Users, Calendar, Settings, HelpCircle, LogOut, ChevronLeft, ChevronRight, Building, DollarSign, Package } from 'lucide-react';
+import { LayoutDashboard, Users, Calendar, Settings, HelpCircle, LogOut, ChevronLeft, ChevronRight, Building, DollarSign, Package, Briefcase } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 interface SidebarProps {
@@ -16,16 +16,15 @@ const sectionButtonClassName =
 const SubButtonClassName =
   "w-full flex justify-start text-sm gap-3 px-3 py-2.5 text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary transition-colors";
 
+const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
+  `${SubButtonClassName} ${isActive ? 'text-primary bg-gray-50 dark:bg-gray-800 font-medium' : ''}`;
+
 const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: SidebarProps) => {
   const handleLinkClick = () => {
     if (mobileOpen && onClose) {
       onClose();
     }
   };
-const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
-  `${SubButtonClassName} ${isActive ? 'text-primary bg-gray-50 dark:bg-gray-800 font-medium' : ''}`;
-
-const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
   const [activeSection, setActiveSection] = useState<string | null>('employee');
   const { t, i18n } = useTranslation();
   const location = useLocation();
