@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-=======
 import { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
->>>>>>> 50aecbc8d4c7453f0d1d4bf164008ae77b75cd36
 import { LayoutDashboard, Users, Calendar, Settings, HelpCircle, LogOut, ChevronLeft, ChevronRight, Building, DollarSign, Package } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-/* eslint-disable @typescript-eslint/no-explicit-any */
-=======
->>>>>>> 50aecbc8d4c7453f0d1d4bf164008ae77b75cd36
 import { useState } from 'react';
 import { Form, Button, Modal, message } from 'antd';
 import { useTranslation } from 'react-i18next';
