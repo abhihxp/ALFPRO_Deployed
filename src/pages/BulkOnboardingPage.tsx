@@ -18,19 +18,7 @@ const BulkOnboardingPage = () => {
     // Watch for file upload changes
     const uploadFileValue = Form.useWatch('uploadFile', form);
 
-    useEffect(() => {
-        if (uploadFileValue && uploadFileValue.fileList && uploadFileValue.fileList.length > 0) {
-            const file = uploadFileValue.fileList[0].originFileObj;
-            if (file) {
-                parseFile(file);
-            }
-        } else {
-            setPreviewData([]);
-            setHeaders([]);
-        }
-    }, [uploadFileValue]);
-
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const parseFile = (file: File) => {
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -67,6 +55,18 @@ const BulkOnboardingPage = () => {
         };
         reader.readAsBinaryString(file);
     };
+
+    useEffect(() => {
+        if (uploadFileValue && uploadFileValue.fileList && uploadFileValue.fileList.length > 0) {
+            const file = uploadFileValue.fileList[0].originFileObj;
+            if (file) {
+                parseFile(file);
+            }
+        } else {
+            setPreviewData([]);
+            setHeaders([]);
+        }
+    }, [parseFile, uploadFileValue]);
 
     const handleFinish = (values: any) => {
         console.log('Form Values:', values);

@@ -30,6 +30,7 @@ import './i18n';
 import { useTranslation } from 'react-i18next';
 import enUS from 'antd/locale/en_US';
 import arEG from 'antd/locale/ar_EG';
+import LeavesPage from './pages/LeavesPage';
 
 const AppContent = () => {
   const { theme } = useTheme();

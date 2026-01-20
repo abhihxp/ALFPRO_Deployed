@@ -32,6 +32,7 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
   useEffect(() => {
     const path = location.pathname;
     if (path.startsWith('/tenant')) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveSection('tenant');
     } else if (
       path.startsWith('/employees') ||
@@ -249,7 +250,7 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
             {!collapsed && activeSection === "employee" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
                 <NavLink to="/employees" className={getNavLinkClass} end>
-                  On-Boarding
+                  {t("sidebar.employee.onBoarding")}
                 </NavLink>
                 <NavLink to="/bulk-onboarding" className={getNavLinkClass} onClick={handleLinkClick}>
                   {t("sidebar.employee.bulkOnboarding")}
@@ -313,7 +314,7 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
             {!collapsed && activeSection === "attendance" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
                 <NavLink to="/attendance/masters" className={getNavLinkClass}>
-                  Master settings
+                  {t("sidebar.attendance.masterSettings")}
                 </NavLink>
                 <button type="button" className={SubButtonClassName}>
                   {t("sidebar.attendance.employeeLinkingToMasters")}

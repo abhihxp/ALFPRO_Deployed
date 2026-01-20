@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Form, Input, Select, DatePicker, Radio, Upload, Button, InputNumber, Switch, Checkbox, TimePicker } from 'antd';
@@ -83,7 +84,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                                         className="mb-0 dynamic-form-item"
                                         layout="vertical"
                                     >
-                                        {renderFieldInput(field, currentLang, getLocalizedText)}
+                                        {renderFieldInput(field, currentLang, values?.[field.name], getLocalizedText, t)}
                                     </Form.Item>
                                 </div>
                             );

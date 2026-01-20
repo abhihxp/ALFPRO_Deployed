@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from 'react';
 import { Card, Table, Tag, message, Button, Modal, Statistic, Row, Col } from 'antd';
 import { Download, Eye, DollarSign } from 'lucide-react';

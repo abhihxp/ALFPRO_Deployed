@@ -106,7 +106,7 @@ const FnFPage = () => {
             </div>
 
             {/* Optional: Summary Footer */}
-            <Card className="shadow-sm border-gray-100 dark:border-gray-700 dark:bg-gray-800 bg-gray-50 dark:bg-gray-900">
+            <Card className="shadow-sm border-gray-100 dark:border-gray-700 dark:bg-gray-800 bg-gray-50">
                 <div className="flex justify-between items-center text-lg">
                     <span className="font-medium text-gray-600 dark:text-gray-400">{t('Net Payable Amount')}</span>
                     <span className="font-bold text-2xl text-green-600">AED {leaveData.encashmentAmount.toLocaleString()}</span>
