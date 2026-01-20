@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Form, Input, Select, DatePicker, Radio, Upload, Button, InputNumber, Switch, Checkbox, TimePicker } from 'antd';
 import { UploadOutlined, InfoCircleOutlined } from '@ant-design/icons';
@@ -109,16 +108,7 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
 
     const commonClasses = "rounded-lg placeholder:!text-gray-500 dark:placeholder:!text-gray-400 w-full"; // Forced color
     const selectPlaceholderClass = "[&_.ant-select-selection-placeholder]:!text-gray-500 dark:[&_.ant-select-selection-placeholder]:!text-gray-400";
-
-    const positionClass = lang === 'ar' ? 'right-3' : 'left-3';
-
-    const CustomPlaceholder = () => (
-        <span className={`absolute ${positionClass} text-gray-500 pointer-events-none z-10 select-none ${field.type === 'textarea' ? 'top-3' : 'top-0 bottom-0 flex items-center'}`}>
-            <span className="text-red-500 font-normal mr-1">*</span>
-            <span className="text-gray-500 dark:text-gray-400">{originalPlaceholder}</span>
-        </span>
-    );
-
+    
     let inputElement = <Input className={commonClasses} />;
 
     switch (field.type) {
