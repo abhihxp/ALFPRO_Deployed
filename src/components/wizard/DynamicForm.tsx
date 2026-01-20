@@ -5,13 +5,16 @@ import { UploadOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
 interface DynamicFormProps {
-    schema: any[];
+    schema: any;
     form: any; // Antd Form Instance
 }
 
 const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
     const { t, i18n } = useTranslation();
     const currentLang = i18n.language as 'en' | 'ar';
+
+    // Normalize schema to handle both array (legacy) and object (new) formats
+    const sections = Array.isArray(schema) ? schema : (schema.sections || []);
 
     // Watch for dependency changes
     const values = Form.useWatch([], form) as any;
@@ -29,7 +32,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
 
     return (
         <div className="flex flex-col gap-16">
-            {schema.map((section: any, sectionIdx: number) => (
+            {sections.map((section: any, sectionIdx: number) => (
                 <div key={sectionIdx}>
                     {section.title && (
                         <div className="mb-4">
@@ -54,7 +57,6 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                             // Generic Rule for required fields
                             const label = field.label.startsWith('form.') ? t(field.label) : field.label;
                             const rules = field.required ? [{ required: true, message: `${label} is required` }] : [];
-                            const fieldValue = values?.[field.name];
                             const colSpan = field.colSpan || "12 md:col-span-6 lg:col-span-6";
 
                             return (
@@ -64,6 +66,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                                     style={{ gridColumn: `span ${colSpan}` }}
                                 >
                                     <Form.Item
+                                        label={label}
                                         name={field.name}
                                         rules={rules}
                                         valuePropName={field.type === 'switch' ? 'checked' : 'value'}
@@ -80,9 +83,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                                         className="mb-0 dynamic-form-item"
                                         layout="vertical"
                                     >
-                                        <div className="relative">
-                                            {renderFieldInput(field, currentLang, fieldValue, getLocalizedText, t)}
-                                        </div>
+                                        {renderFieldInput(field, currentLang, getLocalizedText)}
                                     </Form.Item>
                                 </div>
                             );
@@ -153,7 +154,6 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
             break;
 
         case 'radio':
-            // Radio doesn't generally have a placeholder in the same way, but preventing error
             return (
                 <Radio.Group>
                     {field.options?.map((opt: any) => (
@@ -192,12 +192,10 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
         }
 
         case 'file':
-            // Custom simplified placeholder for file input (button) to include red star inside text
             return (
                 <Upload maxCount={1} action="/api/upload" className="w-full">
                     <Button icon={<UploadOutlined />} className={`w-full h-10 text-left flex items-center ${commonClasses} text-gray-500`}>
-                        {field.required ? <span className="text-red-500 mr-1">*</span> : null}
-                        {originalPlaceholder || (lang === 'ar' ? 'رفع ملف' : 'Click to Upload')}
+                        {inputPlaceholder || (lang === 'ar' ? 'رفع ملف' : 'Click to Upload')}
                     </Button>
                 </Upload>
             );
@@ -206,12 +204,7 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
             inputElement = <Input className={commonClasses} />;
     }
 
-    return (
-        <>
-            {inputElement}
-            {showCustomPlaceholder && field.type !== 'file' && <CustomPlaceholder />}
-        </>
-    );
+    return inputElement;
 };
 
 export default DynamicForm;

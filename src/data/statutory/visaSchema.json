@@ -1,0 +1,82 @@
+{
+    "title": "Visa Details",
+    "sections": [
+        {
+            "title": "Visa Information",
+            "fields": [
+                {
+                    "name": "visaNumber",
+                    "label": "Visa Number",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter Visa Number",
+                    "colSpan": 6
+                },
+                {
+                    "name": "visaType",
+                    "label": "Visa Type",
+                    "type": "select",
+                    "required": true,
+                    "options": [
+                        {
+                            "label": "Employment",
+                            "value": "employment"
+                        },
+                        {
+                            "label": "Visit",
+                            "value": "visit"
+                        },
+                        {
+                            "label": "Business",
+                            "value": "business"
+                        },
+                        {
+                            "label": "Resident",
+                            "value": "resident"
+                        }
+                    ],
+                    "colSpan": 6
+                },
+                {
+                    "name": "issuingCountry",
+                    "label": "Issuing Country",
+                    "type": "select",
+                    "required": true,
+                    "options": [
+                        {
+                            "label": "India",
+                            "value": "IN"
+                        },
+                        {
+                            "label": "USA",
+                            "value": "US"
+                        },
+                        {
+                            "label": "UAE",
+                            "value": "AE"
+                        },
+                        {
+                            "label": "UK",
+                            "value": "UK"
+                        }
+                    ],
+                    "colSpan": 6
+                },
+                {
+                    "name": "issueDate",
+                    "label": "Issue Date",
+                    "type": "date",
+                    "required": true,
+                    "colSpan": 6
+                },
+                {
+                    "name": "expiryDate",
+                    "label": "Expiry Date",
+                    "type": "date",
+                    "required": true,
+                    "colSpan": 6
+                }
+            ]
+        }
+    ]
+}

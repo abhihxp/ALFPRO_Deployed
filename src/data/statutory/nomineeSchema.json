@@ -1,0 +1,73 @@
+{
+    "title": "Nominee Details",
+    "sections": [
+        {
+            "title": "Nomination Information",
+            "fields": [
+                {
+                    "name": "nomineeName",
+                    "label": "Nominee Name",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter Nominee Name",
+                    "colSpan": 6
+                },
+                {
+                    "name": "relationship",
+                    "label": "Relationship",
+                    "type": "select",
+                    "required": true,
+                    "options": [
+                        {
+                            "label": "Spouse",
+                            "value": "spouse"
+                        },
+                        {
+                            "label": "Father",
+                            "value": "father"
+                        },
+                        {
+                            "label": "Mother",
+                            "value": "mother"
+                        },
+                        {
+                            "label": "Son",
+                            "value": "son"
+                        },
+                        {
+                            "label": "Daughter",
+                            "value": "daughter"
+                        },
+                        {
+                            "label": "Other",
+                            "value": "other"
+                        }
+                    ],
+                    "colSpan": 6
+                },
+                {
+                    "name": "dateOfBirth",
+                    "label": "Date of Birth",
+                    "type": "date",
+                    "required": true,
+                    "colSpan": 6
+                },
+                {
+                    "name": "sharePercentage",
+                    "label": "Share Percentage (%)",
+                    "type": "number",
+                    "required": true,
+                    "placeholder": "e.g. 100",
+                    "colSpan": 6
+                },
+                {
+                    "name": "contactNumber",
+                    "label": "Contact Number",
+                    "type": "text",
+                    "required": false,
+                    "colSpan": 6
+                }
+            ]
+        }
+    ]
+}

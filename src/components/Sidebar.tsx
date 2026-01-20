@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, Users, Calendar, Settings, HelpCircle, LogOut, ChevronLeft, ChevronRight, Building, DollarSign, Package, Briefcase } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { LayoutDashboard, Users, Calendar, Settings, HelpCircle, LogOut, ChevronLeft, ChevronRight, Building, DollarSign, Package } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 interface SidebarProps {
@@ -22,8 +22,37 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
       onClose();
     }
   };
+const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
+  `${SubButtonClassName} ${isActive ? 'text-primary bg-gray-50 dark:bg-gray-800 font-medium' : ''}`;
+
+const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
   const [activeSection, setActiveSection] = useState<string | null>('employee');
   const { t, i18n } = useTranslation();
+  const location = useLocation();
+
+  useEffect(() => {
+    const path = location.pathname;
+    if (path.startsWith('/tenant')) {
+      setActiveSection('tenant');
+    } else if (
+      path.startsWith('/employees') ||
+      path.startsWith('/bulk-onboarding') ||
+      path.startsWith('/resignation') ||
+      path.startsWith('/exit-workflow') ||
+      path.startsWith('/fnf') ||
+      path.startsWith('/relieving-policies')
+    ) {
+      setActiveSection('employee');
+    } else if (path.startsWith('/attendance')) {
+      setActiveSection('attendance');
+    } else if (path.startsWith('/leaves')) {
+      setActiveSection('leave');
+    } else if (path.startsWith('/payroll')) {
+      setActiveSection('payroll');
+    } else if (path.startsWith('/assets')) {
+      setActiveSection('asset');
+    }
+  }, [location.pathname]);
   const isRTL = i18n.language === 'ar';
 
   /* 
@@ -89,10 +118,7 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
         <nav className="space-y-1">
           <NavLink
             to="/dashboard"
-            className={`${sectionButtonClassName} ${
-              collapsed ? "justify-center" : ""
-            }`}
-            onClick={handleLinkClick}
+            className={({ isActive }) => `${sectionButtonClassName} ${collapsed ? "justify-center" : ""} ${isActive ? 'text-primary bg-gray-50 dark:bg-gray-800 font-medium' : ''}`}
           >
             <LayoutDashboard size={18} />
             {!collapsed && (
@@ -125,12 +151,14 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
 
             {!collapsed && activeSection === "tenant" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
-                <NavLink to="/tenant-onboard" className={SubButtonClassName} onClick={handleLinkClick}>
+                <NavLink to="/tenant-onboard" className={getNavLinkClass} onClick={handleLinkClick}>
                   {t("sidebar.tenant.onboard")}
                 </NavLink>
-                <button className={SubButtonClassName}>
+                <NavLink to="/tenant/master-data" className={getNavLinkClass}>
+                  
                   {t("sidebar.tenant.masterData")}
-                </button>
+                
+                </NavLink>
                 <button type="button" className={SubButtonClassName}>
                   {t("sidebar.tenant.settings")}
                 </button>
@@ -221,33 +249,33 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
 
             {!collapsed && activeSection === "employee" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
-                <NavLink to="/employees" className={SubButtonClassName} onClick={handleLinkClick}>
-                  {t("sidebar.employee.onBoarding")}
+                <NavLink to="/employees" className={getNavLinkClass} end>
+                  On-Boarding
                 </NavLink>
-                <NavLink to="/bulk-onboarding" className={SubButtonClassName} onClick={handleLinkClick}>
+                <NavLink to="/bulk-onboarding" className={getNavLinkClass} onClick={handleLinkClick}>
                   {t("sidebar.employee.bulkOnboarding")}
                 </NavLink>
                 <button type="button" className={SubButtonClassName}>
                   {t("sidebar.employee.linkToOrgChart")}
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <NavLink to="/employees/statutory-data" className={getNavLinkClass}>
                   {t("sidebar.employee.statutoryData")}
-                </button>
+                </NavLink>
                 <button type="button" className={SubButtonClassName}>
                   {t("sidebar.employee.masterSettings")}
                 </button>
-                <NavLink to="/resignation" className={SubButtonClassName} onClick={handleLinkClick}>
+                <NavLink to="/resignation" className={getNavLinkClass} onClick={handleLinkClick}>
                   {t("sidebar.employee.resignation")}
                 </NavLink>
-                <NavLink to="/exit-workflow" className={SubButtonClassName} onClick={handleLinkClick}>
+                <NavLink to="/exit-workflow" className={getNavLinkClass} onClick={handleLinkClick}>
                   {t("sidebar.employee.exitWorkflow")}
                 </NavLink>
-                <NavLink to="/fnf" className={SubButtonClassName} onClick={handleLinkClick}>
+                <NavLink to="/fnf" className={getNavLinkClass} onClick={handleLinkClick}>
                   {t("sidebar.employee.fnf")}
                 </NavLink>
                 <NavLink
                   to="/relieving-policies"
-                  className={SubButtonClassName}
+                  className={getNavLinkClass}
                   onClick={handleLinkClick}
                 >
                   {t("sidebar.employee.relievingPolicies")}
@@ -285,22 +313,8 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
 
             {!collapsed && activeSection === "attendance" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
-                <button type="button" className={SubButtonClassName}>
-                  {t("sidebar.attendance.masterSettings")}
-                </button>
-                <NavLink
-                  to="/attendance/shift/new"
-                  className={SubButtonClassName}
-                  onClick={handleLinkClick}
-                >
-                  {t("sidebar.attendance.shiftMasters")}
-                </NavLink>
-                <NavLink
-                  to="/attendance/week-off/new"
-                  className={SubButtonClassName}
-                  onClick={handleLinkClick}
-                >
-                  {t("sidebar.attendance.woMasters")}
+                <NavLink to="/attendance/masters" className={getNavLinkClass}>
+                  Master settings
                 </NavLink>
                 <button type="button" className={SubButtonClassName}>
                   {t("sidebar.attendance.employeeLinkingToMasters")}
@@ -314,10 +328,10 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
                 <button type="button" className={SubButtonClassName}>
                   {t("sidebar.attendance.swipeRegulations")}
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <NavLink to="/attendance/my-attendance" className={getNavLinkClass}>
                   {t("sidebar.attendance.markAttendance")}
-                </button>
-                <NavLink to="/leaves" className={SubButtonClassName} onClick={handleLinkClick}>
+                </NavLink>
+                <NavLink to="/attendance/my-attendance" className={getNavLinkClass} onClick={handleLinkClick}>
                   {t("sidebar.attendance.viewAttendance")}
                 </NavLink>
                 <button type="button" className={SubButtonClassName}>
@@ -364,9 +378,9 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
                 <button type="button" className={SubButtonClassName}>
                   {t("sidebar.leave.linkingEmployeeToLeaveMasters")}
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <NavLink to="/leaves/my-leaves" className={getNavLinkClass}>
                   {t("sidebar.leave.viewAndApplyLeaves")}
-                </button>
+                </NavLink>
                 <button type="button" className={SubButtonClassName}>
                   {t("sidebar.leave.approvals")}
                 </button>
@@ -422,9 +436,9 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
                 <button type="button" className={SubButtonClassName}>
                   {t("sidebar.payroll.bankStatements")}
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <NavLink to="/payroll/my-salary" className={getNavLinkClass}>
                   {t("sidebar.payroll.viewSalaryHistory")}
-                </button>
+                </NavLink>
               </div>
             )}
           </div>

@@ -1,0 +1,119 @@
+{
+    "title": "Link Organisational Chart",
+    "sections": [
+        {
+            "title": "Organisation Hierarchy",
+            "fields": [
+                {
+                    "name": "location",
+                    "label": "Location",
+                    "type": "select",
+                    "required": true,
+                    "options": [
+                        {
+                            "label": "Dubai HQ",
+                            "value": "dubai_hq"
+                        },
+                        {
+                            "label": "Abu Dhabi Branch",
+                            "value": "abu_dhabi"
+                        },
+                        {
+                            "label": "Sharjah Office",
+                            "value": "sharjah"
+                        }
+                    ],
+                    "colSpan": 12
+                },
+                {
+                    "name": "department",
+                    "label": "Department",
+                    "type": "select",
+                    "required": true,
+                    "options": [
+                        {
+                            "label": "IT",
+                            "value": "it"
+                        },
+                        {
+                            "label": "HR",
+                            "value": "hr"
+                        },
+                        {
+                            "label": "Finance",
+                            "value": "finance"
+                        },
+                        {
+                            "label": "Operations",
+                            "value": "operations"
+                        }
+                    ],
+                    "colSpan": 12
+                },
+                {
+                    "name": "designation",
+                    "label": "Designation",
+                    "type": "select",
+                    "required": true,
+                    "options": [
+                        {
+                            "label": "Manager",
+                            "value": "manager"
+                        },
+                        {
+                            "label": "Team Lead",
+                            "value": "lead"
+                        },
+                        {
+                            "label": "Senior Developer",
+                            "value": "senior_dev"
+                        },
+                        {
+                            "label": "Associate",
+                            "value": "associate"
+                        }
+                    ],
+                    "colSpan": 12
+                },
+                {
+                    "name": "shift",
+                    "label": "Shift",
+                    "type": "select",
+                    "required": true,
+                    "options": [
+                        {
+                            "label": "General Shift (9-6)",
+                            "value": "general"
+                        },
+                        {
+                            "label": "Morning Shift (7-4)",
+                            "value": "morning"
+                        },
+                        {
+                            "label": "Night Shift (8-5)",
+                            "value": "night"
+                        }
+                    ],
+                    "colSpan": 12
+                },
+                {
+                    "name": "weekOffPattern",
+                    "label": "Week Off Pattern",
+                    "type": "select",
+                    "required": true,
+                    "options": [
+                        {
+                            "label": "Saturday-Sunday",
+                            "value": "sat_sun"
+                        },
+                        {
+                            "label": "Friday-Saturday",
+                            "value": "fri_sat"
+                        }
+                    ],
+                    "colSpan": 12
+                }
+            ]
+        }
+    ]
+}

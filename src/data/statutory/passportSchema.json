@@ -1,0 +1,64 @@
+{
+    "title": "Passport Details",
+    "sections": [
+        {
+            "title": "Passport Information",
+            "fields": [
+                {
+                    "name": "passportNumber",
+                    "label": "Passport Number",
+                    "type": "text",
+                    "required": true,
+                    "placeholder": "Enter Passport Number",
+                    "colSpan": 6
+                },
+                {
+                    "name": "countryOfIssue",
+                    "label": "Issuing Country",
+                    "type": "select",
+                    "required": true,
+                    "options": [
+                        {
+                            "label": "India",
+                            "value": "IN"
+                        },
+                        {
+                            "label": "USA",
+                            "value": "US"
+                        },
+                        {
+                            "label": "UAE",
+                            "value": "AE"
+                        },
+                        {
+                            "label": "UK",
+                            "value": "UK"
+                        }
+                    ],
+                    "colSpan": 6
+                },
+                {
+                    "name": "issueDate",
+                    "label": "Issue Date",
+                    "type": "date",
+                    "required": true,
+                    "colSpan": 6
+                },
+                {
+                    "name": "expiryDate",
+                    "label": "Expiry Date",
+                    "type": "date",
+                    "required": true,
+                    "colSpan": 6
+                },
+                {
+                    "name": "placeOfIssue",
+                    "label": "Place of Issue",
+                    "type": "text",
+                    "required": false,
+                    "colSpan": 12
+                }
+            ]
+        }
+    ]
+}
