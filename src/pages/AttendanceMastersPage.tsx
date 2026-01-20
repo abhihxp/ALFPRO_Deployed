@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Form, Button, Tabs } from 'antd';
 import { useTranslation } from 'react-i18next';
 import DynamicForm from '../components/wizard/DynamicForm';

@@ -19,6 +19,9 @@ import LocationPage from './pages/LocationPage';
 import DepartmentPage from './pages/DepartmentPage';
 import ShiftPage from './pages/ShiftPage';
 import DesignationPage from './pages/DesignationPage';
+import AttendancePage from './pages/AttendancePage';
+import LeavePage from './pages/LeavePage';
+import PayrollPage from './pages/PayrollPage';
 
 import DashboardPage from './pages/DashboardPage';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
@@ -79,6 +82,9 @@ const AppContent = () => {
             <Route path="/fnf" element={<FnFPage />} />
             <Route path="/relieving-policies" element={<RelievingPoliciesPage />} />
             <Route path="/attendance/masters" element={<AttendanceMastersPage />} />
+            <Route path="/attendance/my-attendance" element={<AttendancePage />} />
+            <Route path="/leaves/my-leaves" element={<LeavePage />} />
+            <Route path="/payroll/my-salary" element={<PayrollPage />} />
 
             {/* Routes for individual pages - still accessible but potentially hidden from sidebar */}
             <Route path="/attendance/week-off/new" element={<WeekOffPatternPage />} />
