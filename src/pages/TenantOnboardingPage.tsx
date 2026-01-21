@@ -18,7 +18,7 @@ const TenantOnboardingPage = () => {
                 <Form form={form} component={false} onFinish={handleFinish} layout="vertical">
                     <DynamicForm schema={tenantOnboardingSchemaJson} form={form} />
 
-                    <div className="mt-8 flex justify-end gap-3 border-t border-gray-100 dark:border-gray-700 pt-6">
+                    <div className="flex justify-end gap-3 border-t border-gray-100 dark:border-gray-700 items-center sticky bottom-0 bg-white dark:bg-gray-800 z-10 -mx-8 -mb-8 px-8 py-4 mt-4">
                         <Button
                             className="h-10 px-6"
                         >

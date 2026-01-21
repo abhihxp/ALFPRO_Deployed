@@ -26,18 +26,18 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
     };
 
     return (
-        <div className="flex flex-col gap-16">
+        <div className="flex flex-col gap-6">
             {sections.map((section: any, sectionIdx: number) => (
                 <div key={sectionIdx}>
                     {section.title && (
-                        <div className="mb-4">
-                            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider dark:text-gray-400 pb-2">
+                        <div className="mb-2">
+                            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider dark:text-gray-400 pb-1">
                                 {getLocalizedText(section.title)}
                             </h3>
                         </div>
                     )}
 
-                    <div className="grid grid-cols-12 gap-x-6 gap-y-6">
+                    <div className="grid grid-cols-12 gap-x-4 gap-y-4">
                         {section.fields?.map((field: any) => {
                             // Dependency Logic
                             if (field.dependsOn) {
