@@ -67,7 +67,7 @@ const AppContent = () => {
       <Router>
         <MainLayout>
           <Routes>
-            <Route path="/" element={<Navigate to="/employees" replace />} />
+            <Route path="/" element={<Navigate to="/tenant-onboard" replace />} />
             {/* <Route path="/leaves" element={<LeavesPage />} /> */}
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/employees" element={<EmployeesPage />} />

@@ -12,7 +12,7 @@ const sectionButtonClassName =
   "w-full flex items-center text-lg gap-3 px-3 py-2.5 text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary transition-colors";
 
 const SubButtonClassName =
-  "w-full flex justify-start text-sm gap-3 px-3 py-2.5 text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary transition-colors";
+  "w-full flex justify-start text-sm gap-3 px-3 py-2.5 text-gray-500 dark:text-gray-400 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 hover:text-primary dark:hover:text-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-transparent disabled:hover:text-gray-500";
 
 const getNavLinkClass = ({ isActive }: { isActive: boolean }) =>
   `${SubButtonClassName} ${isActive ? 'text-primary bg-gray-50 dark:bg-gray-800 font-medium' : ''}`;
@@ -142,7 +142,7 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                 <NavLink to="/tenant/master-data" className={getNavLinkClass}>
                   Master Data
                 </NavLink>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Settings
                 </button>
               </div>
@@ -181,13 +181,13 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                 <NavLink to="/bulk-onboarding" className={getNavLinkClass}>
                   Bulk on-boarding
                 </NavLink>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Link to org chart
                 </button>
                 <NavLink to="/employees/statutory-data" className={getNavLinkClass}>
                   Statutory data
                 </NavLink>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Master settings
                 </button>
                 <NavLink to="/resignation" className={getNavLinkClass}>
@@ -235,28 +235,26 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
                 <NavLink to="/attendance/masters" className={getNavLinkClass}>
                   Master settings
                 </NavLink>
-                <button type="button" className={SubButtonClassName}>
-                  Employee Linking to masters
+                <button type="button" className={SubButtonClassName} disabled>
+                  {/* Employee Linking to masters */}
+                  Employee Linking
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Attendance policies
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Time sheet upload
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Swipe regulations
                 </button>
                 <NavLink to="/attendance/my-attendance" className={getNavLinkClass}>
-                  Mark Attendance
+                  My Attendance
                 </NavLink>
-                <NavLink to="/attendance/my-attendance" className={getNavLinkClass}>
-                  View Attendance
-                </NavLink>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Approvals
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Reports
                 </button>
               </div>
@@ -287,19 +285,22 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
 
             {!collapsed && activeSection === "leave" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
-                <button type="button" className={SubButtonClassName}>
-                  Master settings and policies
+                <button type="button" className={SubButtonClassName} disabled>
+                  Settings and policies
+                  {/* Master settings and policies */}
                 </button>
-                <button type="button" className={SubButtonClassName}>
-                  Grouping leave policies
+                <button type="button" className={SubButtonClassName} disabled>
+                  Leave policies
+                  {/* Grouping leave policies */}
                 </button>
-                <button type="button" className={SubButtonClassName}>
-                  Linking employee to leave masters
+                <button type="button" className={SubButtonClassName} disabled>
+                  {/* Linking employee to leave masters */}
+                  Linking employee
                 </button>
                 <NavLink to="/leaves/my-leaves" className={getNavLinkClass}>
                   View and apply leaves
                 </NavLink>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Approvals
                 </button>
               </div>
@@ -332,25 +333,26 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
 
             {!collapsed && activeSection === "payroll" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   salary components
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   salary structure
                 </button>
-                <button type="button" className={SubButtonClassName}>
-                  link employee to salary structure
+                <button type="button" className={SubButtonClassName} disabled>
+                  {/* link employee to salary structure */}
+                  Salary structure
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   processing the payroll
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Lock the month and year
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Reports
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Bank statements
                 </button>
                 <NavLink to="/payroll/my-salary" className={getNavLinkClass}>
@@ -384,16 +386,16 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
 
             {!collapsed && activeSection === "asset" && (
               <div className="mt-1 ml-4 space-y-1 border-l-2 border-gray-100 dark:border-gray-800 pl-3">
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Asset flow master with ref name
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Providing the assets and approvals
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Assest return/exchange flow
                 </button>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Receivable assets and approvals
                 </button>
               </div>
@@ -407,7 +409,7 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
         <nav className="space-y-1">
           <button
             className={`${SubButtonClassName} ${collapsed ? "justify-center" : ""
-              }`}
+              }`} disabled
           >
             <HelpCircle size={18} />
             {!collapsed && (
@@ -416,7 +418,7 @@ const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
           </button>
           {!collapsed && (
             <>
-              <button className={SubButtonClassName}>
+              <button className={SubButtonClassName} disabled>
                 <Settings size={18} />
                 <span className="text-sm font-medium">Settings</span>
               </button>

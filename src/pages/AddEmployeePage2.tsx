@@ -31,7 +31,7 @@ const AddEmployeePage2 = () => {
                 <Form form={form} component={false} onFinish={handleFinish} layout="vertical">
                     <DynamicForm schema={addEmployeeFormSchemaJson} form={form} />
 
-                    <div className="mt-8 flex justify-between border-t border-gray-100 dark:border-gray-700 pt-6 items-center">
+                    <div className="flex justify-between border-t border-gray-100 dark:border-gray-700 items-center sticky bottom-0 bg-white dark:bg-gray-800 z-10 -mx-8 -mb-8 px-8 py-4 mt-4">
                         <div>
                             <Button
                                 type="link"
