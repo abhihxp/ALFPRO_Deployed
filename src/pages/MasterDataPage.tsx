@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { Form, Button, Tabs } from 'antd';
 import { useTranslation } from 'react-i18next';

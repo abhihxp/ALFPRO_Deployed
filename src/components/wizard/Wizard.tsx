@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
 import { Steps, Form, Button, message, Modal } from 'antd';
 import { useTranslation } from 'react-i18next';

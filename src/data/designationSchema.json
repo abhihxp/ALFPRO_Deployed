@@ -1,38 +1,38 @@
 [
     {
-        "title": "Add a new job designation or title",
+        "title": "form.designation.label",
         "fields": [
             {
                 "name": "designationName",
-                "label": "Designation Name",
-                "placeholder": "e.g., Senior Manager, Team Lead, Developer",
+                "label": "form.designation.designationName.label",
+                "placeholder": "form.designation.designationName.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6"
             },
             {
                 "name": "designationCode",
-                "label": "Designation Code",
-                "placeholder": "e.g., MGR, TL, DEV",
+                "label": "form.designation.designationCode.label",
+                "placeholder": "form.designation.designationCode.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6",
-                "tooltip": "Short unique code for this designation"
+                "tooltip": "form.designation.designationCode.tooltip"
             },
             {
                 "name": "description",
-                "label": "Description",
-                "placeholder": "Brief description of the designation's role and responsibilities",
+                "label": "form.designation.description.label",
+                "placeholder": "form.designation.description.placeholder",
                 "type": "textarea",
                 "colSpan": "12"
             },
             {
                 "name": "hierarchyLevel",
-                "label": "Hierarchy Level",
+                "label": "form.designation.hierarchyLevel.label",
+                "placeholder": "form.designation.hierarchyLevel.placeholder",
                 "type": "select",
                 "required": true,
                 "colSpan": "12",
-                "placeholder": "1 - Entry Level",
                 "options": [
                     {
                         "label": "1 - Entry Level",
@@ -51,11 +51,11 @@
                         "value": "4"
                     }
                 ],
-                "tooltip": "Used for organizational hierarchy"
+                "tooltip": "form.designation.hierarchyLevel.tooltip"
             },
             {
                 "name": "isActive",
-                "label": "Active",
+                "label": "form.designation.isActive.label",
                 "type": "switch",
                 "colSpan": "12"
             }

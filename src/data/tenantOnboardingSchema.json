@@ -1,27 +1,27 @@
 [
     {
-        "title": "Organization Details",
+        "title": "form.tenant.organizationDetails.title",
         "fields": [
             {
                 "name": "tenantName",
-                "label": "Tenant Name",
-                "placeholder": "Enter Tenant Name",
+                "label": "form.tenant.organizationDetails.tenantName.label",
+                "placeholder": "form.tenant.organizationDetails.tenantName.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6"
             },
             {
                 "name": "domain",
-                "label": "Domain / Subdomain",
-                "placeholder": "Enter Domain (e.g. acme.com)",
+                "label": "form.tenant.organizationDetails.domain.label",
+                "placeholder": "form.tenant.organizationDetails.domain.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6"
             },
             {
                 "name": "industry",
-                "label": "Industry",
-                "placeholder": "Select Industry",
+                "label": "form.tenant.organizationDetails.industry.label",
+                "placeholder": "form.tenant.organizationDetails.industry.placeholder",
                 "type": "select",
                 "options": [
                     {
@@ -50,8 +50,8 @@
             },
             {
                 "name": "website",
-                "label": "Website",
-                "placeholder": "Website URL (Optional)",
+                "label": "form.tenant.organizationDetails.website.label",
+                "placeholder": "form.tenant.organizationDetails.website.placeholder",
                 "type": "text",
                 "required": false,
                 "colSpan": "12 md:col-span-6"
@@ -59,20 +59,20 @@
         ]
     },
     {
-        "title": "Contact & Admin",
+        "title": "form.tenant.contactAndAdmin.title",
         "fields": [
             {
                 "name": "adminName",
-                "label": "Admin Name",
-                "placeholder": "Enter Admin Name",
+                "label": "form.tenant.contactAndAdmin.adminName.label",
+                "placeholder": "form.tenant.contactAndAdmin.adminName.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6"
             },
             {
                 "name": "adminEmail",
-                "label": "Admin Email",
-                "placeholder": "Enter Admin Email",
+                "label": "form.tenant.contactAndAdmin.adminEmail.label",
+                "placeholder": "form.tenant.contactAndAdmin.adminEmail.placeholder",
                 "type": "text",
                 "required": true,
                 "validation": {
@@ -83,16 +83,16 @@
             },
             {
                 "name": "phoneNumber",
-                "label": "Phone Number",
-                "placeholder": "Enter Phone Number",
+                "label": "form.tenant.contactAndAdmin.phoneNumber.label",
+                "placeholder": "form.tenant.contactAndAdmin.phoneNumber.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6"
             },
             {
                 "name": "address",
-                "label": "Address",
-                "placeholder": "Enter Official Address",
+                "label": "form.tenant.contactAndAdmin.address.label",
+                "placeholder": "form.tenant.contactAndAdmin.address.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6"
@@ -100,12 +100,12 @@
         ]
     },
     {
-        "title": "Subscription & Branding",
+        "title": "form.tenant.subscriptionAndBranding.title",
         "fields": [
             {
                 "name": "plan",
-                "label": "Subscription Plan",
-                "placeholder": "Select Plan",
+                "label": "form.tenant.subscriptionAndBranding.plan.label",
+                "placeholder": "form.tenant.subscriptionAndBranding.plan.placeholder",
                 "type": "select",
                 "options": [
                     {
@@ -126,16 +126,16 @@
             },
             {
                 "name": "logo",
-                "label": "Logo",
-                "placeholder": "Upload Logo",
+                "label": "form.tenant.subscriptionAndBranding.logo.label",
+                "placeholder": "form.tenant.subscriptionAndBranding.logo.placeholder",
                 "type": "file",
                 "required": false,
                 "colSpan": "12 md:col-span-6"
             },
             {
                 "name": "brandColor",
-                "label": "Brand Color",
-                "placeholder": "Enter Brand Color (Hex)",
+                "label": "form.tenant.subscriptionAndBranding.brandColor.label",
+                "placeholder": "form.tenant.subscriptionAndBranding.brandColor.placeholder",
                 "type": "text",
                 "required": false,
                 "colSpan": "12 md:col-span-6"

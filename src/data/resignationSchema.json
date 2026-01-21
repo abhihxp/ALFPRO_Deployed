@@ -1,51 +1,51 @@
 [
     {
-        "title": "Employee Information",
+        "title": "form.resignation.employeeInformation.title",
         "fields": [
             {
                 "name": "employeeId",
-                "label": "Employee ID",
-                "placeholder": "Employee ID",
+                "label": "form.resignation.employeeInformation.employeeId.label",
+                "placeholder": "form.resignation.employeeInformation.employeeId.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6 lg:col-span-4"
             },
             {
                 "name": "name",
-                "label": "Name",
-                "placeholder": "Employee Name",
+                "label": "form.resignation.employeeInformation.name.label",
+                "placeholder": "form.resignation.employeeInformation.name.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6 lg:col-span-4"
             },
             {
                 "name": "designation",
-                "label": "Designation",
-                "placeholder": "Designation",
+                "label": "form.resignation.employeeInformation.designation.label",
+                "placeholder": "form.resignation.employeeInformation.designation.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6 lg:col-span-4"
             },
             {
                 "name": "department",
-                "label": "Department",
-                "placeholder": "Department",
+                "label": "form.resignation.employeeInformation.department.label",
+                "placeholder": "form.resignation.employeeInformation.department.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6 lg:col-span-4"
             },
             {
                 "name": "reportingManager",
-                "label": "Reporting Manager",
-                "placeholder": "Reporting Manager",
+                "label": "form.resignation.employeeInformation.reportingManager.label",
+                "placeholder": "form.resignation.employeeInformation.reportingManager.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6 lg:col-span-4"
             },
             {
                 "name": "workLocation",
-                "label": "Work Location",
-                "placeholder": "Work Location",
+                "label": "form.resignation.employeeInformation.workLocation.label",
+                "placeholder": "form.resignation.employeeInformation.workLocation.placeholder",
                 "type": "text",
                 "required": true,
                 "colSpan": "12 md:col-span-6 lg:col-span-4"
@@ -53,12 +53,12 @@
         ]
     },
     {
-        "title": "Resignation Details",
+        "title": "form.resignation.resignationDetails.title",
         "fields": [
             {
                 "name": "resignationType",
-                "label": "Resignation Type",
-                "placeholder": "Select Resignation Type",
+                "label": "form.resignation.resignationDetails.resignationType.label",
+                "placeholder": "form.resignation.resignationDetails.resignationType.placeholder",
                 "type": "select",
                 "required": true,
                 "colSpan": "12 md:col-span-6 lg:col-span-6",
@@ -75,48 +75,48 @@
             },
             {
                 "name": "dateOfResignation",
-                "label": "Date of Resignation Submission",
-                "placeholder": "Date of Resignation Submission",
+                "label": "form.resignation.resignationDetails.dateOfResignation.label",
+                "placeholder": "form.resignation.resignationDetails.dateOfResignation.placeholder",
                 "type": "date",
                 "required": true,
                 "colSpan": "12 md:col-span-6 lg:col-span-6"
             },
             {
                 "name": "lastWorkingDay",
-                "label": "Last Working Day (LWD)",
-                "placeholder": "Last Working Day (LWD)",
+                "label": "form.resignation.resignationDetails.lastWorkingDay.label",
+                "placeholder": "form.resignation.resignationDetails.lastWorkingDay.placeholder",
                 "type": "date",
                 "required": true,
                 "colSpan": "12 md:col-span-6 lg:col-span-6"
             },
             {
                 "name": "noticePeriodRequired",
-                "label": "Notice Period (Required)",
-                "placeholder": "Notice Period (Required Days)",
+                "label": "form.resignation.resignationDetails.noticePeriodRequired.label",
+                "placeholder": "form.resignation.resignationDetails.noticePeriodRequired.placeholder",
                 "type": "number",
                 "required": true,
                 "colSpan": "12 md:col-span-6 lg:col-span-6"
             },
             {
                 "name": "noticePeriodServed",
-                "label": "Notice Period (Served)",
-                "placeholder": "Notice Period (Served Days)",
+                "label": "form.resignation.resignationDetails.noticePeriodServed.label",
+                "placeholder": "form.resignation.resignationDetails.noticePeriodServed.placeholder",
                 "type": "number",
                 "required": true,
                 "colSpan": "12 md:col-span-6 lg:col-span-6"
             },
             {
                 "name": "shortfallBuyout",
-                "label": "Shortfall / Buyout Details",
-                "placeholder": "Shortfall / Buyout Details (if applicable)",
+                "label": "form.resignation.resignationDetails.shortfallBuyout.label",
+                "placeholder": "form.resignation.resignationDetails.shortfallBuyout.placeholder",
                 "type": "text",
                 "required": false,
                 "colSpan": "6"
             },
             {
                 "name": "resignationReason",
-                "label": "Reason for Resignation",
-                "placeholder": "Reason for Resignation",
+                "label": "form.resignation.resignationDetails.resignationReason.label",
+                "placeholder": "form.resignation.resignationDetails.resignationReason.placeholder",
                 "type": "textarea",
                 "required": true,
                 "colSpan": "12 md:col-span-6 lg:col-span-12"
