@@ -1,4 +1,4 @@
-import { Search, Download, Plus, List, Grid, MoreVertical, X, Edit, Trash } from 'lucide-react';
+import { Search, Download, Plus, List, Grid, MoreVertical, X } from 'lucide-react';
 import { Button, Table, Avatar, Tag, Dropdown, DatePicker, Modal, Tabs } from 'antd';
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { useTranslation } from 'react-i18next';
@@ -311,9 +311,19 @@ const EmployeesPage = () => {
                   {filteredData.map((employee) => (
                     <div
                       key={employee.id}
-                      className="bg-white dark:bg-gray-700 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 p-4 cursor-pointer hover:shadow-md transition-shadow min-w-0"
+                      className="bg-white dark:bg-gray-700 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 p-4 cursor-pointer hover:shadow-md transition-shadow min-w-0 relative"
                       onClick={() => handleViewProfile(employee)}
                     >
+                      <div onClick={(e) => e.stopPropagation()}>
+                        <Dropdown menu={{
+                          items: [
+                            { key: '2', label: t('employeesPage.table.editDetails') },
+                            { key: '3', label: t('employeesPage.table.delete'), danger: true },
+                          ]
+                        }} trigger={['click']}>
+                          <Button type="text" icon={<MoreVertical size={16} />} className="absolute top-2 right-2 text-gray-400 hover:text-primary" />
+                        </Dropdown>
+                      </div>
                       <div className="flex items-center gap-3 mb-3">
                         <Avatar className="bg-primary flex-shrink-0" size={40}>
                           {employee.fullNameEn.charAt(0)}
@@ -343,35 +353,19 @@ const EmployeesPage = () => {
                               employee.status === "active"
                                 ? "success"
                                 : employee.status === "on_leave"
-                                ? "warning"
-                                : "processing"
+                                  ? "warning"
+                                  : "processing"
                             }
                           >
                             {employee.status === "active"
                               ? t("employeesPage.stats.active")
                               : employee.status === "on_leave"
-                              ? t("employeesPage.stats.onLeave")
-                              : t("employeesPage.stats.probation")}
+                                ? t("employeesPage.stats.onLeave")
+                                : t("employeesPage.stats.probation")}
                           </Tag>
                         </div>
                       </div>
-                      <div className="flex gap-0 mt-4">
-                        <Button
-                          type="text"
-                          icon={<Edit size={14} />}
-                          size="small"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex-1 flex items-center justify-center gap-1 px-2 py-1 rounded-lg
-                      text-gray-400 hover:text-primary bg-gray-700 dark:hover:text-primary hover:bg-white dark:hover:bg-gray-900 hover:shadow-sm transition-all text-xs"
-                        />
-                        <Button
-                          type="text"
-                          icon={<Trash size={14} />}
-                          size="small"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex-1 flex items-center justify-center gap-1 px-2 py-1 rounded-lg text-red-600 dark:hover:bg-red-900/20 rounded-br-lg"
-                        />
-                      </div>
+
                     </div>
                   ))}
                 </div>
@@ -559,15 +553,15 @@ const EmployeesPage = () => {
                                 selectedEmployee.status === "active"
                                   ? "success"
                                   : selectedEmployee.status === "on_leave"
-                                  ? "warning"
-                                  : "processing"
+                                    ? "warning"
+                                    : "processing"
                               }
                             >
                               {selectedEmployee.status === "active"
                                 ? t("employeesPage.stats.active")
                                 : selectedEmployee.status === "on_leave"
-                                ? t("employeesPage.stats.onLeave")
-                                : t("employeesPage.stats.probation")}
+                                  ? t("employeesPage.stats.onLeave")
+                                  : t("employeesPage.stats.probation")}
                             </Tag>
                           </div>
                         </div>

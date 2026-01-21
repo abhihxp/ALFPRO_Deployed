@@ -70,7 +70,9 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     return (
       <div className="flex bg-[#F8F9FB] dark:bg-gray-900 min-h-screen relative text-gray-900 dark:text-gray-100">
         {/* Mobile Top Bar */}
-        <div className={`block md:hidden fixed top-0 left-0 right-0 z-40 bg-[#F8F9FB]/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800 shadow-sm ${mobileSidebarOpen ? 'hidden' : ''}`}>
+        <div
+          className={`block md:hidden fixed top-0 left-0 right-0 z-40 bg-[#F8F9FB]/95 dark:bg-gray-900/95 backdrop-blur-sm border-b border-gray-100 dark:border-gray-800 shadow-sm ${mobileSidebarOpen ? "hidden" : ""}`}
+        >
           <div className="flex items-center justify-between px-4 py-3">
             <button
               onClick={() => setMobileSidebarOpen(true)}
@@ -104,7 +106,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
               {profileDropdownOpen && (
                 <div
                   ref={dropdownRef}
-                  className={`absolute ${i18n.language === 'ar' ? 'left-0' : 'right-0'} top-0 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-4 z-70`}
+                  className={`absolute ${i18n.language === "ar" ? "left-0" : "right-0"} top-0 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-4 z-70`}
                 >
                   <div className="flex items-center gap-4 mb-4">
                     <img
@@ -124,7 +126,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                   <div className="flex gap-3">
                     <button
                       className="flex-1 flex items-center justify-center gap-1 px-2 py-1 rounded-lg
-                      text-gray-400 hover:text-primary bg-gray-700 dark:hover:text-primary hover:bg-white dark:hover:bg-gray-900 hover:shadow-sm transition-all text-xs"
+                      text-gray-400 hover:text-primary dark:bg-gray-700 dark:hover:text-primary hover:bg-gray-200 dark:hover:bg-gray-900 hover:shadow-sm transition-all text-xs"
                     >
                       <BarChart3 size={16} />
                       Analytics Data
@@ -152,11 +154,15 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
         )}
         <div
           className={`flex-1 p-8 pt-0 md:pt-0 pt-12 transition-all duration-300 ${
-            collapsed ? "md:ltr:ml-20 md:rtl:mr-20" : "md:ltr:ml-64 md:rtl:mr-64"
+            collapsed
+              ? "md:ltr:ml-20 md:rtl:mr-20"
+              : "md:ltr:ml-64 md:rtl:mr-64"
           } min-w-0`}
         >
           {/* Sticky Header */}
-          <header className={`sticky top-0 z-30 md:z-50 bg-[#F8F9FB]/95 dark:bg-gray-900/95 backdrop-blur-sm -mx-8 px-8 py-4 mb-4 flex justify-between items-start border-b border-gray-100 dark:border-gray-800 shadow-sm ${mobileSidebarOpen ? 'hidden md:flex' : ''}`}>
+          <header
+            className={`sticky top-0 z-30 md:z-50 bg-[#F8F9FB]/95 dark:bg-gray-900/95 backdrop-blur-sm -mx-8 px-8 py-4 mb-4 flex justify-between items-start border-b border-gray-100 dark:border-gray-800 shadow-sm ${mobileSidebarOpen ? "hidden md:flex" : ""}`}
+          >
             <div>
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
                 {headerInfo.title}
@@ -211,7 +217,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                 {profileDropdownOpen && (
                   <div
                     ref={dropdownRef}
-                    className={`absolute ${i18n.language === 'ar' ? 'left-0' : 'right-0'} top-0 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-4 z-70`}
+                    className={`absolute ${i18n.language === "ar" ? "left-0" : "right-0"} top-0 w-80 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 p-4 z-70`}
                   >
                     <div className="flex items-center gap-4 mb-4">
                       <img
