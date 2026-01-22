@@ -1,4 +1,5 @@
 import { useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Button, Modal, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 import DynamicForm from '../components/wizard/DynamicForm';
@@ -27,7 +28,7 @@ const AddEmployeePage2 = () => {
     return (
         <div className="w-full mx-auto">
             <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-8">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('Add New Employee')}</h2>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('form.employee.title')}</h2>
                 <Form form={form} component={false} onFinish={handleFinish} layout="vertical">
                     <DynamicForm schema={addEmployeeFormSchemaJson} form={form} />
 
@@ -46,20 +47,20 @@ const AddEmployeePage2 = () => {
                             <Button
                                 className="h-10 px-6"
                             >
-                                {t('Cancel')}
+                                {t("form.buttons.cancel")}
                             </Button>
                             <Button
                                 onClick={() => form.resetFields()}
                                 className="h-10 px-6"
                             >
-                                {t('Clear All')}
+                                {t('form.buttons.clear')}
                             </Button>
                             <Button
                                 type="primary"
                                 htmlType="submit"
                                 className="bg-primary hover:bg-purple-700 border-none h-10 px-8"
                             >
-                                {t('Submit')}
+                                {t('form.buttons.submit')}
                             </Button>
                         </div>
                     </div>

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from 'react';
 import { Card, Button, Table, Tag, message, Row, Col, Statistic, Form, Select, DatePicker, Input, Modal } from 'antd';
 import { PlusCircle, CheckCircle, XCircle, Clock } from 'lucide-react';

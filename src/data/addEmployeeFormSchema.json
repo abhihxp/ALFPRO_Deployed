@@ -1,11 +1,11 @@
 [
   {
-    "title": "Personal Details",
+    "title": "form.employee.personalDetails.title",
     "fields": [
       {
         "name": "firstName",
-        "label": "First Name",
-        "placeholder": "Enter first name",
+        "label": "form.employee.personalDetails.firstName.label",
+        "placeholder": "form.employee.personalDetails.firstName.placeholder",
         "type": "text",
         "required": true,
         "validation": {
@@ -15,8 +15,8 @@
       },
       {
         "name": "middleName",
-        "label": "Middle Name",
-        "placeholder": "Enter middle name",
+        "label": "form.employee.personalDetails.middleName.label",
+        "placeholder": "form.employee.personalDetails.middleName.placeholder",
         "type": "text",
         "required": false,
         "validation": {
@@ -25,8 +25,8 @@
       },
       {
         "name": "lastName",
-        "label": "Last Name",
-        "placeholder": "Enter last name",
+        "label": "form.employee.personalDetails.lastName.label",
+        "placeholder": "form.employee.personalDetails.lastName.placeholder",
         "type": "text",
         "required": true,
         "validation": {
@@ -36,8 +36,8 @@
       },
       {
         "name": "employeeId",
-        "label": "Employee ID",
-        "placeholder": "Enter employee ID",
+        "label": "form.employee.personalDetails.employeeId.label",
+        "placeholder": "form.employee.personalDetails.employeeId.placeholder",
         "type": "text",
         "required": true,
         "validation": {
@@ -48,15 +48,15 @@
       },
       {
         "name": "dob",
-        "label": "Date of Birth",
-        "placeholder": "Select date of birth",
+        "label": "form.employee.personalDetails.dob.label",
+        "placeholder": "form.employee.personalDetails.dob.placeholder",
         "type": "date",
         "required": true
       },
       {
         "name": "gender",
-        "label": "Gender",
-        "placeholder": "Select gender",
+        "label": "form.employee.personalDetails.gender.label",
+        "placeholder": "form.employee.personalDetails.gender.placeholder",
         "type": "select",
         "required": true,
         "options": [
@@ -73,12 +73,12 @@
     ]
   },
   {
-    "title": "Contact Details",
+    "title": "form.employee.contactDetails.title",
     "fields": [
       {
         "name": "contactNo",
-        "label": "Contact No.",
-        "placeholder": "Enter contact number",
+        "label": "form.employee.contactDetails.contactNo.label",
+        "placeholder": "form.employee.contactDetails.contactNo.placeholder",
         "type": "text",
         "required": true,
         "validation": {
@@ -88,8 +88,8 @@
       },
       {
         "name": "alternateContactNo",
-        "label": "Alternate Contact No.",
-        "placeholder": "Enter alternate contact number",
+        "label": "form.employee.contactDetails.alternateContactNo.label",
+        "placeholder": "form.employee.contactDetails.alternateContactNo.placeholder",
         "type": "text",
         "required": false,
         "validation": {
@@ -99,8 +99,8 @@
       },
       {
         "name": "personalEmailId",
-        "label": "Personal Email ID",
-        "placeholder": "Enter personal email",
+        "label": "form.employee.contactDetails.personalEmailId.label",
+        "placeholder": "form.employee.contactDetails.personalEmailId.placeholder",
         "type": "text",
         "required": true,
         "validation": {
@@ -110,8 +110,8 @@
       },
       {
         "name": "officialEmailId",
-        "label": "Official Email ID",
-        "placeholder": "Enter official email",
+        "label": "form.employee.contactDetails.officialEmailId.label",
+        "placeholder": "form.employee.contactDetails.officialEmailId.placeholder",
         "type": "text",
         "required": true,
         "validation": {
@@ -122,12 +122,12 @@
     ]
   },
   {
-    "title": "Address Details",
+    "title": "form.employee.addressDetails.title",
     "fields": [
       {
         "name": "presentAddress",
-        "label": "Present Address",
-        "placeholder": "Enter present address",
+        "label": "form.employee.addressDetails.presentAddress.label",
+        "placeholder": "form.employee.addressDetails.presentAddress.placeholder",
         "type": "text",
         "required": true,
         "validation": {
@@ -137,8 +137,8 @@
       },
       {
         "name": "permanentAddress",
-        "label": "Permanent Address",
-        "placeholder": "Enter permanent address",
+        "label": "form.employee.addressDetails.permanentAddress.label",
+        "placeholder": "form.employee.addressDetails.permanentAddress.placeholder",
         "type": "text",
         "required": true,
         "validation": {
@@ -148,8 +148,8 @@
       },
       {
         "name": "city",
-        "label": "City",
-        "placeholder": "Enter city",
+        "label": "form.employee.addressDetails.city.label",
+        "placeholder": "form.employee.addressDetails.city.placeholder",
         "type": "text",
         "required": true,
         "validation": {
@@ -159,8 +159,8 @@
       },
       {
         "name": "state",
-        "label": "State",
-        "placeholder": "Enter state",
+        "label": "form.employee.addressDetails.state.label",
+        "placeholder": "form.employee.addressDetails.state.placeholder",
         "type": "text",
         "required": true,
         "validation": {
@@ -170,8 +170,8 @@
       },
       {
         "name": "country",
-        "label": "Country",
-        "placeholder": "Select country",
+        "label": "form.employee.addressDetails.country.label",
+        "placeholder": "form.employee.addressDetails.country.placeholder",
         "type": "select",
         "required": true,
         "options": [
@@ -195,8 +195,8 @@
       },
       {
         "name": "postalCode",
-        "label": "Postal Code",
-        "placeholder": "Enter postal code",
+        "label": "form.employee.addressDetails.postalCode.label",
+        "placeholder": "form.employee.addressDetails.postalCode.placeholder",
         "type": "text",
         "required": true,
         "validation": {
@@ -209,12 +209,12 @@
     ]
   },
   {
-    "title": "Emergency Contact",
+    "title": "form.employee.emergencyContact.title",
     "fields": [
       {
         "name": "emergencyContactName",
-        "label": "Emergency Contact Name",
-        "placeholder": "Enter contact name",
+        "label": "form.employee.emergencyContact.emergencyContactName.label",
+        "placeholder": "form.employee.emergencyContact.emergencyContactName.placeholder",
         "type": "text",
         "required": true,
         "validation": {
@@ -224,8 +224,8 @@
       },
       {
         "name": "relation",
-        "label": "Relation",
-        "placeholder": "Enter relationship",
+        "label": "form.employee.emergencyContact.relation.label",
+        "placeholder": "form.employee.emergencyContact.relation.placeholder",
         "type": "text",
         "required": true,
         "validation": {
@@ -235,8 +235,8 @@
       },
       {
         "name": "emergencyContactNo",
-        "label": "Emergency Contact No.",
-        "placeholder": "Enter contact number",
+        "label": "form.employee.emergencyContact.emergencyContactNo.label",
+        "placeholder": "form.employee.emergencyContact.emergencyContactNo.placeholder",
         "type": "text",
         "required": true,
         "validation": {

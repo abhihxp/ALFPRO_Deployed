@@ -3,6 +3,7 @@ import { Button, Table, Avatar, Tag, Dropdown, DatePicker, Modal, Tabs } from 'a
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { useActiveFilters, type ActiveFiltersState } from '../hooks/useActiveFilters';
 import ActiveFilters from '../components/ActiveFilters';
@@ -46,10 +47,12 @@ export interface Employee {
 
 const EmployeesPage = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const { activeFilters, updateActiveFilters, clearFilter, clearAllFilters, getGroupedActiveFilters } = useActiveFilters();
   const [dateRange, setDateRange] = useState<[dayjs.Dayjs | null, dayjs.Dayjs | null]>([null, null]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedEmployee, setSelectedEmployee] = useState<Employee | null>(null);
+    const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
 
   // --- Filter Helpers ---
   const getFilters = (key: keyof Employee) => {
@@ -237,7 +240,7 @@ const EmployeesPage = () => {
               type="primary"
               icon={<Plus size={16} />}
               className="bg-primary hover:bg-purple-700 h-9"
-              onClick={() => (window.location.href = "/employees/new")} // Using window location for simplicity as useNavigate is inside child
+              onClick={() => navigate("/employees/new")}
             >
               {t("employeesPage.addEmployee")}
             </Button> */}
@@ -245,7 +248,7 @@ const EmployeesPage = () => {
             type="primary"
             icon={<Plus size={16} />}
             className="bg-primary hover:bg-purple-700 h-9"
-            onClick={() => (window.location.href = "/employees/new2")} // Route to new form
+            onClick={() => navigate("/employees/new2")}
           >
             Add Employee 2
           </Button>
@@ -261,11 +264,21 @@ const EmployeesPage = () => {
           <div className="flex gap-2">
             <Button
               icon={<List size={16} />}
-              className="text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600"
+              className={`${
+                  viewMode === "list"
+                    ? "bg-primary text-white"
+                    : "text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600"
+                }`}
+                onClick={() => setViewMode("list")}
             />
             <Button
               icon={<Grid size={16} />}
-              className="text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600"
+              className={`${
+                  viewMode === "grid"
+                    ? "bg-primary text-white"
+                    : "text-gray-500 dark:text-gray-400 dark:bg-gray-700 dark:border-gray-600"
+                }`}
+                onClick={() => setViewMode("grid")}
             />
           </div>
         </div>
@@ -281,22 +294,87 @@ const EmployeesPage = () => {
           </div>
         )}
 
-        <div className="h-[600px]">
-          {" "}
-          {/* Fixed height for sticky header effectiveness */}
-          <Table
-            key={JSON.stringify(activeFilters)}
-            columns={columns}
-            dataSource={filteredData}
-            rowKey="id"
-            pagination={{ pageSize: 15 }}
-            size="middle"
-            scroll={{ x: 1300, y: 500 }} // Increased x width slightly to ensure scrolling happens inside
-            sticky
-            onChange={handleTableChange}
-          />
+          <div className="h-[600px]">
+            {viewMode === "list" ? (
+              <Table
+                key={JSON.stringify(activeFilters)}
+                columns={columns}
+                dataSource={filteredData}
+                rowKey="id"
+                pagination={{ pageSize: 15 }}
+                size="middle"
+                scroll={{ x: 1300, y: 500 }}
+                sticky
+                onChange={handleTableChange}
+              />
+            ) : (
+              <div className="p-4 h-full">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 h-full overflow-y-auto">
+                  {filteredData.map((employee) => (
+                    <div
+                      key={employee.id}
+                      className="bg-white dark:bg-gray-700 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 p-4 cursor-pointer hover:shadow-md transition-shadow min-w-0 relative"
+                      onClick={() => handleViewProfile(employee)}
+                    >
+                      <div onClick={(e) => e.stopPropagation()}>
+                        <Dropdown menu={{
+                          items: [
+                            { key: '2', label: t('employeesPage.table.editDetails') },
+                            { key: '3', label: t('employeesPage.table.delete'), danger: true },
+                          ]
+                        }} trigger={['click']}>
+                          <Button type="text" icon={<MoreVertical size={16} />} className="absolute top-2 right-2 text-gray-400 hover:text-primary" />
+                        </Dropdown>
+                      </div>
+                      <div className="flex items-center gap-3 mb-3">
+                        <Avatar className="bg-primary flex-shrink-0" size={40}>
+                          {employee.fullNameEn.charAt(0)}
+                        </Avatar>
+                        <div className="flex-1 min-w-0">
+                          <div className="font-medium text-gray-900 dark:text-white truncate">
+                            {i18n.language === "ar"
+                              ? employee.fullNameAr
+                              : employee.fullNameEn}
+                          </div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400 truncate">
+                            {employee.email}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="space-y-2 mb-4">
+                        <div className="text-sm text-gray-600 dark:text-gray-300">
+                          <span className="font-medium">Location:</span>{" "}
+                          {employee.location}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
+                            Status:
+                          </span>
+                          <Tag
+                            color={
+                              employee.status === "active"
+                                ? "success"
+                                : employee.status === "on_leave"
+                                  ? "warning"
+                                  : "processing"
+                            }
+                          >
+                            {employee.status === "active"
+                              ? t("employeesPage.stats.active")
+                              : employee.status === "on_leave"
+                                ? t("employeesPage.stats.onLeave")
+                                : t("employeesPage.stats.probation")}
+                          </Tag>
+                        </div>
+                      </div>
+
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
 
       {/* Employee Details Modal */}
       <Modal

@@ -13,7 +13,70 @@
         "profile": "الملف الشخصي",
         "helpCenter": "مركز المساعدة",
         "settings": "إعدادات",
-        "logOut": "تسجيل خروج"
+        "logOut": "تسجيل خروج",
+        "tenant": "المستأجر",
+        "organization": "المنظمة",
+        "asset": "الأصل",
+        "menuLabel": "القائمة"
+    },
+    "sidebar": {
+        "tenant": {
+            "onboard": "التسجيل",
+            "masterData": "البيانات الرئيسية",
+            "settings": "إعدادات"
+        },
+        "organization": {
+            "locations": "المواقع",
+            "departments": "الأقسام",
+            "designations": "اللقب الوظيفي"
+        },
+        "employee": {
+            "onBoarding": "التسجيل",
+            "bulkOnboarding": "التسجيل بالجملة",
+            "linkToOrgChart": "ربط بمخطط المنظمة",
+            "statutoryData": "البيانات القانونية",
+            "masterSettings": "الإعدادات الرئيسية",
+            "resignation": "الاستقالة",
+            "exitWorkflow": "سير عمل الخروج",
+            "fnf": "النهائي والنهائي",
+            "relievingPolicies": "سياسات الإعفاء"
+        },
+        "attendance": {
+            "masterSettings": "الإعدادات الرئيسية",
+            "shiftMasters": "ماجستير الورديات",
+            "woMasters": "ماجستير WO",
+            "employeeLinkingToMasters": "ربط الموظف بالماجستير",
+            "attendancePolicies": "سياسات الحضور",
+            "timeSheetUpload": "تحميل جدول الوقت",
+            "swipeRegulations": "لوائح التمرير",
+            "markAttendance": "تحديد الحضور",
+            "viewAttendance": "عرض الحضور",
+            "approvals": "الموافقات",
+            "reports": "التقارير"
+        },
+        "leave": {
+            "masterSettingsAndPolicies": "الإعدادات الرئيسية والسياسات",
+            "groupingLeavePolicies": "تجميع سياسات الإجازة",
+            "linkingEmployeeToLeaveMasters": "ربط الموظف بماجستير الإجازة",
+            "viewAndApplyLeaves": "عرض وتطبيق الإجازات",
+            "approvals": "الموافقات"
+        },
+        "payroll": {
+            "salaryComponents": "مكونات الراتب",
+            "salaryStructure": "هيكل الراتب",
+            "linkEmployeeToSalaryStructure": "ربط الموظف بهيكل الراتب",
+            "processingThePayroll": "معالجة كشف الرواتب",
+            "lockTheMonthAndYear": "قفل الشهر والسنة",
+            "reports": "التقارير",
+            "bankStatements": "كشوفات البنك",
+            "viewSalaryHistory": "عرض تاريخ الراتب"
+        },
+        "asset": {
+            "assetFlowMasterWithRefName": "ماجستير تدفق الأصل مع اسم المرجع",
+            "providingTheAssetsAndApprovals": "تقديم الأصول والموافقات",
+            "assetReturnExchangeFlow": "تدفق إرجاع/تبادل الأصل",
+            "receivableAssetsAndApprovals": "الأصول المستحقة والموافقات"
+        }
     },
     "header": {
         "leaves": "إجازات",
@@ -82,6 +145,400 @@
             "maternityLeave": "إجازة أمومة",
             "casualLeave": "إجازة عارضة",
             "otherLeave": "إجازة أخرى"
+        }
+    },
+    "form": {
+        "location": {
+            "title": "إضافة موقع مكتب جديد أو فرع",
+            "locationName": {
+                "label": "اسم الموقع",
+                "placeholder": "مثال: المقر الرئيسي، مكتب نيويورك"
+            },
+            "locationCode": {
+                "label": "رمز الموقع",
+                "placeholder": "مثال: HQ، NYC، LON",
+                "tooltip": "رمز قصير فريد لهذا الموقع"
+            },
+            "address": {
+                "label": "العنوان",
+                "placeholder": "عنوان الشارع"
+            },
+            "city": {
+                "label": "المدينة",
+                "placeholder": "مثال: نيويورك"
+            },
+            "state": {
+                "label": "الولاية/المقاطعة",
+                "placeholder": "مثال: NY، كاليفورنيا"
+            },
+            "country": {
+                "label": "البلد",
+                "placeholder": "مثال: الولايات المتحدة، المملكة المتحدة، الهند"
+            },
+            "postalCode": {
+                "label": "الرمز البريدي",
+                "placeholder": "مثال: 10001"
+            },
+            "isActive": {
+                "label": "نشط"
+            }
+        },
+        "department": {
+            "title": "إنشاء قسم جديد",
+            "label": "إضافة قسم جديد إلى منظمتك",
+            "departmentName": {
+                "label": "اسم القسم",
+                "placeholder": "مثال: تكنولوجيا المعلومات، الموارد البشرية"
+            },
+            "departmentCode": {
+                "label": "رمز القسم",
+                "placeholder": "مثال: IT، HR، FIN",
+                "tooltip": "رمز قصير فريد لهذا القسم"
+            },
+            "description": {
+                "label": "الوصف",
+                "placeholder": "وصف مختصر لمسؤوليات القسم"
+            },
+            "headOfDepartment": {
+                "label": "رئيس القسم",
+                "placeholder": "اختر رئيس القسم",
+                "tooltip": "يمكن تعيينه لاحقاً"
+            },
+            "isActive": {
+                "label": "نشط"
+            }
+        },
+        "designation": {
+            "title": "إنشاء لقب وظيفي جديد",
+            "label": "إضافة لقب وظيفي جديد أو عنوان",
+            "designationName": {
+                "label": "اسم اللقب الوظيفي",
+                "placeholder": "مثال: مدير كبير، قائد فريق، مطور"
+            },
+            "designationCode": {
+                "label": "رمز اللقب الوظيفي",
+                "placeholder": "مثال: MGR، TL، DEV",
+                "tooltip": "رمز قصير فريد لهذا اللقب الوظيفي"
+            },
+            "description": {
+                "label": "الوصف",
+                "placeholder": "وصف مختصر لدور ومسؤوليات اللقب الوظيفي"
+            },
+            "hierarchyLevel": {
+                "label": "مستوى التسلسل الهرمي",
+                "placeholder": "1 - مستوى الدخول",
+                "tooltip": "يُستخدم للتسلسل الهرمي التنظيمي"
+            },
+            "isActive": {
+                "label": "نشط"
+            }
+        },
+        "resignation": {
+            "employeeInformation": {
+                "title": "معلومات الموظف",
+                "employeeId": {
+                    "label": "معرف الموظف",
+                    "placeholder": "معرف الموظف"
+                },
+                "name": {
+                    "label": "الاسم",
+                    "placeholder": "اسم الموظف"
+                },
+                "designation": {
+                    "label": "اللقب الوظيفي",
+                    "placeholder": "اللقب الوظيفي"
+                },
+                "department": {
+                    "label": "القسم",
+                    "placeholder": "القسم"
+                },
+                "reportingManager": {
+                    "label": "المدير المباشر",
+                    "placeholder": "المدير المباشر"
+                },
+                "workLocation": {
+                    "label": "مكان العمل",
+                    "placeholder": "مكان العمل"
+                }
+            },
+            "resignationDetails": {
+                "title": "تفاصيل الاستقالة",
+                "resignationType": {
+                    "label": "نوع الاستقالة",
+                    "placeholder": "اختر نوع الاستقالة"
+                },
+                "dateOfResignation": {
+                    "label": "تاريخ تقديم الاستقالة",
+                    "placeholder": "تاريخ تقديم الاستقالة"
+                },
+                "lastWorkingDay": {
+                    "label": "آخر يوم عمل (LWD)",
+                    "placeholder": "آخر يوم عمل (LWD)"
+                },
+                "noticePeriodRequired": {
+                    "label": "فترة الإشعار (مطلوبة)",
+                    "placeholder": "فترة الإشعار (الأيام المطلوبة)"
+                },
+                "noticePeriodServed": {
+                    "label": "فترة الإشعار (مخدمة)",
+                    "placeholder": "فترة الإشعار (الأيام المخدمة)"
+                },
+                "shortfallBuyout": {
+                    "label": "تفاصيل العجز / الشراء",
+                    "placeholder": "تفاصيل العجز / الشراء (إن أمكن)"
+                },
+                "resignationReason": {
+                    "label": "سبب الاستقالة",
+                    "placeholder": "سبب الاستقالة"
+                }
+            }
+        },
+        "shift": {
+            "shiftName": {
+                "label": "اسم الوردية",
+                "placeholder": "مثال: وردية الصباح، وردية الليل"
+            },
+            "shiftCode": {
+                "label": "رمز الوردية",
+                "placeholder": "مثال: MS، ES، NS",
+                "tooltip": "رمز قصير فريد"
+            },
+            "description": {
+                "label": "الوصف",
+                "placeholder": "وصف مختصر للواردية"
+            },
+            "shiftTimings": {
+                "title": "أوقات الوردية",
+                "startTime": {
+                    "label": "وقت البدء"
+                },
+                "endTime": {
+                    "label": "وقت الانتهاء"
+                },
+                "workingHours": {
+                    "label": "ساعات العمل"
+                },
+                "breakDuration": {
+                    "label": "مدة الاستراحة (دقائق)",
+                    "tooltip": "وقت استراحة الغداء/الشاي"
+                },
+                "gracePeriod": {
+                    "label": "فترة السماح (دقائق)",
+                    "tooltip": "سماح التأخر"
+                }
+            },
+            "shiftConfiguration": {
+                "title": "تكوين الوردية",
+                "shiftType": {
+                    "label": "نوع الوردية"
+                },
+                "colorCode": {
+                    "label": "رمز اللون",
+                    "tooltip": "لعرض التقويم"
+                },
+                "isActive": {
+                    "label": "نشط"
+                }
+            }
+        },
+        "employee": {
+            "title": "إضافة موظف جديد",
+            "personalDetails": {
+                "title": "التفاصيل الشخصية",
+                "firstName": {
+                    "label": "الاسم الأول",
+                    "placeholder": "أدخل الاسم الأول"
+                },
+                "middleName": {
+                    "label": "الاسم الأوسط",
+                    "placeholder": "أدخل الاسم الأوسط"
+                },
+                "lastName": {
+                    "label": "اسم العائلة",
+                    "placeholder": "أدخل اسم العائلة"
+                },
+                "employeeId": {
+                    "label": "معرف الموظف",
+                    "placeholder": "أدخل معرف الموظف"
+                },
+                "dob": {
+                    "label": "تاريخ الميلاد",
+                    "placeholder": "اختر تاريخ الميلاد"
+                },
+                "gender": {
+                    "label": "الجنس",
+                    "placeholder": "اختر الجنس"
+                }
+            },
+            "contactDetails": {
+                "title": "تفاصيل الاتصال",
+                "contactNo": {
+                    "label": "رقم الاتصال",
+                    "placeholder": "أدخل رقم الاتصال"
+                },
+                "alternateContactNo": {
+                    "label": "رقم الاتصال البديل",
+                    "placeholder": "أدخل رقم الاتصال البديل"
+                },
+                "personalEmailId": {
+                    "label": "معرف البريد الإلكتروني الشخصي",
+                    "placeholder": "أدخل البريد الإلكتروني الشخصي"
+                },
+                "officialEmailId": {
+                    "label": "معرف البريد الإلكتروني الرسمي",
+                    "placeholder": "أدخل البريد الإلكتروني الرسمي"
+                }
+            },
+            "addressDetails": {
+                "title": "تفاصيل العنوان",
+                "presentAddress": {
+                    "label": "العنوان الحالي",
+                    "placeholder": "أدخل العنوان الحالي"
+                },
+                "permanentAddress": {
+                    "label": "العنوان الدائم",
+                    "placeholder": "أدخل العنوان الدائم"
+                },
+                "city": {
+                    "label": "المدينة",
+                    "placeholder": "أدخل المدينة"
+                },
+                "state": {
+                    "label": "الولاية",
+                    "placeholder": "أدخل الولاية"
+                },
+                "country": {
+                    "label": "البلد",
+                    "placeholder": "اختر البلد"
+                },
+                "postalCode": {
+                    "label": "الرمز البريدي",
+                    "placeholder": "أدخل الرمز البريدي"
+                }
+            },
+            "emergencyContact": {
+                "title": "الاتصال الطارئ",
+                "emergencyContactName": {
+                    "label": "اسم جهة الاتصال الطارئة",
+                    "placeholder": "أدخل اسم جهة الاتصال"
+                },
+                "relation": {
+                    "label": "العلاقة",
+                    "placeholder": "أدخل العلاقة"
+                },
+                "emergencyContactNo": {
+                    "label": "رقم جهة الاتصال الطارئة",
+                    "placeholder": "أدخل رقم جهة الاتصال"
+                }
+            }
+        },
+        "bulkOnboarding": {
+            "title": "عملية الإعداد الجماعي",
+            "label": "قم بتحميل بيانات الموظفين دفعة واحدة باستخدام ملف CSV أو Excel",
+            "upload": {
+                "label": "هل تحتاج إلى قالب؟",
+                "download": " تنزيل نموذج ملف CSV",
+                "placeholder": "وضع المعالجة",
+                "button":"إنشاء ملف أو تحميله"
+            }
+        },
+        "tenant": {
+            "title":"عملية انضمام المستأجرين",
+            "organizationDetails": {
+                "title": "تفاصيل المنظمة",
+                "tenantName": {
+                    "label": "اسم المستأجر",
+                    "placeholder": "أدخل اسم المستأجر"
+                },
+                "domain": {
+                    "label": "النطاق / النطاق الفرعي",
+                    "placeholder": "أدخل النطاق (مثال: acme.com)"
+                },
+                "industry": {
+                    "label": "الصناعة",
+                    "placeholder": "اختر الصناعة"
+                },
+                "website": {
+                    "label": "الموقع الإلكتروني",
+                    "placeholder": "رابط الموقع الإلكتروني (اختياري)"
+                }
+            },
+            "contactAndAdmin": {
+                "title": "الاتصال والمسؤول",
+                "adminName": {
+                    "label": "اسم المسؤول",
+                    "placeholder": "أدخل اسم المسؤول"
+                },
+                "adminEmail": {
+                    "label": "بريد المسؤول الإلكتروني",
+                    "placeholder": "أدخل بريد المسؤول الإلكتروني"
+                },
+                "phoneNumber": {
+                    "label": "رقم الهاتف",
+                    "placeholder": "أدخل رقم الهاتف"
+                },
+                "address": {
+                    "label": "العنوان",
+                    "placeholder": "أدخل العنوان الرسمي"
+                }
+            },
+            "subscriptionAndBranding": {
+                "title": "الاشتراك والعلامة التجارية",
+                "plan": {
+                    "label": "خطة الاشتراك",
+                    "placeholder": "اختر الخطة"
+                },
+                "logo": {
+                    "label": "الشعار",
+                    "placeholder": "تحميل الشعار"
+                },
+                "brandColor": {
+                    "label": "لون العلامة التجارية",
+                    "placeholder": "أدخل لون العلامة التجارية (Hex)"
+                }
+            }
+        },
+        "weekOff": {
+            "definePattern": {
+                "title": "تحديد نمط إجازة أسبوعية جديد لمنظمتك",
+                "patternName": {
+                    "label": "اسم النمط",
+                    "placeholder": "مثال: عطلة نهاية الأسبوع، الأحد فقط"
+                },
+                "patternCode": {
+                    "label": "رمز النمط",
+                    "placeholder": "مثال: WKD، SUN، ROT",
+                    "tooltip": "رمز قصير فريد"
+                },
+                "description": {
+                    "label": "الوصف",
+                    "placeholder": "وصف مختصر"
+                }
+            },
+            "weekOffDays": {
+                "title": "أيام الإجازة الأسبوعية"
+            },
+            "rotationalSettings": {
+                "title": "إعدادات الدورية",
+                "isRotational": {
+                    "label": "إجازة أسبوعية دورية",
+                    "tooltip": "الإجازات الأسبوعية دورية (ليست أيام ثابتة)"
+                },
+                "weekOffsPerMonth": {
+                    "label": "إجازات أسبوعية شهرياً"
+                },
+                "isActive": {
+                    "label": "نشط"
+                }
+            }
+        },
+        "buttons": {
+            "save": "يحفظ",
+            "cancel": "يلغي",
+            "submit": "يُقدِّم",
+            "clear": "مسح",
+            "reset": "إعادة تعيين",
+            "back": "يرجع"
         }
     }
 }

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Form, Input, Select, DatePicker, Radio, Upload, Button, InputNumber, Switch, Checkbox, TimePicker } from 'antd';
 import { UploadOutlined, InfoCircleOutlined } from '@ant-design/icons';
@@ -10,7 +10,7 @@ interface DynamicFormProps {
 }
 
 const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
-    const { i18n } = useTranslation();
+    const { t, i18n } = useTranslation();
     const currentLang = i18n.language as 'en' | 'ar';
 
     // Normalize schema to handle both array (legacy) and object (new) formats
@@ -21,7 +21,12 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
 
     const getLocalizedText = (text: any) => {
         if (!text) return '';
-        if (typeof text === 'string') return text;
+        if (typeof text === 'string') {
+            if (text.startsWith('form.')) {
+                return t(text);
+            }
+            return text;
+        }
         return text[currentLang] || text.en || '';
     };
 
@@ -32,7 +37,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                     {section.title && (
                         <div className="mb-2">
                             <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider dark:text-gray-400 pb-1">
-                                {getLocalizedText(section.title)}
+                                {section.title.startsWith('form.') ? t(section.title) : section.title}
                             </h3>
                         </div>
                     )}
@@ -50,7 +55,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                             }
 
                             // Generic Rule for required fields
-                            const label = getLocalizedText(field.label);
+                            const label = field.label.startsWith('form.') ? t(field.label) : field.label;
                             const rules = field.required ? [{ required: true, message: `${label} is required` }] : [];
                             const colSpan = field.colSpan || "12 md:col-span-6 lg:col-span-6";
 
@@ -68,7 +73,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                                         tooltip={
                                             field.tooltip
                                                 ? {
-                                                    title: getLocalizedText(field.tooltip),
+                                                    title: field.tooltip.startsWith('form.') ? t(field.tooltip) : field.tooltip,
                                                     icon: (
                                                         <InfoCircleOutlined className="text-gray-400" />
                                                     ),
@@ -78,7 +83,7 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
                                         className="mb-0 dynamic-form-item"
                                         layout="vertical"
                                     >
-                                        {renderFieldInput(field, currentLang, getLocalizedText)}
+                                        {renderFieldInput(field, currentLang, values?.[field.name], getLocalizedText, t)}
                                     </Form.Item>
                                 </div>
                             );
@@ -90,12 +95,20 @@ const DynamicForm: React.FC<DynamicFormProps> = ({ schema, form }) => {
     );
 };
 
-const renderFieldInput = (field: any, lang: 'en' | 'ar', getLocalizedText: (t: any) => string) => {
-    const inputPlaceholder = getLocalizedText(field.placeholder);
+const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalizedText: (t: any) => string, t: any) => {
+    const originalPlaceholder = getLocalizedText(field.placeholder);
 
-    const commonClasses = "rounded-lg placeholder:text-gray-400 dark:placeholder:text-gray-500 w-full"; // Standard colors
-    const selectPlaceholderClass = "[&_.ant-select-selection-placeholder]:text-gray-400 dark:[&_.ant-select-selection-placeholder]:text-gray-500";
+    // Check if field has value to toggle custom placeholder visibility
+    const hasValue = value !== undefined && value !== null && value !== '' && (Array.isArray(value) ? value.length > 0 : true);
+    // Ensure custom placeholder shows if required and no value
+    const showCustomPlaceholder = field.required && !hasValue;
 
+    // If showing custom overlay, hide native placeholder. If not required, show native placeholder.
+    const inputPlaceholder = showCustomPlaceholder ? undefined : originalPlaceholder;
+
+    const commonClasses = "rounded-lg placeholder:!text-gray-500 dark:placeholder:!text-gray-400 w-full"; // Forced color
+    const selectPlaceholderClass = "[&_.ant-select-selection-placeholder]:!text-gray-500 dark:[&_.ant-select-selection-placeholder]:!text-gray-400";
+    
     let inputElement = <Input className={commonClasses} />;
 
     switch (field.type) {
@@ -116,7 +129,7 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', getLocalizedText: (t: a
                 <Select placeholder={inputPlaceholder} className={`h-10 ${commonClasses} ${selectPlaceholderClass}`} allowClear>
                     {field.options?.map((opt: any) => (
                         <Select.Option key={opt.value} value={opt.value}>
-                            {getLocalizedText(opt.label)}
+                            {opt.label.startsWith('form.') ? t(opt.label) : opt.label}
                         </Select.Option>
                     ))}
                 </Select>
@@ -136,7 +149,7 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', getLocalizedText: (t: a
                 <Radio.Group>
                     {field.options?.map((opt: any) => (
                         <Radio key={opt.value} value={opt.value}>
-                            {getLocalizedText(opt.label)}
+                            {opt.label.startsWith('form.') ? t(opt.label) : opt.label}
                         </Radio>
                     ))}
                 </Radio.Group>
@@ -146,7 +159,7 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', getLocalizedText: (t: a
             return (
                 <div className="flex items-center gap-2">
                     <Switch />
-                    <span className="text-sm text-gray-700 dark:text-gray-300">{getLocalizedText(field.label)}</span>
+                    <span className="text-sm text-gray-700 dark:text-gray-300">{field.label.startsWith('form.') ? t(field.label) : field.label}</span>
                 </div>
             );
 
@@ -156,7 +169,7 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', getLocalizedText: (t: a
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {field.options?.map((opt: any) => (
                             <Checkbox key={opt.value} value={opt.value}>
-                                {getLocalizedText(opt.label)}
+                                {opt.label.startsWith('form.') ? t(opt.label) : opt.label}
                             </Checkbox>
                         ))}
                     </div>
