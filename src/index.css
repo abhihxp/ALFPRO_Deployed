@@ -4,9 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
 body {
+  overscroll-behavior: none;
   font-family: 'Inter', sans-serif;
-  background-color: #f7f8fa; /* Light background for dashboard */
+  background-color: #f7f8fa;
+  /* Light background for dashboard */
 }
 
 /* Custom Scrollbar */
