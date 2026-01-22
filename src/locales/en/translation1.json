@@ -1,0 +1,623 @@
+{
+    "master": {
+        "popup": {
+            "analyticsData": "Analytics Data",
+            "upgradePlan": "Upgrade Plan"
+        },
+        "form":{
+            "buttons": {
+                "save": "Save",
+                "cancel": "Cancel",
+                "submit": "Submit",
+                "clear": "Clear",
+                "reset": "Reset",
+                "back": "Back"
+            },
+            "description": {
+                "label": "Description",
+                "placeholder": "Enter Description"
+            },
+            "activeStatus": "Active Status"
+        }
+    },
+    "dashboard": {
+        "title": "Dashboard",
+        "label": "Welcome to your dashboard!"
+    },
+    "tenant": {
+        "title": "Tenant",
+        "onboarding":{
+            "title": "Tenant Onboarding",
+            "label": "Sign up as tenant.",
+            "organizationDetails": {
+                "title": "Organization Details",
+                "tenantName": {
+                    "label": "Tenant Name",
+                    "placeholder": "Enter Tenant Name"
+                },
+                "domain": {
+                    "label": "Domain / Subdomain",
+                    "placeholder": "Enter Domain (e.g. acme.com)"
+                },
+                "industry": {
+                    "label": "Industry",
+                    "placeholder": "Select Industry"
+                },
+                "website": {
+                    "label": "Website",
+                    "placeholder": "Website URL (Optional)"
+                }
+            },
+            "contactAndAdmin": {
+                "title": "Contact & Admin",
+                "adminName": {
+                    "label": "Admin Name",
+                    "placeholder": "Enter Admin Name"
+                },
+                "adminEmail": {
+                    "label": "Admin Email",
+                    "placeholder": "Enter Admin Email"
+                },
+                "phoneNumber": {
+                    "label": "Phone Number",
+                    "placeholder": "Enter Phone Number"
+                },
+                "address": {
+                    "label": "Address",
+                    "placeholder": "Enter Official Address"
+                }
+            },
+            "subscriptionAndBranding": {
+                "title": "Subscription & Branding",
+                "plan": {
+                    "label": "Subscription Plan",
+                    "placeholder": "Select Plan"
+                },
+                "logo": {
+                    "label": "Logo",
+                    "placeholder": "Upload Logo"
+                },
+                "brandColor": {
+                    "label": "Brand Color",
+                    "placeholder": "Enter Brand Color (Hex)"
+                }
+            }
+        },
+        "masterData": {
+            "title": "Master Data",
+            "label": "Manage master data here.",
+            "company": {
+                "title": "Company",
+                "label": "Company Details",
+                "companyCode": {
+                    "label": "Company Code",
+                    "placeholder": "Enter Company Code"
+                },
+                "companyName": {
+                    "label": "Company Name",
+                    "placeholder": "Enter Company Name"
+                }
+            },
+            "division": {
+                "title": "Division",
+                "label": "Division Details",
+                "divisionCode": {
+                    "label": "Division Code",
+                    "placeholder": "Enter Division Code"
+                },
+                "divisionName": {
+                    "label": "Division Name",
+                    "placeholder": "Enter Division Name"
+                }
+            },
+            "location": {
+                "title": "Location",
+                "label": "Add a new office location or branch",
+                "locationName": {
+                    "label": "Location Name",
+                    "placeholder": "Enter Location Name"
+                },
+                "locationCode": {
+                    "label": "Location Code",
+                    "placeholder": "Enter Location Code"
+                },
+                "address": "Address",
+                "city": "City",
+                "state": "State",
+                "country": "Country",
+                "pinCode": "Postal Code"
+            },
+            "department": {
+                "title": "Department",
+                "label": "Add a new department to your organization",
+                "departmentName": {
+                    "label": "Department Name",
+                    "placeholder": "Enter Department Name"
+                },
+                "departmentCode": {
+                    "label": "Department Code",
+                    "placeholder": "Enter Department Code"
+                },
+                "headOfDepartment": {
+                    "label": "Head of Department",
+                    "placeholder": "Select Head of Department"
+                }
+            },
+            "designation": {
+                "title": "Designation",
+                "label": "Add a new designation or job title",
+                "designationName": {
+                    "label": "Designation Name",
+                    "placeholder": "Enter Designation Name"
+                },
+                "designationCode": {
+                    "label": "Designation Code",
+                    "placeholder": "Enter Designation Code"
+                },
+                "hierarchyLevel": {
+                    "label": "Hierarchy Level",
+                    "placeholder": "Select Hierarchy Level",
+                    "options": {
+                        "level1": "Entry Level",
+                        "level2": "Mid Level",
+                        "level3": "Senior Level",
+                        "level4": "Executive Level"
+                    }
+                }
+            }
+        }
+    },
+    "organization": {
+        "title": "Organization",
+        "label": "Manage organization settings here.",
+        "locations": {
+            "title": "Location",
+            "label": "Add a new office location or branch",
+            "locationName": {
+                "label": "Location Name",
+                "placeholder": "Enter Location Name"
+            },
+            "locationCode": {
+                "label": "Location Code",
+                "placeholder": "Enter Location Code"
+            },
+            "address": "Address",
+            "city": "City",
+            "state": "State",
+            "country": "Country",
+            "pinCode": "Postal Code"
+        },
+        "departments": {
+            "title": "Department",
+            "label": "Add a new department to your organization",
+            "departmentName": {
+                "label": "Department Name",
+                "placeholder": "Enter Department Name"
+            },
+            "departmentCode": {
+                "label": "Department Code",
+                "placeholder": "Enter Department Code"
+            },
+            "headOfDepartment": {
+                "label": "Head of Department",
+                "placeholder": "Select Head of Department"
+            }
+        },
+        "designations": {
+            "title": "Designation",
+            "label": "Add a new designation or job title",
+            "designationName": {
+                "label": "Designation Name",
+                "placeholder": "Enter Designation Name"
+            },
+            "designationCode": {
+                "label": "Designation Code",
+                "placeholder": "Enter Designation Code"
+            },
+            "hierarchyLevel": {
+                "label": "Hierarchy Level",
+                "placeholder": "Select Hierarchy Level",
+                "options": {
+                    "level1": "Entry Level",
+                    "level2": "Mid Level",
+                    "level3": "Senior Level",
+                    "level4": "Executive Level"
+                }
+            }
+        }
+    },
+    "employee": {
+        "title": "Employee",
+        "onboarding":{
+            "searchEmployee": {
+                "label": "Search Employee",
+                "placeholder": "Enter Employee Name"
+            },
+            "buttons": {
+                "export": "Export",
+                "addEmployee": {
+                    "title": "Add Employee",
+                    "personalDetails": {
+                        "title": "Personal Details",
+                        "firstName": {
+                            "label": "First Name",
+                            "placeholder": "Enter First Name"
+                        },
+                        "middleName": {
+                            "label": "Middle Name",
+                            "placeholder": "Enter Middle Name"
+                        },
+                        "lastName": {
+                            "label": "Last Name",
+                            "placeholder": "Enter Last Name"
+                        },
+                        "employeeId": {
+                            "label": "Employee ID",
+                            "placeholder": "Enter Employee ID"
+                        },
+                        "dateOfBirth": "Date of Birth"
+                    },
+                    "contactDetails": {
+                        "title": "Contact Details",
+                        "contactNumber": {
+                            "label": "Contact Number",
+                            "placeholder": "Enter Alternate Contact Number",
+                            "alternateContactNo": "Alternate Contact Number"
+                        },
+                        "email": {
+                            "label": "Official Email",
+                            "placeholder": "Enter Email",
+                            "alternateEmail": "Personal Email"
+                        }
+                    },
+                    "addressDetails": {
+                        "title": "Address Details",
+                        "address": {
+                            "present": "Present Address",
+                            "placeholder": "Enter Present Address",
+                            "permanent": "Permanent Address"
+                        },
+                        "city": "City",
+                        "state": "State",
+                        "country": "Country",
+                        "pinCode": "Postal Code"
+                    },
+                    "emergencyContact": {
+                        "title": "Emergency Contact",
+                        "contactName": {
+                            "label": "Emergency Contact Name",
+                            "placeholder": "Enter Contact Name"
+                        },
+                        "relationship": {
+                            "label": "Relationship",
+                            "placeholder": "Enter Relationship"
+                        },
+                        "contactNumber": {
+                            "label": "Emergency Contact Number",
+                            "placeholder": "Enter Emergency Contact Number"
+                        }
+                    }
+                }
+            },
+            "table": {
+                "title": "All Employees",
+                "employeeName": "Employee",
+                "location": "Location",
+                "joiningDate": "Joining Date",
+                "department": "Department",
+                "designation": "Designation",
+                "status": {
+                    "title": "Status",
+                    "active": "Active",
+                    "onLeave": "On Leave",
+                    "probation": "Probation"
+                },
+                "visaStatus": "Visa Status",
+                "actions": {
+                    "title": "Actions",
+                    "view": "View Profile",
+                    "edit": "Edit Profile",
+                    "delete": "Delete"
+                }
+            }
+        },
+        "bulkOnboarding": {
+            "title": "Bulk Employee Onboarding",
+            "label": "Upload employee data in bulk using a CSV or Excel file.",
+            "needTemplate": "Need a template?",
+            "downloadTemplate": "Download Template",
+            "processingMode": {
+                "label": "Processing Mode",
+                "options": {
+                    "validateOnly": "Validate Only",
+                    "processValid": "Process Valid Records",
+                    "stopOnError": "Stop on First Error"
+                }
+            },
+            "uploadFile": "Create or Upload File"
+        },
+        "StatutoryData": {
+            "title": "Statutory Data",
+            "passport": {
+                "title": "Passport",
+                "label": "Passport Information",
+                "passportNumber": {
+                    "label": "Passport Number",
+                    "placeholder": "Enter Passport Number"
+                },
+                "issueDate": "Issue Date",
+                "expiryDate": "Expiry Date",
+                "countryOfIssue": {
+                    "label": "Country of Issue",
+                    "placeholder": "Select Country"
+                },
+                "placeOfIssue": {
+                    "label": "Place of Issue",
+                    "placeholder": "Enter Place of Issue"
+                }
+            },
+            "visa": {
+                "title": "Visa",
+                "label": "Visa Information",
+                "visaNumber": {
+                    "label": "Visa Number",
+                    "placeholder": "Enter Visa Number"
+                },
+                "issueDate": "Issue Date",
+                "expiryDate": "Expiry Date",
+                "countryOfIssue": {
+                    "label": "Country of Issue",
+                    "placeholder": "Select Country"
+                },
+                "visaType": {
+                    "label": "Visa Type",
+                    "employmentVisa": "Employment Visa",
+                    "businessVisa": "Business Visa",
+                    "touristVisa": "Tourist Visa",
+                    "resident": "Resident"
+                }
+            },
+            "education": {
+                "title": "Education",
+                "label": "Educational Qualifications",
+                "degree": "Qualification/Degree",
+                "institution": "Institution",
+                "yearOfPassing": "Year of Passing",
+                "grade": "Grade/Percentage/CGPA",
+                "specialization": "Specialization/Major"
+            },
+            "certifications": {
+                "title": "Certifications",
+                "label": "Professional Certifications",
+                "name": "Certification Name",
+                "issuingBody": "Issuing Body",
+                "credentialId": "Credential ID",
+                "issueDate": "Issue Date",
+                "expiryDate": "Expiry Date"
+            },
+            "workExperience": {
+                "title": "Work Experience",
+                "label": "Previous Employment",
+                "companyName": "Company Name",
+                "jobTitle": "Job Title",
+                "startDate": "Start Date",
+                "endDate": "End Date",
+                "location": {
+                    "label": "Location",
+                    "placeholder": "e.g. Bangalore"
+                }
+            },
+            "idProof": {
+                "title": "ID Proof",
+                "label": "Identification Documents",
+                "idType": {
+                    "label": "ID Type",
+                    "placeholder": "Select ID Type",
+                    "options": {
+                        "aadhar": "Aadhar Card",
+                        "pan": "PAN Card",
+                        "drivingLicense": "Driving License",
+                        "voterId": "Voter ID"
+                    }
+                },
+                "idNumber":"ID Number",
+                "name": "Name on ID",
+                "uploadDocument": {
+                    "label": "Upload Document",
+                    "placeholder": "Upload Scanned Copy"
+                }
+            },
+            "nominee": {
+                "title": "Nominee",
+                "label": "Nomination Information",
+                "nomineeName": {
+                    "label": "Nominee Name",
+                    "placeholder": "Enter Nominee Name"
+                },
+                "relationship": {
+                    "label": "Relationship",
+                    "placeholder": "Enter Relationship",
+                    "options": {
+                        "spouse": "Spouse",
+                        "Father": "Father",
+                        "mother": "Mother",
+                        "son": "Son",
+                        "daughter": "Daughter",
+                        "other": "Other"
+                    }
+                },
+                "dateOfBirth": "Date of Birth",
+                "sharePercentage": {
+                    "label": "Share Percentage (%)",
+                    "placeholder": "Enter Share Percentage in %"
+                },
+                "contactNumber": {
+                    "label": "Contact Number",
+                    "placeholder": "Enter Contact Number"
+                }
+            },
+            "bankDetails": {
+                "title": "Bank Details",
+                "label": "Bank Account Information",
+                "accountHolderName": {
+                    "label": "Account Holder Name",
+                    "placeholder": "Enter Account Holder Name"
+                },
+                "bankName": {
+                    "label": "Bank Name",
+                    "placeholder": "Enter Bank Name"
+                },
+                "accountNumber": {
+                    "label": "Account Number",
+                    "placeholder": "Enter Account Number"
+                },
+                "ifscCode": {
+                    "label": "IFSC/Sort Code",
+                    "placeholder": "Enter IFSC Code"
+                },
+                "branchName": {
+                    "label": "Branch Name",
+                    "placeholder": "Enter Branch Name"
+                },
+                "accountType": {
+                    "label": "Account Type",
+                    "placeholder": "Select Account Type",
+                    "options": {
+                        "savings": "Savings",
+                        "current": "Current",
+                        "salary": "Salary"
+                    }
+                }
+            }
+        },
+        "resignationForm": {
+            "title": "Resignation Form",
+            "employeeInformation": {
+                "title": "Employee Information",
+                "employeeName": {
+                    "label": "Employee Name",
+                    "placeholder": "Enter Employee Name"
+                },
+                "employeeId": {
+                    "label": "Employee ID",
+                    "placeholder": "Enter Employee ID"
+                },
+                "department": {
+                    "label": "Department",
+                    "placeholder": "Select Department"
+                },
+                "designation": {
+                    "label": "Designation",
+                    "placeholder": "Select Designation"
+                },
+                "reportingManager": {
+                    "label": "Reporting Manager",
+                    "placeholder": "Select Reporting Manager"
+                },
+                "workLocation": {
+                    "label": "Work Location",
+                    "placeholder": "Select Work Location"
+                }
+            },
+            "resignationDetails": {
+                "title": "Resignation Details",
+                "resignationType": {
+                    "label": "Resignation Type",
+                    "placeholder": "Select Resignation Type",
+                    "options": {
+                        "voluntary": "Voluntary",
+                        "involuntary": "Involuntary"
+                    }
+                },
+                "dateOfResignation": "Date of Resignation Submission",
+                "lastWorkingDay": "Last Working Day (LWD)",
+                "noticePeriodRequired": {
+                    "label": "Notice Period Required (in days)",
+                    "placeholder": "Enter Notice Period in Days"
+                },
+                "noticePeriodServed": {
+                    "label": "Notice Period Served (in days)",
+                    "placeholder": "Enter Notice Period Served in Days"
+                },
+                "shortfall": "Shortfall/Buyout Detais",
+                "reasonForResignation": {
+                    "label": "Reason for Resignation",
+                    "placeholder": "Enter Reason for Resignation"
+                }
+            }
+        },
+        "exitWorkflow": {
+            "title": "Exit Workflow: ",
+            "viewResignation": "View Resignation Letter",
+            "downloadFnF": "Download FnF Settlement",
+            "flow": {
+                "resignation": "Resignation",
+                "managerApproval": "Manager Approval",
+                "assetClearance": "Asset Clearance",
+                "finance": "Finance & Fnf",
+                "relieved": "Relieved"
+            },
+            "caseDetails": {
+                "title": "Case Details",
+                "employeeId": "Employee ID",
+                "department": "Department",
+                "designation": "Designation",
+                "Manager": "Manager",
+                "hrbp": "HRBP",
+                "exitType": "Exit Type",
+                "initiationDate": "Initiation Date",
+                "lastWorkingDay": "Last Working Day"
+            },
+            "clearanceChecklist": {
+                "title": "Clearance Checklist",
+                "department": "Department",
+                "item": "Item",
+                "status": {
+                    "title": "Status",
+                    "pending": "Pending",
+                    "cleared": "Cleared",
+                    "waiting": "Wait"
+                },
+                "approver": "Approver",
+                "actions": {
+                    "title": "Actions",
+                    "markCleared": "Mark Cleared",
+                    "sendReminder": "Send Reminder"
+                }
+            },
+            "exitInterview": {
+                "title": "Exit Interview",
+                "label": "Exit interview pending schedule",
+                "scheduleInterview": "Schedule Interview",
+                "interviewer": {
+                    "label": "Interviewer",
+                    "placeholder": "Select Interviewer"
+                },
+                "interviewDate": "Interview Date",
+                "feedback": {
+                    "label": "Feedback",
+                    "placeholder": "Enter Feedback"
+                }
+            },
+            "daysToExit": {
+                "title": "Days to Exit",
+                "pendingApprovals": "Pending Approvals"
+            },
+            "activityLog": {
+                "approval": {
+                    "approved": "Resignation Approved",
+                    "rejected": "Resignation Rejected"
+                },
+                "initiated": "Resignation Initiated",
+                "clearance": {
+                    "started": "Clearance Process Started",
+                    "cleared": "All Clearances Completed"
+                },
+                "assetReturn": {
+                    "returned": "Assets Returned",
+                    "pending": "Assets Pending"
+                } 
+            }
+        }
+    }
+}
