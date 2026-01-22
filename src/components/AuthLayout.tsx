@@ -4,7 +4,7 @@ import { Globe, Moon, Sun } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 const AuthLayout = ({ children, title, subtitle, maxWidth = "sm:max-w-md" }: { children: React.ReactNode, title?: string, subtitle?: string, maxWidth?: string }) => {
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
     const { theme, toggleTheme } = useTheme();
 
     return (
