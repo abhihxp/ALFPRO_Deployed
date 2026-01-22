@@ -3,6 +3,7 @@ import { Button, Table, Avatar, Tag, Dropdown, DatePicker, Modal, Tabs } from 'a
 import type { ColumnsType, TableProps } from 'antd/es/table';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { useActiveFilters, type ActiveFiltersState } from '../hooks/useActiveFilters';
 import ActiveFilters from '../components/ActiveFilters';
@@ -46,6 +47,7 @@ export interface Employee {
 
 const EmployeesPage = () => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const { activeFilters, updateActiveFilters, clearFilter, clearAllFilters, getGroupedActiveFilters } = useActiveFilters();
   const [dateRange, setDateRange] = useState<[dayjs.Dayjs | null, dayjs.Dayjs | null]>([null, null]);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -238,7 +240,7 @@ const EmployeesPage = () => {
               type="primary"
               icon={<Plus size={16} />}
               className="bg-primary hover:bg-purple-700 h-9"
-              onClick={() => (window.location.href = "/employees/new")} // Using window location for simplicity as useNavigate is inside child
+              onClick={() => navigate("/employees/new")}
             >
               {t("employeesPage.addEmployee")}
             </Button> */}
@@ -246,7 +248,7 @@ const EmployeesPage = () => {
             type="primary"
             icon={<Plus size={16} />}
             className="bg-primary hover:bg-purple-700 h-9"
-            onClick={() => (window.location.href = "/employees/new2")} // Route to new form
+            onClick={() => navigate("/employees/new2")}
           >
             Add Employee 2
           </Button>

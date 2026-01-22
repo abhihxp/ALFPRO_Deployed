@@ -25,7 +25,7 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
       onClose();
     }
   };
-  const [activeSection, setActiveSection] = useState<string | null>('employee');
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const { t, i18n } = useTranslation();
   const location = useLocation();
 
@@ -34,6 +34,8 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
     if (path.startsWith('/tenant')) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveSection('tenant');
+    } else if (path.startsWith('/organization')) {
+      setActiveSection('organization');
     } else if (
       path.startsWith('/employees') ||
       path.startsWith('/bulk-onboarding') ||
@@ -386,7 +388,7 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
                 >
                   View Attendance
                 </NavLink>
-                <button type="button" className={SubButtonClassName}>
+                <button type="button" className={SubButtonClassName} disabled>
                   Approvals
                 </button>
                 <button type="button" className={SubButtonClassName} disabled>
@@ -562,7 +564,7 @@ const Sidebar = ({ collapsed, setCollapsed, mobileOpen = false, onClose }: Sideb
           <button
             className={`${SubButtonClassName} ${
               collapsed ? "justify-center" : ""
-            }`}
+            }`} disabled
           >
             <HelpCircle size={18} />
             {!collapsed && (
