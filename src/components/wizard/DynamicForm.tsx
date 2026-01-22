@@ -1,4 +1,4 @@
- /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { Form, Input, Select, DatePicker, Radio, Upload, Button, InputNumber, Switch, Checkbox, TimePicker } from 'antd';
 import { UploadOutlined, InfoCircleOutlined } from '@ant-design/icons';
@@ -108,12 +108,16 @@ const renderFieldInput = (field: any, lang: 'en' | 'ar', value: any, getLocalize
 
     const commonClasses = "rounded-lg placeholder:!text-gray-500 dark:placeholder:!text-gray-400 w-full"; // Forced color
     const selectPlaceholderClass = "[&_.ant-select-selection-placeholder]:!text-gray-500 dark:[&_.ant-select-selection-placeholder]:!text-gray-400";
-    
+
     let inputElement = <Input className={commonClasses} />;
 
     switch (field.type) {
         case 'text':
             inputElement = <Input placeholder={inputPlaceholder} className={`h-10 ${commonClasses}`} />;
+            break;
+
+        case 'password':
+            inputElement = <Input.Password placeholder={inputPlaceholder} className={`h-10 ${commonClasses}`} />;
             break;
 
         case 'number':

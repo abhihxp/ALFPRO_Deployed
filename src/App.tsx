@@ -23,6 +23,13 @@ import AttendancePage from './pages/AttendancePage';
 import LeavePage from './pages/LeavePage';
 import PayrollPage from './pages/PayrollPage';
 
+// Auth Pages
+import LoginPage from './pages/auth/LoginPage';
+import SignupPage from './pages/auth/SignupPage';
+import ForgotPasswordPage from './pages/auth/ForgotPasswordPage';
+import ForgotUsernamePage from './pages/auth/ForgotUsernamePage';
+import ResetPasswordPage from './pages/auth/ResetPasswordPage';
+
 import DashboardPage from './pages/DashboardPage';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 
@@ -65,35 +72,50 @@ const AppContent = () => {
       }}
     >
       <Router>
-        <MainLayout>
-          <Routes>
-            <Route path="/" element={<Navigate to="/tenant-onboard" replace />} />
-            {/* <Route path="/leaves" element={<LeavesPage />} /> */}
-            <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/employees" element={<EmployeesPage />} />
-            <Route path="/employees/new" element={<AddEmployeePage />} />
-            <Route path="/employees/new2" element={<AddEmployeePage2 />} />
-            <Route path="/resignation" element={<ResignationPage />} />
-            <Route path="/bulk-onboarding" element={<BulkOnboardingPage />} />
-            <Route path="/tenant-onboard" element={<TenantOnboardingPage />} />
-            <Route path="/tenant/master-data" element={<MasterDataPage />} />
-            <Route path="/employees/statutory-data" element={<StatutoryDataPage />} />
-            <Route path="/exit-workflow" element={<ExitWorkflowPage />} />
-            <Route path="/fnf" element={<FnFPage />} />
-            <Route path="/relieving-policies" element={<RelievingPoliciesPage />} />
-            <Route path="/attendance/masters" element={<AttendanceMastersPage />} />
-            <Route path="/attendance/my-attendance" element={<AttendancePage />} />
-            <Route path="/leaves/my-leaves" element={<LeavePage />} />
-            <Route path="/payroll/my-salary" element={<PayrollPage />} />
+        <Routes>
+          {/* Public Auth Routes */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/forgot-username" element={<ForgotUsernamePage />} />
+          <Route path="/reset-password" element={<ResetPasswordPage />} />
 
-            {/* Routes for individual pages - still accessible but potentially hidden from sidebar */}
-            <Route path="/attendance/week-off/new" element={<WeekOffPatternPage />} />
-            <Route path="/organization/location/new" element={<LocationPage />} />
-            <Route path="/organization/department/new" element={<DepartmentPage />} />
-            <Route path="/attendance/shift/new" element={<ShiftPage />} />
-            <Route path="/organization/designation/new" element={<DesignationPage />} />
-          </Routes>
-        </MainLayout>
+          {/* Protected Dashboard Routes */}
+          <Route
+            path="/*"
+            element={
+              <MainLayout>
+                <Routes>
+                  <Route path="/" element={<Navigate to="/tenant-onboard" replace />} />
+                  {/* <Route path="/leaves" element={<LeavesPage />} /> */}
+                  <Route path="/dashboard" element={<DashboardPage />} />
+                  <Route path="/employees" element={<EmployeesPage />} />
+                  <Route path="/employees/new" element={<AddEmployeePage />} />
+                  <Route path="/employees/new2" element={<AddEmployeePage2 />} />
+                  <Route path="/resignation" element={<ResignationPage />} />
+                  <Route path="/bulk-onboarding" element={<BulkOnboardingPage />} />
+                  <Route path="/tenant-onboard" element={<TenantOnboardingPage />} />
+                  <Route path="/tenant/master-data" element={<MasterDataPage />} />
+                  <Route path="/employees/statutory-data" element={<StatutoryDataPage />} />
+                  <Route path="/exit-workflow" element={<ExitWorkflowPage />} />
+                  <Route path="/fnf" element={<FnFPage />} />
+                  <Route path="/relieving-policies" element={<RelievingPoliciesPage />} />
+                  <Route path="/attendance/masters" element={<AttendanceMastersPage />} />
+                  <Route path="/attendance/my-attendance" element={<AttendancePage />} />
+                  <Route path="/leaves/my-leaves" element={<LeavePage />} />
+                  <Route path="/payroll/my-salary" element={<PayrollPage />} />
+
+                  {/* Routes for individual pages - still accessible but potentially hidden from sidebar */}
+                  <Route path="/attendance/week-off/new" element={<WeekOffPatternPage />} />
+                  <Route path="/organization/location/new" element={<LocationPage />} />
+                  <Route path="/organization/department/new" element={<DepartmentPage />} />
+                  <Route path="/attendance/shift/new" element={<ShiftPage />} />
+                  <Route path="/organization/designation/new" element={<DesignationPage />} />
+                </Routes>
+              </MainLayout>
+            }
+          />
+        </Routes>
       </Router>
     </ConfigProvider>
   );

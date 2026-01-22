@@ -1,0 +1,132 @@
+[
+    {
+        "title": "Organization Details",
+        "fields": [
+            {
+                "name": "companyName",
+                "label": "Company Name",
+                "placeholder": "Enter Company Name",
+                "type": "text",
+                "required": true,
+                "colSpan": "6"
+            },
+            {
+                "name": "employeeStrength",
+                "label": "Employee Strength",
+                "placeholder": "Select Employee Strength",
+                "type": "select",
+                "required": true,
+                "options": [
+                    {
+                        "value": "0-10",
+                        "label": "0 - 10 Employees"
+                    },
+                    {
+                        "value": "11-50",
+                        "label": "11 - 50 Employees"
+                    },
+                    {
+                        "value": "51-100",
+                        "label": "51 - 100 Employees"
+                    },
+                    {
+                        "value": "101-500",
+                        "label": "101 - 500 Employees"
+                    },
+                    {
+                        "value": "500+",
+                        "label": "500+ Employees"
+                    }
+                ],
+                "colSpan": "12 md:col-span-6"
+            }
+        ]
+    },
+    {
+        "title": "Personal Details",
+        "fields": [
+            {
+                "name": "fullName",
+                "label": "Full Name",
+                "placeholder": "Enter Full Name",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "designation",
+                "label": "Designation",
+                "placeholder": "Enter Your Designation",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "email",
+                "label": "Email ID",
+                "placeholder": "Enter Email Address",
+                "type": "email",
+                "required": true,
+                "colSpan": "12"
+            }
+        ]
+    },
+    {
+        "title": "Location",
+        "fields": [
+            {
+                "name": "city",
+                "label": "City",
+                "placeholder": "Enter City",
+                "type": "text",
+                "required": true,
+                "colSpan": "6 md:col-span-4"
+            },
+            {
+                "name": "state",
+                "label": "State",
+                "placeholder": "Enter State",
+                "type": "text",
+                "required": true,
+                "colSpan": "6 md:col-span-4"
+            },
+            {
+                "name": "country",
+                "label": "Country",
+                "placeholder": "Enter Country",
+                "type": "text",
+                "required": true,
+                "colSpan": "12 md:col-span-4"
+            }
+        ]
+    },
+    {
+        "title": "Account Setup",
+        "fields": [
+            {
+                "name": "username",
+                "label": "Username",
+                "placeholder": "Choose a Username",
+                "type": "text",
+                "required": true,
+                "colSpan": "12"
+            },
+            {
+                "name": "password",
+                "label": "Password",
+                "placeholder": "Enter Password",
+                "type": "password",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            },
+            {
+                "name": "confirmPassword",
+                "label": "Confirm Password",
+                "placeholder": "Confirm Password",
+                "type": "password",
+                "required": true,
+                "colSpan": "12 md:col-span-6"
+            }
+        ]
+    }
+]
