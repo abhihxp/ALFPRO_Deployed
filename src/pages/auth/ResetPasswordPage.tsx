@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Input, Button, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
@@ -5,7 +6,7 @@ import AuthLayout from '../../components/AuthLayout';
 import { User, Lock, ArrowLeft } from 'lucide-react';
 
 const ResetPasswordPage = () => {
-    const { t } = useTranslation();
+    useTranslation();
     const navigate = useNavigate();
 
     const onFinish = (values: any) => {

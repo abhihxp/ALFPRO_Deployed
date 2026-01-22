@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Input, Button, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
@@ -5,7 +6,7 @@ import AuthLayout from '../../components/AuthLayout';
 import { Mail, ArrowLeft } from 'lucide-react';
 
 const ForgotUsernamePage = () => {
-    const { t } = useTranslation();
+    useTranslation();
 
     const onFinish = (values: any) => {
         console.log('Received values of form: ', values);

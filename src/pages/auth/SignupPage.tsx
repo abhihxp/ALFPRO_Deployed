@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Button, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,7 +8,7 @@ import AuthLayout from '../../components/AuthLayout';
 
 const SignupPage = () => {
     const [form] = Form.useForm();
-    const { t } = useTranslation();
+    useTranslation();
     const navigate = useNavigate();
 
     const handleFinish = (values: any) => {

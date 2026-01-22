@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Form, Input, Button, Checkbox, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
@@ -5,7 +6,7 @@ import AuthLayout from '../../components/AuthLayout';
 import { User, Lock } from 'lucide-react';
 
 const LoginPage = () => {
-    const { t } = useTranslation();
+    useTranslation();
     const navigate = useNavigate();
 
     const onFinish = (values: any) => {
